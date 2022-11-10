@@ -1,0 +1,31 @@
+.base-btn {
+    padding: 7px 18px;
+    border: none;
+    background: var(--primary);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    background: transparent;
+}
+
+.btn-success {
+    background: var(--btn-success);
+    color: var(--white);
+    box-shadow: var(--btn-box-shadow);
+    &:hover {
+        background: var(--btn-hover-success);
+        box-shadow: var(--btn-hover-box-shadow);
+    }
+}
+
+.btn-error {
+    border: 1px solid var(--btn-boder-error);
+    background-color: transparent;
+    &:hover {
+        border: 1px solid var(--btn-hover-error);
+    }
+}
