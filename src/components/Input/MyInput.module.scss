@@ -1,0 +1,10 @@
+.baseInput {
+    padding: 10px;
+    outline: none;
+    border-radius: 2px;
+    border: 1px solid var(--input-boder);
+    box-shadow: var(--input-box-shadow);
+    &:focus {
+        border: 1px solid var(--input-boder-focus);
+    }
+}
