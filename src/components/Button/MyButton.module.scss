@@ -1,0 +1,38 @@
+.baseBtn {
+    padding: 7px 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.danger {
+    background-color: var(--danger);
+    color: var(--white);
+    &:hover {
+        background: var(--btn-hover-danger);
+    }
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    background: transparent;
+}
+
+.success {
+    background: var(--btn-success);
+    color: var(--white);
+    box-shadow: var(--btn-box-shadow);
+    &:hover {
+        background: var(--btn-hover-success);
+        box-shadow: var(--btn-hover-box-shadow);
+    }
+}
+
+.error {
+    border: 1px solid var(--btn-boder-error);
+    background-color: transparent;
+    &:hover {
+        border: 1px solid var(--btn-hover-danger);
+    }
+}
