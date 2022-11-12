@@ -1,11 +1,11 @@
 import style from './MyButton.module.scss';
 import classNames from 'classnames';
 
-function MyButton({ children, primary, disabled, success, error, hanldeClick }) {
+function MyButton({ children, danger, disabled, success, error, hanldeClick }) {
     // console.log(style);
     const btnClassses = classNames({
         [style.baseBtn]: true,
-        [style.primary]: primary,
+        [style.danger]: danger,
         [style.disabled]: disabled,
         [style.success]: success,
         [style.error]: error,

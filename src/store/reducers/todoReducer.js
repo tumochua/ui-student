@@ -2,21 +2,21 @@ import { ADD_TODO, GET_TODOS, DELETE_TODO } from '../type/todos';
 
 const initialState = {
     todos: [
-        {
-            id: 1,
-            title: 'delectus aut autem',
-            completed: false,
-        },
-        {
-            id: 2,
-            title: 'quis ut nam facilis et officia qui',
-            completed: false,
-        },
-        {
-            id: 3,
-            title: 'fugiat veniam minus',
-            completed: false,
-        },
+        // {
+        //     id: 1,
+        //     title: 'delectus aut autem',
+        //     completed: false,
+        // },
+        // {
+        //     id: 2,
+        //     title: 'quis ut nam facilis et officia qui',
+        //     completed: false,
+        // },
+        // {
+        //     id: 3,
+        //     title: 'fugiat veniam minus',
+        //     completed: false,
+        // },
     ],
 };
 

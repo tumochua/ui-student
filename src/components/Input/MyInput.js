@@ -3,8 +3,6 @@ import classNames from 'classnames';
 import style from './MyInput.module.scss';
 
 function MyInput({ value, placeholder, name, type, handleOnchange }) {
-    const checkType = type ? type : 'text';
-
     const handleOnchangeInput = (e) => {
         handleOnchange({ name: name, value: e.target.value });
     };
@@ -17,7 +15,7 @@ function MyInput({ value, placeholder, name, type, handleOnchange }) {
             value={value}
             placeholder={placeholder}
             name={name}
-            type={checkType}
+            type={type}
             onChange={handleOnchangeInput}
             className={inputClasses}
         />

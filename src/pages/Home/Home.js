@@ -1,23 +1,27 @@
-import './Home.scss';
+import classNames from 'classnames';
 
 import MyButton from '@/components/Button/MyButton';
 import WapperInput from '@/components/WapperInput';
 
 import { connect } from 'react-redux';
+import style from './Home.module.scss';
 
-function Home({ todos }) {
+function Home() {
+    const homeClasses = classNames({
+        [style.home]: true,
+    });
+
     // console.log(todos);
     const hanldeClickBtn = () => {
         console.log('hanldeClickBtn');
     };
 
     return (
-        <div className="home-wapper">
-            <MyButton hanldeClick={hanldeClickBtn} primary>
+        <div className={homeClasses}>
+            <WapperInput></WapperInput>
+            <MyButton hanldeClick={hanldeClickBtn} success>
                 Button
             </MyButton>
-            <WapperInput></WapperInput>
-            <div>Home page</div>
         </div>
     );
 }
