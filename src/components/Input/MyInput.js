@@ -2,12 +2,13 @@ import classNames from 'classnames';
 
 import style from './MyInput.module.scss';
 
-function MyInput({ value, placeholder, name, type, handleOnchange }) {
+function MyInput({ value, placeholder, name, type, handleOnchange, invalid }) {
     const handleOnchangeInput = (e) => {
         handleOnchange({ name: name, value: e.target.value });
     };
     const inputClasses = classNames({
         [style.baseInput]: true,
+        [style.invalid]: invalid,
     });
 
     return (
