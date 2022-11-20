@@ -1,5 +1,6 @@
 .baseInput {
-    padding: 10px;
+    width: 100%;
+    padding: 14px 20px;
     outline: none;
     border-radius: 2px;
     border: 1px solid var(--input-boder);
@@ -8,6 +9,7 @@
         border: 1px solid var(--input-boder-focus);
     }
 }
+
 .invalid {
     border: 1px solid var(--danger);
 }

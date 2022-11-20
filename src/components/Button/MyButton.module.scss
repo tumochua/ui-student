@@ -28,6 +28,22 @@
         box-shadow: var(--btn-hover-box-shadow);
     }
 }
+.small {
+    padding: 4px 10px;
+}
+.medium {
+    padding: 6px 16px;
+}
+.large {
+    padding: 8px 22px;
+}
+.fullWidth {
+    width: 100%;
+    padding: 14px;
+}
+.top {
+    margin-top: 14px;
+}
 
 .error {
     border: 1px solid var(--btn-boder-error);
