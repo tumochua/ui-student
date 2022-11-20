@@ -1,15 +1,28 @@
-.baseInput {
-    width: 100%;
-    padding: 14px 20px;
-    outline: none;
-    border-radius: 2px;
-    border: 1px solid var(--input-boder);
-    box-shadow: var(--input-box-shadow);
-    &:focus {
-        border: 1px solid var(--input-boder-focus);
-    }
-}
+.inputCtn {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-.invalid {
-    border: 1px solid var(--danger);
+    .baseInput {
+        width: 100%;
+        padding: 14px 20px;
+        outline: none;
+        border-radius: 2px;
+        border: 1px solid var(--input-boder);
+        box-shadow: var(--input-box-shadow);
+        &:focus {
+            border: 1px solid var(--input-boder-focus);
+        }
+    }
+
+    .invalid {
+        border: 1px solid var(--danger);
+    }
+
+    .inputWapperIcon {
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+    }
 }
