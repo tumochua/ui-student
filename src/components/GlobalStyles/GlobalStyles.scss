@@ -3,7 +3,7 @@
 :root {
     --danger: #dc3545;
     --black: #000;
-    --white: #fff;
+    --white: #ffffff;
     --text-color: #161823;
 
     --btn-success: #2e7d32;
@@ -15,6 +15,8 @@
     --btn-background-color-error: rgba(211, 47, 47, 0.5);
     --btn-boder-error: rgba(211, 47, 47, 0.5);
     --btn-hover-danger: #d32f2f;
+
+    --box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
     --input-boder: rgba(0, 0, 0, 0.14);
     --input-boder-focus: rgba(0, 0, 0, 0.54);

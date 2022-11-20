@@ -9,6 +9,7 @@ function MyInput({ value, placeholder, name, type, handleOnchange, invalid }) {
     const inputClasses = classNames({
         [style.baseInput]: true,
         [style.invalid]: invalid,
+        // [style.formControll]: true,
     });
 
     return (
