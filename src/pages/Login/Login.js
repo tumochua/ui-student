@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Link } from 'react-router-dom';
 
 import style from './Login.module.scss';
@@ -7,7 +9,61 @@ import Button from '@/components/Button';
 
 import config from '@/config';
 
+import { useShowHideIconPassword, useTypeInput, useValidateForm } from '@/use/Forms';
+
 function Login() {
+    const [user, setUser] = useState({
+        email: '',
+        password: '',
+    });
+
+    const [iconPassword, setIconPassword] = useState('fa-sharp fa-solid fa-eye-slash');
+    const [type, setType] = useState('password');
+    const [error, setError] = useState(null);
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const data = useValidateForm(newObjectUser);
+        setError(data);
+        console.log('error', error);
+    };
+    const newObjectUser = [
+        {
+            name: 'email',
+            value: user.email,
+            length: 5,
+            isRequire: true,
+        },
+        {
+            name: 'password',
+            value: user.password,
+            length: 5,
+            isRequire: true,
+        },
+    ];
+
+    const handleOnchange = (data) => {
+        // bảo lưu users và thêm data input
+        setUser({ ...user, [data.name]: data.value });
+        if (error) {
+            error.map((item) => {
+                if (item.name === data.name) {
+                    item.errorMessage = '';
+                    item.statusError = false;
+                }
+                return null;
+            });
+        }
+    };
+    const handleChanIcon = () => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const classPassword = useShowHideIconPassword(iconPassword);
+        setIconPassword(classPassword);
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const resultType = useTypeInput(type);
+        setType(resultType);
+    };
     return (
         <div className={style.loginWapper}>
             <div className={style.bodyWapper}>
@@ -17,10 +73,31 @@ function Login() {
                         Login an account to enjoy all the services <br /> without any ads for free!
                     </p>
                 </div>
+
                 <form className={style.formBody}>
-                    <WapperInput lable="Email Address" placeholder="Email Address"></WapperInput>
-                    <WapperInput lable="Password" placeholder="Password"></WapperInput>
-                    <Button success fullWidth top>
+                    <WapperInput
+                        lable="Email Address"
+                        value={user.email}
+                        name="email"
+                        type="email"
+                        handleOnchange={handleOnchange}
+                        placeholder="Email Address"
+                        errors={error && error[0].errorMessage}
+                        invalid={error && error[0].statusError}
+                    ></WapperInput>
+                    <WapperInput
+                        lable="Password"
+                        value={user.password}
+                        name="password"
+                        type={type}
+                        handleOnchange={handleOnchange}
+                        placeholder="Password"
+                        icon={iconPassword}
+                        handleChanIcon={handleChanIcon}
+                        errors={error && error[1].errorMessage}
+                        invalid={error && error[1].statusError}
+                    ></WapperInput>
+                    <Button success fullWidth top hanldeClick={handleLogin}>
                         Login
                     </Button>
                 </form>

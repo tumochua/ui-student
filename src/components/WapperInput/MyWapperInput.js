@@ -2,7 +2,18 @@ import style from './MyWapperInput.module.scss';
 import MyInput from '@/components/Input/MyInput';
 import MyLable from '@/components/Lable/MyLable';
 import MyError from '@/components/Error/MyError';
-function MyWapperInput({ value, name, placeholder, handleOnchange, errors, lable, invalid }) {
+function MyWapperInput({
+    value,
+    name,
+    type,
+    placeholder,
+    handleOnchange,
+    errors,
+    lable,
+    invalid,
+    icon,
+    handleChanIcon,
+}) {
     return (
         <div className={style.wapperInput}>
             <MyLable>{lable}</MyLable> <br />
@@ -12,10 +23,11 @@ function MyWapperInput({ value, name, placeholder, handleOnchange, errors, lable
                 value={value}
                 placeholder={placeholder}
                 name={name}
-                type={name}
+                type={type}
                 handleOnchange={handleOnchange}
+                icon={icon}
+                handleChanIcon={handleChanIcon}
             ></MyInput>{' '}
-            <br />
             <MyError invalid>{errors}</MyError>
         </div>
     );

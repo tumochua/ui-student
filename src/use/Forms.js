@@ -45,11 +45,21 @@ const handleCheckLength = (props) => {
     return dataCheck;
 };
 
-const useValidateForm = (params) => {
-    const data = handleCheckLength(params);
-    console.log('data', data);
+const useValidateForm = (user) => {
+    const data = handleCheckLength(user);
+    return data;
+};
+
+const useShowHideIconPassword = (param) => {
+    return param === 'fa-sharp fa-solid fa-eye-slash' ? 'fa-solid fa-eye' : 'fa-sharp fa-solid fa-eye-slash';
+};
+
+const useTypeInput = (type) => {
+    return type === 'password' ? 'text' : 'password';
 };
 
 module.exports = {
     useValidateForm,
+    useShowHideIconPassword,
+    useTypeInput,
 };

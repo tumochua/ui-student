@@ -6,7 +6,6 @@ import Register from '@/pages/Register/index';
 import Profile from '@/pages/Profile/index';
 // import LeanRedux from '@/pages/LeanRedux/index';
 // import LeanReactContext from '@/pages/LeanReactContext/index';
-console.log('check config', config);
 // Public routes
 const publicRoutes = [
     { path: config.routes.home, component: Home },
