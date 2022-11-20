@@ -9,13 +9,9 @@ const api = axios.create({
     },
 });
 
-const getListUsers = () => {
+export const getListUsers = () => {
     return api.get('/api-get-list-users');
 };
-const getTest = () => {
+export const getTest = () => {
     return api.get('/api-test');
-};
-module.exports = {
-    getListUsers,
-    getTest,
 };
