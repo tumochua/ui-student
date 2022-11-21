@@ -10,6 +10,8 @@ import Button from '@/components/Button';
 import config from '@/config';
 import { useShowHideIconPassword, useTypeInput, useValidateForm } from '@/use/Forms';
 
+import { handRegisterUser } from '@/services/apis';
+
 function Register() {
     const [user, setUser] = useState({
         email: '',
@@ -21,11 +23,19 @@ function Register() {
 
     const handleRegister = (e) => {
         e.preventDefault();
-        // console.log('user', user);
         // eslint-disable-next-line react-hooks/rules-of-hooks
         const data = useValidateForm(newObjectUser);
         setError(data);
-        console.log('error', error);
+        // console.log(error);
+        // console.log(user);
+        error &&
+            error.every(async (item) => {
+                if (item.success) {
+                    const response = await handRegisterUser(user);
+                    console.log(response);
+                }
+                return '';
+            });
     };
 
     const newObjectUser = [

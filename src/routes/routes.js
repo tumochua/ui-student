@@ -8,9 +8,9 @@ import Profile from '@/pages/Profile/index';
 // import LeanReactContext from '@/pages/LeanReactContext/index';
 // Public routes
 const publicRoutes = [
-    { path: config.routes.home, component: Home },
-    { path: config.routes.login, component: Login },
-    { path: config.routes.register, component: Register },
+    { path: config.routes.home, component: Home, layout: null },
+    { path: config.routes.login, component: Login, layout: null },
+    { path: config.routes.register, component: Register, layout: null },
     { path: config.routes.profile, component: Profile },
     // { path: '/leanRedux', component: LeanRedux },
     // { path: '/leanReactContext', component: LeanReactContext },
