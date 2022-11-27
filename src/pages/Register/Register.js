@@ -37,7 +37,7 @@ function Register() {
     /// loading
     const [isLoading, setIsLoading] = useState(false);
 
-    const [redirect, setRedirect] = useState(false);
+    // const [redirect, setRedirect] = useState(false);
 
     const newObjectUser = [
         {
@@ -87,14 +87,14 @@ function Register() {
                     const response = await handRegisterUser(user);
                     // console.log(response.data);
                     if (response.data.statusCode === 2) {
-                        handleSetState({
-                            type: 'success',
-                            icon: 'fa fa-check-circle',
-                            title: 'success',
-                            description: response.data.message,
-                        });
-                        console.log(redirect);
-                        // navigate(config.routes.login);
+                        // handleSetState({
+                        //     type: 'success',
+                        //     icon: 'fa fa-check-circle',
+                        //     title: 'success',
+                        //     description: response.data.message,
+                        // });
+                        // console.log(redirect);
+                        navigate(config.routes.login);
                     }
                     if (response.data.statusCode === 4) {
                         handleSetState({
@@ -118,10 +118,10 @@ function Register() {
                 }
             }
             fetchMyAPIPostUser();
-            setRedirect(true);
+            // setRedirect(true);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [result, error, redirect]);
+    }, [result, error]);
 
     const handleOnchange = (data) => {
         // bảo lưu users và thêm data input

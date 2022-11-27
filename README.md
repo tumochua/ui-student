@@ -68,3 +68,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+get value tab response header
+// var req = new XMLHttpRequest();
+// req.open('GET', document.location, false);
+// req.send(null);
+// var headers = req.getAllResponseHeaders().toLowerCase();
+// console.log(headers);

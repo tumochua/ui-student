@@ -1,17 +1,24 @@
-import { useEffect } from 'react';
-import { getTest } from '../../services/apis';
+import { connect } from 'react-redux';
 
-function Profile() {
+import { useEffect } from 'react';
+import { apiGetProfileUser } from '../../services/apis';
+
+function Profile({ userRedux }) {
     useEffect(() => {
         callApiTest();
     }, []);
 
+    useEffect(() => {
+        console.log('userRedux', userRedux);
+    }, [userRedux]);
+
     const callApiTest = async () => {
-        const data = await getTest();
-        console.log('check data', data);
+        await apiGetProfileUser();
     };
 
     return <div>Profile</div>;
 }
-
-export default Profile;
+const mapStateToProps = (state) => ({
+    userRedux: state.users.user,
+});
+export default connect(mapStateToProps, {})(Profile);
