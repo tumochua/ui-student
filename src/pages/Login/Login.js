@@ -12,6 +12,7 @@ import style from './Login.module.scss';
 import WapperInput from '@/components/WapperInput';
 import Button from '@/components/Button';
 import Loading from '@/components/Loading';
+import ToastMessage from '@/components/ToastMessage';
 ///config router
 import config from '@/config';
 /// hook validate form
@@ -26,7 +27,6 @@ import { createUser } from '@/store/actions/userActions';
 function Login({ createUser, userRedux }) {
     const navigate = useNavigate();
 
-    // const [cookies, setCookie] = useCookies(null);
     const [user, setUser] = useState({
         email: '',
         password: '',
@@ -37,6 +37,12 @@ function Login({ createUser, userRedux }) {
     const [error, setError] = useState(null);
     const [result, setResult] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+
+    const [isToast, setIstoast] = useState(false);
+    const [iconToast, setIconToast] = useState('fa fa-check-circle');
+    const [typeToast, setTypeToast] = useState('default');
+    const [toastTitle, setToastTitle] = useState('default');
+    const [toastDescription, setToastDescription] = useState('default');
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -80,6 +86,12 @@ function Login({ createUser, userRedux }) {
         const resultType = useTypeInput(type);
         setType(resultType);
     };
+    const handleSetState = ({ type, icon, title, description }) => {
+        setTypeToast(type);
+        setIconToast(icon);
+        setToastTitle(title);
+        setToastDescription(description);
+    };
     useEffect(() => {
         setResult(
             error &&
@@ -91,15 +103,28 @@ function Login({ createUser, userRedux }) {
             async function fetchHandleLogin() {
                 setIsLoading(true);
                 try {
-                    createUser(user);
-                    // const response = await handleApiLogin(user);
-                    // console.log(response);
-                    // if (response.data.accessToken && response.data.refreshToken && response.data.statusCode === 2) {
-                    // }
+                    const response = await createUser(user);
+                    if (response === 'The information you are entering is incorrect, please login again later') {
+                        handleSetState({
+                            type: 'warning',
+                            icon: 'fa fa-check-circle',
+                            title: 'warning',
+                            description: response,
+                        });
+                        setIstoast(true);
+                    }
                 } catch (error) {
                     console.log(error);
+                    handleSetState({
+                        type: 'error',
+                        icon: 'fa-solid fa-xmark',
+                        title: 'error',
+                        description: 'error from serve',
+                    });
+                    setIstoast(true);
                 } finally {
                     setIsLoading(false);
+                    // setIstoast(false);
                 }
             }
             fetchHandleLogin();
@@ -108,12 +133,36 @@ function Login({ createUser, userRedux }) {
     }, [result, error]);
 
     useEffect(() => {
-        console.log('userRedux', userRedux);
+        if (userRedux && userRedux.data.statusCode === 2) {
+            const userId = userRedux.data.user.id;
+            navigate(`/profile/${userId}`);
+            return;
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userRedux]);
+
+    const handleCloseToast = () => {
+        setIstoast(false);
+    };
 
     return (
         <>
             {isLoading ? <Loading /> : null}
+            {isToast ? (
+                <ToastMessage
+                    icon={iconToast}
+                    handleCloseToast={handleCloseToast}
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    hideBorder={false}
+                    typeToast={typeToast}
+                >
+                    <div>
+                        <p>{toastTitle}</p>
+                        <p>{toastDescription}</p>
+                    </div>
+                </ToastMessage>
+            ) : null}
             <div className={style.loginWapper}>
                 <div className={style.bodyWapper}>
                     <div className={style.headeWapper}>

@@ -9,13 +9,16 @@ import { POST_USER } from '../type/todos';
 export const createUser = (user) => async (dispatch) => {
     // const navigate = useNavigate();
     try {
-        console.log('clik me');
         const response = await handleApiLogin(user);
         const result = response.data;
-        console.log(result);
-        if (result.statusCode === 2) {
+        console.log('user actions', result);
+        if (result.data.statusCode === 4) {
+            return 'The information you are entering is incorrect, please login again later';
+        }
+        if (result.data.statusCode === 2) {
             await dispatch({ type: POST_USER, payload: result });
-            // navigate(config.routes.profile);
+            const user = JSON.stringify(result);
+            localStorage.setItem('user', user);
             return;
         }
     } catch (error) {
