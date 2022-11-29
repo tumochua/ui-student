@@ -11,7 +11,6 @@ export const createUser = (user) => async (dispatch) => {
     try {
         const response = await handleApiLogin(user);
         const result = response.data;
-        console.log('user actions', result);
         if (result.data.statusCode === 4) {
             return 'The information you are entering is incorrect, please login again later';
         }

@@ -23,6 +23,6 @@ export const handleApiLogin = (user) => {
     return api.post('api-login', user);
 };
 
-export const apiGetProfileUser = () => {
-    return api.get('/api-get-profile-user');
+export const apiGetProfileUser = (userId) => {
+    return api.get(`/api-get-profile-user-by-id?userId=${userId}`);
 };

@@ -135,9 +135,12 @@ function Login({ createUser, userRedux }) {
     useEffect(() => {
         if (userRedux && userRedux.data.statusCode === 2) {
             const userId = userRedux.data.user.id;
-            navigate(`/profile/${userId}`);
+            if (userId) {
+                navigate(`/profile/${userId}`);
+            }
             return;
         }
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userRedux]);
 

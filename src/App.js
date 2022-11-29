@@ -8,7 +8,6 @@ import { publicRoutes, privateRoutes } from '@/routes';
 import config from './config';
 
 import DefaultLayout from './layouts/DefaultLayout';
-import Login from './pages/Login';
 
 function App() {
     return (
@@ -47,22 +46,8 @@ function App() {
                     const user = localStorage.getItem('user');
                     const path = config.routes.login;
                     if (!accessToken || !refreshToken || !user) {
-                        // console.log(config.routes.login);
-                        console.log('redirect');
-                        // return (
-                        //     <Route
-                        //         key={index}
-                        //         path={route.path}
-                        //         element={
-                        //             <Layout>
-                        //                 <Login />
-                        //             </Layout>
-                        //         }
-                        //     />
-                        // );
                         return <Route key={index} path={route.path} element={<Navigate to={path} replace />} />;
                     }
-                    console.log('not redirect', path);
                     return (
                         <Route
                             key={index}
