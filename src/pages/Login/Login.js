@@ -1,17 +1,32 @@
-import { useState } from 'react';
+/// reactjs
+import { useState, useEffect } from 'react';
+/// react-router-dom
+import { Link, useNavigate } from 'react-router-dom';
 
-import { Link } from 'react-router-dom';
+/// redux
+import { connect } from 'react-redux';
 
+///scss
 import style from './Login.module.scss';
-
+///component
 import WapperInput from '@/components/WapperInput';
 import Button from '@/components/Button';
-
+import Loading from '@/components/Loading';
+import ToastMessage from '@/components/ToastMessage';
+///config router
 import config from '@/config';
-
+/// hook validate form
 import { useShowHideIconPassword, useTypeInput, useValidateForm } from '@/use/Forms';
 
-function Login() {
+/// api
+// import { handleApiLogin } from '@/services/apis';
+
+/// redux
+import { createUser } from '@/store/actions/userActions';
+
+function Login({ createUser, userRedux }) {
+    const navigate = useNavigate();
+
     const [user, setUser] = useState({
         email: '',
         password: '',
@@ -20,13 +35,20 @@ function Login() {
     const [iconPassword, setIconPassword] = useState('fa-sharp fa-solid fa-eye-slash');
     const [type, setType] = useState('password');
     const [error, setError] = useState(null);
+    const [result, setResult] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const [isToast, setIstoast] = useState(false);
+    const [iconToast, setIconToast] = useState('fa fa-check-circle');
+    const [typeToast, setTypeToast] = useState('default');
+    const [toastTitle, setToastTitle] = useState('default');
+    const [toastDescription, setToastDescription] = useState('default');
 
     const handleLogin = (e) => {
         e.preventDefault();
         // eslint-disable-next-line react-hooks/rules-of-hooks
         const data = useValidateForm(newObjectUser);
         setError(data);
-        console.log('error', error);
     };
     const newObjectUser = [
         {
@@ -64,54 +86,136 @@ function Login() {
         const resultType = useTypeInput(type);
         setType(resultType);
     };
-    return (
-        <div className={style.loginWapper}>
-            <div className={style.bodyWapper}>
-                <div className={style.headeWapper}>
-                    <h1>Login An Account</h1>
-                    <p>
-                        Login an account to enjoy all the services <br /> without any ads for free!
-                    </p>
-                </div>
+    const handleSetState = ({ type, icon, title, description }) => {
+        setTypeToast(type);
+        setIconToast(icon);
+        setToastTitle(title);
+        setToastDescription(description);
+    };
+    useEffect(() => {
+        setResult(
+            error &&
+                error.every((item) => {
+                    return item.success ? true : false;
+                }),
+        );
+        if (result) {
+            async function fetchHandleLogin() {
+                setIsLoading(true);
+                try {
+                    const response = await createUser(user);
+                    if (response === 'The information you are entering is incorrect, please login again later') {
+                        handleSetState({
+                            type: 'warning',
+                            icon: 'fa fa-check-circle',
+                            title: 'warning',
+                            description: response,
+                        });
+                        setIstoast(true);
+                    }
+                } catch (error) {
+                    console.log(error);
+                    handleSetState({
+                        type: 'error',
+                        icon: 'fa-solid fa-xmark',
+                        title: 'error',
+                        description: 'error from serve',
+                    });
+                    setIstoast(true);
+                } finally {
+                    setIsLoading(false);
+                    // setIstoast(false);
+                }
+            }
+            fetchHandleLogin();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [result, error]);
 
-                <form className={style.formBody}>
-                    <WapperInput
-                        lable="Email Address"
-                        value={user.email}
-                        name="email"
-                        type="email"
-                        handleOnchange={handleOnchange}
-                        placeholder="Email Address"
-                        errors={error && error[0].errorMessage}
-                        invalid={error && error[0].statusError}
-                    ></WapperInput>
-                    <WapperInput
-                        lable="Password"
-                        value={user.password}
-                        name="password"
-                        type={type}
-                        handleOnchange={handleOnchange}
-                        placeholder="Password"
-                        icon={iconPassword}
-                        handleChanIcon={handleChanIcon}
-                        errors={error && error[1].errorMessage}
-                        invalid={error && error[1].statusError}
-                    ></WapperInput>
-                    <Button success fullWidth top hanldeClick={handleLogin}>
-                        Login
-                    </Button>
-                </form>
-                <div className={style.footerWapper}>
-                    <p>
-                        Already Have An Account?{' '}
-                        <Link to={config.routes.register} className={style.navLink}>
-                            Register
-                        </Link>
-                    </p>
+    useEffect(() => {
+        if (userRedux && userRedux.data.statusCode === 2) {
+            const userId = userRedux.data.user.id;
+            if (userId) {
+                navigate(`/profile/${userId}`);
+            }
+            return;
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userRedux]);
+
+    const handleCloseToast = () => {
+        setIstoast(false);
+    };
+
+    return (
+        <>
+            {isLoading ? <Loading /> : null}
+            {isToast ? (
+                <ToastMessage
+                    icon={iconToast}
+                    handleCloseToast={handleCloseToast}
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    hideBorder={false}
+                    typeToast={typeToast}
+                >
+                    <div>
+                        <p>{toastTitle}</p>
+                        <p>{toastDescription}</p>
+                    </div>
+                </ToastMessage>
+            ) : null}
+            <div className={style.loginWapper}>
+                <div className={style.bodyWapper}>
+                    <div className={style.headeWapper}>
+                        <h1>Login An Account</h1>
+                        <p>
+                            Login an account to enjoy all the services <br /> without any ads for free!
+                        </p>
+                    </div>
+
+                    <form className={style.formBody}>
+                        <WapperInput
+                            lable="Email Address"
+                            value={user.email}
+                            name="email"
+                            type="email"
+                            handleOnchange={handleOnchange}
+                            placeholder="Email Address"
+                            errors={error && error[0].errorMessage}
+                            invalid={error && error[0].statusError}
+                        ></WapperInput>
+                        <WapperInput
+                            lable="Password"
+                            value={user.password}
+                            name="password"
+                            type={type}
+                            handleOnchange={handleOnchange}
+                            placeholder="Password"
+                            icon={iconPassword}
+                            handleChanIcon={handleChanIcon}
+                            errors={error && error[1].errorMessage}
+                            invalid={error && error[1].statusError}
+                        ></WapperInput>
+                        <Button success fullWidth top hanldeClick={handleLogin}>
+                            Login
+                        </Button>
+                    </form>
+                    <div className={style.footerWapper}>
+                        <p>
+                            Already Have An Account?{' '}
+                            <Link to={config.routes.register} className={style.navLink}>
+                                Register
+                            </Link>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
-
-export default Login;
+const mapStateToProps = (state) => ({
+    userRedux: state.users.user,
+});
+export default connect(mapStateToProps, { createUser })(Login);

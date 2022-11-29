@@ -4,6 +4,8 @@ import Home from '@/pages/Home/index';
 import Login from '@/pages/Login/index';
 import Register from '@/pages/Register/index';
 import Profile from '@/pages/Profile/index';
+import NotFound from '@/pages/NotFound';
+import Test from '@/pages/Test';
 // import LeanRedux from '@/pages/LeanRedux/index';
 // import LeanReactContext from '@/pages/LeanReactContext/index';
 // Public routes
@@ -11,11 +13,17 @@ const publicRoutes = [
     { path: config.routes.home, component: Home, layout: null },
     { path: config.routes.login, component: Login, layout: null },
     { path: config.routes.register, component: Register, layout: null },
-    { path: config.routes.profile, component: Profile },
+    { path: config.routes.test, component: Test, layout: null },
+    // { path: config.routes.profile, component: Profile },
+
+    { path: config.routes.notFound, component: NotFound, layout: null },
     // { path: '/leanRedux', component: LeanRedux },
     // { path: '/leanReactContext', component: LeanReactContext },
 ];
-
-const privateRoutes = [];
+// console.log(config.routes.profile);
+const privateRoutes = [
+    { path: config.routes.profile, component: Profile, layout: null },
+    // { path: config.routes.login, component: Login, layout: null },
+];
 
 export { publicRoutes, privateRoutes };
