@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 import style from './MyInput.module.scss';
 
-function MyInput({ value, placeholder, name, type, handleOnchange, icon, invalid, handleChanIcon }) {
+function MyInput({ value, placeholder, name, type, handleOnchange, icon, invalid, handleChanIcon, autocomplete }) {
     const handleOnchangeInput = (e) => {
         handleOnchange({ name: name, value: e.target.value });
     };
@@ -33,6 +33,7 @@ function MyInput({ value, placeholder, name, type, handleOnchange, icon, invalid
                 type={type}
                 onChange={handleOnchangeInput}
                 className={inputClasses}
+                autoComplete="on"
             />
             <IconComponent></IconComponent>
             {/* <span className={style.inputWapperIcon}>

@@ -8,8 +8,10 @@ function DefaultLayout({ children }) {
         <div className={style.defaultWapper}>
             <Header />
             <div className={style.bodyWapper}>
-                <Sidebar />
-                <div>{children}</div>
+                <div className={style.sibebarWapper}>
+                    <Sidebar />
+                </div>
+                <div className={style.contentWapper}>{children}</div>
             </div>
         </div>
     );

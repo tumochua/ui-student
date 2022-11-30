@@ -2,8 +2,12 @@ const routes = {
     home: '/',
     login: '/login',
     register: '/register',
-    profile: '/profile/:id',
-    test: '/test:id',
+
+    /// profile
+    profile: '/profile',
+    notification: '/notification',
+    share: '/share',
+    post: '/post',
     notFound: '*',
 };
 

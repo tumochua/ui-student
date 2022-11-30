@@ -4,8 +4,10 @@ import Home from '@/pages/Home/index';
 import Login from '@/pages/Login/index';
 import Register from '@/pages/Register/index';
 import Profile from '@/pages/Profile/index';
+import Notification from '@/pages/Notification';
+import Post from '@/pages/Post';
+import Share from '@/pages/Share';
 import NotFound from '@/pages/NotFound';
-import Test from '@/pages/Test';
 // import LeanRedux from '@/pages/LeanRedux/index';
 // import LeanReactContext from '@/pages/LeanReactContext/index';
 // Public routes
@@ -13,7 +15,6 @@ const publicRoutes = [
     { path: config.routes.home, component: Home, layout: null },
     { path: config.routes.login, component: Login, layout: null },
     { path: config.routes.register, component: Register, layout: null },
-    { path: config.routes.test, component: Test, layout: null },
     // { path: config.routes.profile, component: Profile },
 
     { path: config.routes.notFound, component: NotFound, layout: null },
@@ -22,7 +23,22 @@ const publicRoutes = [
 ];
 // console.log(config.routes.profile);
 const privateRoutes = [
-    { path: config.routes.profile, component: Profile, layout: null },
+    { path: config.routes.profile, component: Profile, nameEn: 'Home', nameVi: 'Trang chủ', icon: 'fa-solid fa-house' },
+    {
+        path: config.routes.notification,
+        component: Notification,
+        nameEn: 'Notification',
+        nameVi: 'Thông báo',
+        icon: 'fa-solid fa-bell',
+    },
+    {
+        path: config.routes.share,
+        component: Share,
+        nameEn: 'Share',
+        nameVi: 'Chia sẻ thông tin',
+        icon: 'fa-solid fa-share-nodes',
+    },
+    { path: config.routes.post, component: Post, nameEn: 'Post', nameVi: 'Viết bài', icon: 'fa-solid fa-blog' },
     // { path: config.routes.login, component: Login, layout: null },
 ];
 
