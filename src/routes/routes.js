@@ -7,21 +7,29 @@ import Profile from '@/pages/Profile/index';
 import Notification from '@/pages/Notification';
 import Post from '@/pages/Post';
 import Share from '@/pages/Share';
+
+import Translate from '@/translate';
+
 import NotFound from '@/pages/NotFound';
+
+// import en from '../translate/en/translation.json';
+// import vi from '../translate/vi/translation.json';
+
 // import LeanRedux from '@/pages/LeanRedux/index';
 // import LeanReactContext from '@/pages/LeanReactContext/index';
 // Public routes
+
 const publicRoutes = [
     { path: config.routes.home, component: Home, layout: null },
     { path: config.routes.login, component: Login, layout: null },
     { path: config.routes.register, component: Register, layout: null },
-    // { path: config.routes.profile, component: Profile },
+    { path: config.routes.translate, component: Translate, layout: null },
 
     { path: config.routes.notFound, component: NotFound, layout: null },
     // { path: '/leanRedux', component: LeanRedux },
     // { path: '/leanReactContext', component: LeanReactContext },
 ];
-// console.log(config.routes.profile);
+
 const privateRoutes = [
     { path: config.routes.profile, component: Profile, nameEn: 'Home', nameVi: 'Trang chủ', icon: 'fa-solid fa-house' },
     {

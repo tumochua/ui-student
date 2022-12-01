@@ -25,4 +25,15 @@
         position: absolute;
         right: 20px;
     }
+    .boder {
+        border: none;
+        &:focus {
+            border: none;
+        }
+    }
+    .opacity {
+        opacity: 0;
+        z-index: 10;
+        cursor: pointer;
+    }
 }

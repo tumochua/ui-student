@@ -1,0 +1,15 @@
+{
+    "Home": {
+        "home": "Home",
+        "welcome": "Welcome to React"
+    },
+    "Profile": {
+        "name": "Name"
+    },
+    "Navbar": {
+        "home": "Home",
+        "notification": "Notification",
+        "share": "Share Infor",
+        "post": "Post"
+    }
+}

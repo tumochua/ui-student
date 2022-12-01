@@ -12,15 +12,21 @@ import store from './store';
 
 import { ContextProvider } from './context';
 
+///i18n
+
+import Translate from './translate/Translate';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <GlobalStyles>
-            <Provider store={store}>
-                <ContextProvider>
-                    <App />
-                </ContextProvider>
-            </Provider>
+            <Translate>
+                <Provider store={store}>
+                    <ContextProvider>
+                        <App />
+                    </ContextProvider>
+                </Provider>
+            </Translate>
         </GlobalStyles>
     </React.StrictMode>,
 );

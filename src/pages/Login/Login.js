@@ -110,7 +110,7 @@ function Login({ createUser, userRedux }) {
                     const response = await createUser(user);
                     // console.log('response', response);
 
-                    if (response.data.data.statusCode === 2) {
+                    if (response && response.data.data.statusCode === 2) {
                         setAccessToken(Cookies.get('accessToken'));
                         setRefreshToken(Cookies.get('refreshToken'));
                         return;

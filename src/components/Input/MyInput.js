@@ -2,7 +2,18 @@ import classNames from 'classnames';
 
 import style from './MyInput.module.scss';
 
-function MyInput({ value, placeholder, name, type, handleOnchange, icon, invalid, handleChanIcon, autocomplete }) {
+function MyInput({
+    value,
+    placeholder,
+    name,
+    type,
+    handleOnchange,
+    icon,
+    invalid,
+    handleChanIcon,
+    boder = true,
+    opacity = true,
+}) {
     const handleOnchangeInput = (e) => {
         handleOnchange({ name: name, value: e.target.value });
     };
@@ -21,6 +32,8 @@ function MyInput({ value, placeholder, name, type, handleOnchange, icon, invalid
     const inputClasses = classNames({
         [style.baseInput]: true,
         [style.invalid]: invalid,
+        [style.boder]: !boder,
+        [style.opacity]: !opacity,
         // [style.formControll]: true,
     });
 

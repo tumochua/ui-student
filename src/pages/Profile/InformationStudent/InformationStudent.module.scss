@@ -1,0 +1,40 @@
+.inforWapper {
+    display: flex;
+    gap: 10px;
+    .inforLeft {
+        width: 70%;
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    }
+    .inforRightWapper {
+        width: 30%;
+        border: 1px solid #dddddd;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        .inforRight {
+            position: relative;
+            .iconFile {
+                font-size: 28px;
+                position: absolute;
+                right: 50%;
+                top: 20%;
+            }
+        }
+    }
+}

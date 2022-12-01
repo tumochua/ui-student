@@ -1,0 +1,15 @@
+{
+    "Home": {
+        "home": "Trang chủ",
+        "welcome": "Xin chào React"
+    },
+    "Profile": {
+        "name": "Tên"
+    },
+    "Navbar": {
+        "home": "Trang chủ",
+        "notification": "Thông Báo",
+        "share": "Chia sẻ thông tin",
+        "post": "Viết bài"
+    }
+}
