@@ -8,7 +8,9 @@ function Header({ userRedux }) {
     const [name, setName] = useState(null);
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));
-        setName(user.data.user.fullName);
+        if (user) {
+            setName(user.data.user.fullName);
+        }
     }, [name]);
     return (
         <div className={style.headerWapper}>

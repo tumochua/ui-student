@@ -1,26 +1,16 @@
-import { useState } from 'react';
+import { memo } from 'react';
 import style from './Language.module.scss';
-import Modal from '@/components/Modal';
-function Language({ isModalLanguage }) {
+import Modal from '@/components/Menu';
+function Language({ isModalLanguage, language, onChanLanguage }) {
+    // console.log('re-render Language');
     function JsxLanguage() {
-        // eslint-disable-next-line no-unused-vars
-        const [language, setLanguage] = useState([
-            {
-                id: 1,
-                name: 'Tiếng Việt',
-            },
-            {
-                id: 2,
-                name: 'Tiếng anh',
-            },
-        ]);
         return (
             <>
                 {language &&
                     language.map((item) => {
                         return (
                             <p className={style.itemLanguage} key={item.id}>
-                                {item.name}
+                                <span onClick={() => onChanLanguage(item.value)}> {item.name}</span>
                             </p>
                         );
                     })}
@@ -41,4 +31,5 @@ function Language({ isModalLanguage }) {
     );
 }
 
-export default Language;
+// export default Language;
+export default memo(Language);

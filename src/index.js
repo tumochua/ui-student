@@ -20,13 +20,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <GlobalStyles>
-            <Translate>
-                <Provider store={store}>
-                    <ContextProvider>
+            <Provider store={store}>
+                <ContextProvider>
+                    <Translate>
                         <App />
-                    </ContextProvider>
-                </Provider>
-            </Translate>
+                    </Translate>
+                </ContextProvider>
+            </Provider>
         </GlobalStyles>
     </React.StrictMode>,
 );

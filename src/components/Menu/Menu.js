@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import style from './Modal.module.scss';
+import style from './Menu.module.scss';
 
 function Modal({ small, showBefore, children }) {
     const classes = classNames({

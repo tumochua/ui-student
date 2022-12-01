@@ -1,10 +1,8 @@
 import { NavLink } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { privateRoutes } from '@/routes';
 import style from './Sidebar.module.scss';
 import './Sidebar.module.scss';
 function Sidebar() {
-    const { t } = useTranslation();
     return (
         <div>
             <ul className={style.navbarList}>

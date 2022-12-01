@@ -5,7 +5,6 @@ import en from './en/translation.json';
 import vi from './vi/translation.json';
 
 function Translate({ children, language }) {
-    // console.log('language', language);
     localStorage.setItem('language', 'vi');
     i18n.use(initReactI18next).init({
         resources: {
@@ -17,6 +16,7 @@ function Translate({ children, language }) {
             },
         },
         lng: localStorage.getItem('language'), // if you're using a language detector, do not define the lng option
+        // lng: language, // if you're using a language detector, do not define the lng option
         fallbackLng: 'vi',
         interpolation: {
             escapeValue: false, // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
@@ -27,6 +27,6 @@ function Translate({ children, language }) {
 const mapStateToProps = (state) => ({
     language: state.language.language,
 });
-// export default connect(mapStateToProps, {})(Translate);
+export default connect(mapStateToProps, {})(Translate);
 
-export default Translate;
+// export default Translate;

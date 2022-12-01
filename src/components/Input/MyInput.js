@@ -15,6 +15,11 @@ function MyInput({
     opacity = true,
 }) {
     const handleOnchangeInput = (e) => {
+        if (name === 'inputFile') {
+            handleOnchange({ name: name, value: e.target.files[0] });
+            return;
+        }
+
         handleOnchange({ name: name, value: e.target.value });
     };
 
