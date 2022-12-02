@@ -1,16 +1,19 @@
 import { memo } from 'react';
 import style from './Language.module.scss';
 import Modal from '@/components/Menu';
-function Language({ isModalLanguage, language, onChanLanguage }) {
-    // console.log('re-render Language');
+function Language({ languages, onChanLanguage }) {
+    // console.log('language', languages);
     function JsxLanguage() {
         return (
             <>
-                {language &&
-                    language.map((item) => {
+                {languages &&
+                    languages.map((item) => {
                         return (
                             <p className={style.itemLanguage} key={item.id}>
-                                <span onClick={() => onChanLanguage(item.value)}> {item.name}</span>
+                                <span onClick={() => onChanLanguage({ value: item.value, name: item.name })}>
+                                    {' '}
+                                    {item.name}
+                                </span>
                             </p>
                         );
                     })}

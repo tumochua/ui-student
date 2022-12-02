@@ -7,7 +7,6 @@ import { publicRoutes, privateRoutes } from '@/routes';
 
 import DefaultLayout from './layouts/DefaultLayout';
 import ProtectedRouter from './components/ProtectedRouter';
-
 function App() {
     return (
         <Router>

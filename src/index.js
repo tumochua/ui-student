@@ -13,17 +13,15 @@ import store from './store';
 import { ContextProvider } from './context';
 
 ///i18n
-
-import Translate from './translate/Translate';
+// import { I18nextProvider } from 'react-i18next';
+import './i18n/I18n';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <GlobalStyles>
             <Provider store={store}>
                 <ContextProvider>
-                    <Translate>
-                        <App></App>
-                    </Translate>
+                    <App />
                 </ContextProvider>
             </Provider>
         </GlobalStyles>

@@ -1,0 +1,31 @@
+{
+    "Headers": {
+        "studentPortal": "Cổng Sinh Viên"
+    },
+
+    "Home": {
+        "home": "Trang chủ",
+        "welcome": "Xin chào React"
+    },
+    "Profile": {
+        "fullName": "Họ và tên",
+        "dateBirth": "Ngày Tháng Năm Sinh",
+        "address": "Địa Chỉ",
+        "codeSv": "Mã Sinh Viên",
+        "class": "Lớp",
+        "language": "Ngôn Ngữ",
+        "InformationStudent": {
+            "notFound": "Chưa Có dữ liệu"
+        }
+    },
+    "Languages": {
+        "vi": "Tiếng Việt",
+        "en": "Tiếng Anh"
+    },
+    "Navbar": {
+        "home": "Trang chủ",
+        "notification": "Thông Báo",
+        "share": "Chia sẻ thông tin",
+        "post": "Viết bài"
+    }
+}

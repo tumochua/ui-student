@@ -8,45 +8,49 @@ import Notification from '@/pages/Notification';
 import Post from '@/pages/Post';
 import Share from '@/pages/Share';
 
-import Translate from '@/translate';
-
 import NotFound from '@/pages/NotFound';
 
-// import en from '../translate/en/translation.json';
-// import vi from '../translate/vi/translation.json';
-
 // import LeanRedux from '@/pages/LeanRedux/index';
-// import LeanReactContext from '@/pages/LeanReactContext/index';
-// Public routes
-
+import LeanReactContext from '@/pages/LeanReactContext/index';
 const publicRoutes = [
     { path: config.routes.home, component: Home, layout: null },
     { path: config.routes.login, component: Login, layout: null },
     { path: config.routes.register, component: Register, layout: null },
-    { path: config.routes.translate, component: Translate, layout: null },
 
     { path: config.routes.notFound, component: NotFound, layout: null },
     // { path: '/leanRedux', component: LeanRedux },
-    // { path: '/leanReactContext', component: LeanReactContext },
+    { path: '/leanReactContext', component: LeanReactContext },
 ];
 
 const privateRoutes = [
-    { path: config.routes.profile, component: Profile, nameEn: 'Home', nameVi: 'Trang chủ', icon: 'fa-solid fa-house' },
     {
+        id: 1,
+        path: config.routes.profile,
+        component: Profile,
+        icon: 'fa-solid fa-house',
+        name: 'Navbar.home',
+    },
+    {
+        id: 2,
         path: config.routes.notification,
         component: Notification,
-        nameEn: 'Notification',
-        nameVi: 'Thông báo',
         icon: 'fa-solid fa-bell',
+        name: 'Navbar.notification',
     },
     {
+        id: 3,
         path: config.routes.share,
         component: Share,
-        nameEn: 'Share',
-        nameVi: 'Chia sẻ thông tin',
         icon: 'fa-solid fa-share-nodes',
+        name: 'Navbar.share',
     },
-    { path: config.routes.post, component: Post, nameEn: 'Post', nameVi: 'Viết bài', icon: 'fa-solid fa-blog' },
+    {
+        id: 4,
+        path: config.routes.post,
+        component: Post,
+        icon: 'fa-solid fa-blog',
+        name: 'Navbar.post',
+    },
     // { path: config.routes.login, component: Login, layout: null },
 ];
 

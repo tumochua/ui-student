@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -11,36 +11,34 @@ import style from './Profile.module.scss';
 ///component
 import InformationStudent from './InformationStudent/InformationStudent';
 import Language from './Language';
-/// redux
-import { changeLanguage } from '@/store/actions/LanguageActions';
 
-function Profile({ changeLanguage }) {
-    const { t } = useTranslation();
+function Profile() {
+    // console.log('re-render profile');
+    const { t, i18n } = useTranslation();
+
     const navigate = useNavigate();
     const [isModalLanguage, setIsModalLanguage] = useState(false);
-    const [useInfor, setUseInfor] = useState(null);
+    const [userInfor, setUserInfor] = useState(null);
     const [inputFile, setInputFile] = useState(null);
     const [preview, setPreview] = useState(null);
 
-    // eslint-disable-next-line no-unused-vars
-    const [language, setLanguage] = useState([
+    const [languages, setLanguages] = useState([
         {
             id: 1,
-            name: 'Tiếng Việt',
+            name: t('Languages.vi'),
             value: 'vi',
         },
         {
             id: 2,
-            name: 'Tiếng anh',
+            name: t('Languages.en'),
             value: 'en',
         },
     ]);
-
     useEffect(() => {
         const fetchApiUserInfor = async () => {
             const reponse = await apiGetProfileUser();
             if (reponse.data.statusCode === 2) {
-                setUseInfor(reponse.data);
+                setUserInfor(reponse.data);
                 // console.log('useInfor', useInfor);
             }
             // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -50,7 +48,8 @@ function Profile({ changeLanguage }) {
             }
         };
         fetchApiUserInfor();
-    }, [navigate]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
         if (inputFile) {
@@ -59,7 +58,20 @@ function Profile({ changeLanguage }) {
             return () => URL.revokeObjectURL(objectUrl);
         }
     }, [inputFile]);
-
+    useEffect(() => {
+        setLanguages([
+            {
+                id: 1,
+                name: t('Languages.vi'),
+                value: 'vi',
+            },
+            {
+                id: 2,
+                name: t('Languages.en'),
+                value: 'en',
+            },
+        ]);
+    }, [t]);
     const handleMouseEnter = useCallback(() => {
         setIsModalLanguage(true);
     }, []);
@@ -70,14 +82,18 @@ function Profile({ changeLanguage }) {
 
     const handleChangeLanguage = useCallback(
         (language) => {
-            changeLanguage(language);
+            i18n.changeLanguage(language.value);
+
             setIsModalLanguage(false);
         },
-        [changeLanguage],
+        [i18n],
+        // [changeLanguage],
     );
+
     const handleOnchangeInput = useCallback((data) => {
         setInputFile(data.value);
     }, []);
+
     return (
         <div className={style.profileWapper}>
             {inputFile && <img src={preview} alt="preview" />}
@@ -86,20 +102,16 @@ function Profile({ changeLanguage }) {
                 onMouseEnter={() => handleMouseEnter()}
                 onMouseLeave={() => handleMouseLeave()}
             >
-                {/* ngôn ngữ */}
                 {t('Profile.language')}
                 {isModalLanguage && (
                     <Language
                         isModalLanguage={isModalLanguage}
-                        language={language}
+                        languages={languages}
                         onChanLanguage={handleChangeLanguage}
                     />
                 )}
             </span>
-            <InformationStudent useInfor={useInfor} onchangeInput={handleOnchangeInput} />
-            {/* {
-                useInfor && <InformationStudent onchangeInput={handleOnchangeInput} />
-            } */}
+            <InformationStudent onchangeInput={handleOnchangeInput} userInfor={userInfor} />
         </div>
     );
 }
@@ -107,4 +119,4 @@ const mapStateToProps = (state) => ({
     userRedux: state.users.user,
 });
 
-export default connect(mapStateToProps, { changeLanguage })(Profile);
+export default connect(mapStateToProps, {})(memo(Profile));

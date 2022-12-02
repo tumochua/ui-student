@@ -1,6 +1,6 @@
 import { CHANGE_LANGUAGE } from '../type/todos';
 
-const initialState = {
+export const initialState = {
     language: 'vi',
 };
 

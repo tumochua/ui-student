@@ -1,0 +1,30 @@
+{
+    "Headers": {
+        "studentPortal": "Student Portal"
+    },
+    "Home": {
+        "home": "Home",
+        "welcome": "Welcome to React"
+    },
+    "Profile": {
+        "fullName": "fullName",
+        "dateBirth": "Date Of Birth",
+        "address": "Address",
+        "codeSv": "Code Student",
+        "class": "Class",
+        "language": "Language",
+        "InformationStudent": {
+            "notFound": "no data yet"
+        }
+    },
+    "Languages": {
+        "vi": "Vietnamese",
+        "en": "English"
+    },
+    "Navbar": {
+        "home": "Home",
+        "notification": "Notification",
+        "share": "Share Infor",
+        "post": "Post"
+    }
+}

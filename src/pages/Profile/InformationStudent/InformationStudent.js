@@ -4,11 +4,10 @@ import { useTranslation } from 'react-i18next';
 
 import style from './InformationStudent.module.scss';
 import Input from '@/components/Input';
-function InformationStudent({ onchangeInput }) {
+function InformationStudent({ userInfor, onchangeInput }) {
     // console.log('re-render InformationStudent');
     const { t } = useTranslation();
-    // console.log('inputFile', inputFile);
-    // console.log('userInfor', userInfor);
+    // console.log('useInfor', userInfor);
     const classess = classNames('fa-solid fa-cloud-arrow-down', {
         [style.iconFile]: true,
     });
@@ -18,18 +17,29 @@ function InformationStudent({ onchangeInput }) {
                 <table>
                     <tbody>
                         <tr>
-                            <th>{t('Profile.name')}</th>
-                            <th>{t('Profile.dateBirth')}</th>
+                            <th>{t('Profile.fullName')}</th>
+                            <th>{t('Profile.codeSv')}</th>
                             <th>{t('Profile.address')}</th>
-                            {/* <th>Company</th>
-                            <th>Contact</th>
-                            <th>Country</th> */}
+                            <th>{t('Profile.class')}</th>
                         </tr>
-                        <tr>
-                            <th>Company</th>
-                            <th>Contact</th>
-                            <th>Country</th>
-                        </tr>
+                        {userInfor && (
+                            <tr>
+                                <th>{userInfor.data.fullName}</th>
+                                <th>
+                                    {userInfor.data.id ? userInfor.data.id : t('Profile.InformationStudent.notFound')}
+                                </th>
+                                <th>
+                                    {userInfor.data.class
+                                        ? userInfor.data.class
+                                        : t('Profile.InformationStudent.notFound')}
+                                </th>
+                                <th>
+                                    {userInfor.data.address
+                                        ? userInfor.data.address
+                                        : t('Profile.InformationStudent.notFound')}
+                                </th>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>
@@ -43,7 +53,7 @@ function InformationStudent({ onchangeInput }) {
         </div>
     );
 }
-
+// {t(${`Profile.InformationStudent.notFound`})}}
 export default memo(InformationStudent);
 // export default InformationStudent;
 // const mapStateToProps = (state) => ({
