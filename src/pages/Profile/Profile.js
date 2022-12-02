@@ -1,6 +1,8 @@
-import { connect } from 'react-redux';
 import { useState, useEffect, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 import { apiGetProfileUser } from '@/services/apis';
 import { useCheckToken } from '@/use/CheckToken';
 import config from '@/config';
@@ -9,11 +11,17 @@ import style from './Profile.module.scss';
 ///component
 import InformationStudent from './InformationStudent/InformationStudent';
 import Language from './Language';
-
 /// redux
 import { changeLanguage } from '@/store/actions/LanguageActions';
 
-function Profile({ userRedux, changeLanguage }) {
+function Profile({ changeLanguage }) {
+    const { t } = useTranslation();
+    const navigate = useNavigate();
+    const [isModalLanguage, setIsModalLanguage] = useState(false);
+    const [useInfor, setUseInfor] = useState(null);
+    const [inputFile, setInputFile] = useState(null);
+    const [preview, setPreview] = useState(null);
+
     // eslint-disable-next-line no-unused-vars
     const [language, setLanguage] = useState([
         {
@@ -27,47 +35,30 @@ function Profile({ userRedux, changeLanguage }) {
             value: 'en',
         },
     ]);
-    const [isModalLanguage, setIsModalLanguage] = useState(false);
-    const navigate = useNavigate();
-    const [userInfor, setUserInfor] = useState(null);
-    const [inputFile, setInputFile] = useState(null);
-    const [preview, setPreview] = useState(null);
+
     useEffect(() => {
-        (async () => {
+        const fetchApiUserInfor = async () => {
             const reponse = await apiGetProfileUser();
-            setUserInfor(reponse.data);
+            if (reponse.data.statusCode === 2) {
+                setUseInfor(reponse.data);
+                // console.log('useInfor', useInfor);
+            }
             // eslint-disable-next-line react-hooks/rules-of-hooks
             const result = useCheckToken(reponse);
             if (result) {
                 return navigate(config.routes.login);
             }
-        })();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        };
+        fetchApiUserInfor();
+    }, [navigate]);
+
     useEffect(() => {
-        if (!inputFile) {
-            setPreview(undefined);
-            return;
+        if (inputFile) {
+            const objectUrl = URL.createObjectURL(inputFile);
+            setPreview(objectUrl);
+            return () => URL.revokeObjectURL(objectUrl);
         }
-        const objectUrl = URL.createObjectURL(inputFile);
-        setPreview(objectUrl);
-        return () => URL.revokeObjectURL(objectUrl);
     }, [inputFile]);
-    const handleChangeLanguage = useCallback(
-        (language) => {
-            changeLanguage(language);
-            setIsModalLanguage(false);
-        },
-        [changeLanguage],
-    );
-
-    const handleOnchangeInput = useCallback((data) => {
-        setInputFile(data.value);
-    }, []);
-
-    // const handleOnchangeInput = (data) => {
-    //     setInputFile(data.value);
-    // };
 
     const handleMouseEnter = useCallback(() => {
         setIsModalLanguage(true);
@@ -77,6 +68,16 @@ function Profile({ userRedux, changeLanguage }) {
         setIsModalLanguage(false);
     }, []);
 
+    const handleChangeLanguage = useCallback(
+        (language) => {
+            changeLanguage(language);
+            setIsModalLanguage(false);
+        },
+        [changeLanguage],
+    );
+    const handleOnchangeInput = useCallback((data) => {
+        setInputFile(data.value);
+    }, []);
     return (
         <div className={style.profileWapper}>
             {inputFile && <img src={preview} alt="preview" />}
@@ -85,11 +86,20 @@ function Profile({ userRedux, changeLanguage }) {
                 onMouseEnter={() => handleMouseEnter()}
                 onMouseLeave={() => handleMouseLeave()}
             >
-                Ngôn ngữ
-                {/* <i class="fa-solid fa-caret-down"></i> */}
-                <Language isModalLanguage={isModalLanguage} language={language} onChanLanguage={handleChangeLanguage} />
+                {/* ngôn ngữ */}
+                {t('Profile.language')}
+                {isModalLanguage && (
+                    <Language
+                        isModalLanguage={isModalLanguage}
+                        language={language}
+                        onChanLanguage={handleChangeLanguage}
+                    />
+                )}
             </span>
-            <InformationStudent userInfor={userInfor} onchangeInput={handleOnchangeInput} />
+            <InformationStudent useInfor={useInfor} onchangeInput={handleOnchangeInput} />
+            {/* {
+                useInfor && <InformationStudent onchangeInput={handleOnchangeInput} />
+            } */}
         </div>
     );
 }

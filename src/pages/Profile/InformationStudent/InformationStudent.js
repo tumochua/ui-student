@@ -1,16 +1,17 @@
 import { memo } from 'react';
-import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
+import { useTranslation } from 'react-i18next';
 
 import style from './InformationStudent.module.scss';
 import Input from '@/components/Input';
-
-function InformationStudent({ userInfor, onchangeInput }) {
+function InformationStudent({ onchangeInput }) {
+    // console.log('re-render InformationStudent');
     const { t } = useTranslation();
+    // console.log('inputFile', inputFile);
+    // console.log('userInfor', userInfor);
     const classess = classNames('fa-solid fa-cloud-arrow-down', {
         [style.iconFile]: true,
     });
-
     return (
         <div className={style.inforWapper}>
             <div className={style.inforLeft}>
@@ -18,8 +19,11 @@ function InformationStudent({ userInfor, onchangeInput }) {
                     <tbody>
                         <tr>
                             <th>{t('Profile.name')}</th>
-                            <th>Ngày Tháng Năm Sinh</th>
-                            <th>Country</th>
+                            <th>{t('Profile.dateBirth')}</th>
+                            <th>{t('Profile.address')}</th>
+                            {/* <th>Company</th>
+                            <th>Contact</th>
+                            <th>Country</th> */}
                         </tr>
                         <tr>
                             <th>Company</th>
@@ -33,6 +37,7 @@ function InformationStudent({ userInfor, onchangeInput }) {
                 <div className={style.inforRight}>
                     <Input type="file" boder={false} opacity={false} name="inputFile" handleOnchange={onchangeInput} />
                     <i className={classess}></i>
+                    tumochua
                 </div>
             </div>
         </div>
@@ -40,6 +45,7 @@ function InformationStudent({ userInfor, onchangeInput }) {
 }
 
 export default memo(InformationStudent);
+// export default InformationStudent;
 // const mapStateToProps = (state) => ({
 //     language: state.language.language,
 // });

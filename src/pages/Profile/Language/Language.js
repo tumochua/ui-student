@@ -20,13 +20,13 @@ function Language({ isModalLanguage, language, onChanLanguage }) {
 
     return (
         <>
-            {isModalLanguage ? (
-                <span className={style.languagectn}>
-                    <Modal small showBefore>
-                        <JsxLanguage />
-                    </Modal>
-                </span>
-            ) : null}
+            {/* {isModalLanguage ? ( */}
+            <span className={style.languagectn}>
+                <Modal small showBefore>
+                    <JsxLanguage />
+                </Modal>
+            </span>
+            {/* ) : null} */}
         </>
     );
 }

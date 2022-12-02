@@ -4,7 +4,10 @@
         "welcome": "Welcome to React"
     },
     "Profile": {
-        "name": "Name"
+        "name": "Name",
+        "dateBirth": "Date Of Birth",
+        "address": "Address",
+        "language": "Language"
     },
     "Navbar": {
         "home": "Home",

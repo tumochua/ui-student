@@ -4,7 +4,10 @@
         "welcome": "Xin chào React"
     },
     "Profile": {
-        "name": "Tên"
+        "name": "Tên",
+        "dateBirth": "Ngày Tháng Năm Sinh",
+        "address": "Địa Chỉ",
+        "language": "Ngôn Ngữ"
     },
     "Navbar": {
         "home": "Trang chủ",
