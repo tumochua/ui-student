@@ -6,9 +6,12 @@ const routes = {
 
     /// profile
     profile: '/profile',
+    editUser: '/eidt-user/:id',
     notification: '/notification',
     share: '/share',
     post: '/post',
+
+    /// not found
     notFound: '*',
 };
 

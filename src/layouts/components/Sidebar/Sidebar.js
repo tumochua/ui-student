@@ -1,12 +1,45 @@
 import { useTranslation } from 'react-i18next';
 
 import { NavLink } from 'react-router-dom';
-import { privateRoutes } from '@/routes';
+import Profile from '@/pages/Profile/index';
+import Notification from '@/pages/Notification';
+import Post from '@/pages/Post';
+import Share from '@/pages/Share';
+import config from '@/config';
 import style from './Sidebar.module.scss';
 import './Sidebar.module.scss';
 function Sidebar() {
     const { t } = useTranslation();
-
+    const privateRoutes = [
+        {
+            id: 1,
+            path: config.routes.profile,
+            component: Profile,
+            icon: 'fa-solid fa-house',
+            name: 'Navbar.home',
+        },
+        {
+            id: 2,
+            path: config.routes.notification,
+            component: Notification,
+            icon: 'fa-solid fa-bell',
+            name: 'Navbar.notification',
+        },
+        {
+            id: 3,
+            path: config.routes.share,
+            component: Share,
+            icon: 'fa-solid fa-share-nodes',
+            name: 'Navbar.share',
+        },
+        {
+            id: 4,
+            path: config.routes.post,
+            component: Post,
+            icon: 'fa-solid fa-blog',
+            name: 'Navbar.post',
+        },
+    ];
     return (
         <div>
             <ul className={style.navbarList}>

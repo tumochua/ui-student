@@ -8,6 +8,7 @@ import Notification from '@/pages/Notification';
 import Post from '@/pages/Post';
 import Share from '@/pages/Share';
 
+import EditUser from '@/pages/Profile/Edit/EditUser';
 import NotFound from '@/pages/NotFound';
 
 // import LeanRedux from '@/pages/LeanRedux/index';
@@ -51,7 +52,7 @@ const privateRoutes = [
         icon: 'fa-solid fa-blog',
         name: 'Navbar.post',
     },
-    // { path: config.routes.login, component: Login, layout: null },
+    { path: config.routes.editUser, component: EditUser },
 ];
 
 export { publicRoutes, privateRoutes };

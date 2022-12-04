@@ -50,16 +50,59 @@ const useValidateForm = (user) => {
     return data;
 };
 
-const useShowHideIconPassword = (param) => {
-    return param === 'fa-sharp fa-solid fa-eye-slash' ? 'fa-solid fa-eye' : 'fa-sharp fa-solid fa-eye-slash';
+const useShowHideIconPassword = (icon) => {
+    return icon === 'fa-sharp fa-solid fa-eye-slash' ? 'fa-solid fa-eye' : 'fa-sharp fa-solid fa-eye-slash';
 };
 
 const useTypeInput = (type) => {
     return type === 'password' ? 'text' : 'password';
 };
 
+const useCheckForm = (dataforms) => {
+    // console.log('dataforms', dataforms);
+    if (dataforms) {
+        return dataforms.map((element) => {
+            if (element.require) {
+                // console.log('element', element);
+                if (element.name === 'email') {
+                    const checkEmail = reg.test(element.value);
+                    // console.log('checkEmail', checkEmail);
+                    if (!checkEmail) {
+                        return {
+                            name: element.name,
+                            errorMessage: `Trường ${element.name} của bạn là email`,
+                        };
+                    }
+                }
+                if (element.name === 'avatar') {
+                    if (!element.value) {
+                        return {
+                            name: element.name,
+                            errorMessage: `Trường ${element.name} của bạn là bắt buộc`,
+                        };
+                    }
+                }
+                if (element.value.length < element.length) {
+                    if (element.name !== 'email') {
+                        return {
+                            name: element.name,
+                            errorMessage: `Trường ${element.name} của bạn phải lớn hơn ${element.length} ký tự`,
+                        };
+                    }
+                }
+            } else {
+                return {
+                    name: element.name,
+                    success: true,
+                };
+            }
+        });
+    }
+};
+
 module.exports = {
     useValidateForm,
     useShowHideIconPassword,
     useTypeInput,
+    useCheckForm,
 };

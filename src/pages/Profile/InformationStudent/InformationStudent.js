@@ -1,16 +1,16 @@
 import { memo } from 'react';
-import classNames from 'classnames';
+// import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 
 import style from './InformationStudent.module.scss';
-import Input from '@/components/Input';
+// import Input from '@/components/Input';
 function InformationStudent({ userInfor, onchangeInput }) {
     // console.log('re-render InformationStudent');
     const { t } = useTranslation();
     // console.log('useInfor', userInfor);
-    const classess = classNames('fa-solid fa-cloud-arrow-down', {
-        [style.iconFile]: true,
-    });
+    // const classess = classNames('fa-solid fa-cloud-arrow-down', {
+    //     [style.iconFile]: true,
+    // });
     return (
         <div className={style.inforWapper}>
             <div className={style.inforLeft}>
@@ -43,13 +43,12 @@ function InformationStudent({ userInfor, onchangeInput }) {
                     </tbody>
                 </table>
             </div>
-            <div className={style.inforRightWapper}>
+            {/* <div className={style.inforRightWapper}>
                 <div className={style.inforRight}>
                     <Input type="file" boder={false} opacity={false} name="inputFile" handleOnchange={onchangeInput} />
                     <i className={classess}></i>
-                    tumochua
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

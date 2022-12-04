@@ -16,7 +16,8 @@
         "language": "Ngôn Ngữ",
         "InformationStudent": {
             "notFound": "Chưa Có dữ liệu"
-        }
+        },
+        "edit": "Sửa"
     },
     "Languages": {
         "vi": "Tiếng Việt",

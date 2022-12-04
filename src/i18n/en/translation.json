@@ -15,7 +15,8 @@
         "language": "Language",
         "InformationStudent": {
             "notFound": "no data yet"
-        }
+        },
+        "edit": "Update student"
     },
     "Languages": {
         "vi": "Vietnamese",

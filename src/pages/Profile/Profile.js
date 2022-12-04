@@ -2,15 +2,15 @@ import { useState, useEffect, useCallback, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+///component
+import InformationStudent from './InformationStudent/InformationStudent';
+import Language from './Language';
+import MyButton from '@/components/Button/MyButton';
 
 import { apiGetProfileUser } from '@/services/apis';
 import { useCheckToken } from '@/use/CheckToken';
 import config from '@/config';
 import style from './Profile.module.scss';
-
-///component
-import InformationStudent from './InformationStudent/InformationStudent';
-import Language from './Language';
 
 function Profile() {
     // console.log('re-render profile');
@@ -20,6 +20,7 @@ function Profile() {
     const [isModalLanguage, setIsModalLanguage] = useState(false);
     const [userInfor, setUserInfor] = useState(null);
     const [inputFile, setInputFile] = useState(null);
+    // eslint-disable-next-line no-unused-vars
     const [preview, setPreview] = useState(null);
 
     const [languages, setLanguages] = useState([
@@ -94,23 +95,38 @@ function Profile() {
         setInputFile(data.value);
     }, []);
 
+    const handleRedirectEditUser = () => {
+        if (userInfor) {
+            const userId = userInfor.data.id;
+            // navigate(`/${config.routes.editUser}/${userId}`);
+            navigate(`/eidt-user/${userId}`);
+        }
+    };
+
     return (
         <div className={style.profileWapper}>
-            {inputFile && <img src={preview} alt="preview" />}
-            <span
-                className={style.languageWapper}
-                onMouseEnter={() => handleMouseEnter()}
-                onMouseLeave={() => handleMouseLeave()}
-            >
-                {t('Profile.language')}
-                {isModalLanguage && (
-                    <Language
-                        isModalLanguage={isModalLanguage}
-                        languages={languages}
-                        onChanLanguage={handleChangeLanguage}
-                    />
-                )}
-            </span>
+            <div className={style.profileHeader}>
+                <span
+                    className={style.languageWapper}
+                    onMouseEnter={() => handleMouseEnter()}
+                    onMouseLeave={() => handleMouseLeave()}
+                >
+                    {t('Profile.language')}
+                    {isModalLanguage && (
+                        <Language
+                            isModalLanguage={isModalLanguage}
+                            languages={languages}
+                            onChanLanguage={handleChangeLanguage}
+                        />
+                    )}
+                </span>
+                <span className={style.profileEdit} title="Bạn cần sửa thông tin" onClick={handleRedirectEditUser}>
+                    {/* <i className="fa-solid fa-pen"></i> */}
+                    <MyButton success medium>
+                        {t('Profile.edit')}
+                    </MyButton>
+                </span>
+            </div>
             <InformationStudent onchangeInput={handleOnchangeInput} userInfor={userInfor} />
         </div>
     );
