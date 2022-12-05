@@ -28,6 +28,9 @@
     --input-boder-focus: rgba(0, 0, 0, 0.54);
     --input-box-shadow: inset 0 2px 0 rgb(0 0 0 / 2%);
 
+    --growth-from: 0.7;
+    --growth-to: 1;
+
     --font-family: 'Roboto', sans-serif;
 
     // Default layout
@@ -51,6 +54,25 @@
 //     display: inherit;
 //     background: red;
 // }
+.modal {
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    animation: fadeIn linear 0.1s;
+    .modalBody {
+        width: 40%;
+        margin: 0 auto;
+        animation: growth linear 0.1s;
+    }
+}
+
 html {
     font-size: 62.5%;
 }
@@ -62,4 +84,24 @@ body {
     text-rendering: optimizespeed;
     color: var(--text-color);
     overflow-y: overlay;
+}
+
+/// animation
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes growth {
+    from {
+        transform: scale(var(--growth-from));
+    }
+    to {
+        transform: scale(var(--growth-to));
+    }
 }

@@ -3,7 +3,6 @@ import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import style from './InformationStudent.module.scss';
-// import Input from '@/components/Input';
 function InformationStudent({ userInfor, onchangeInput }) {
     // console.log('re-render InformationStudent');
     const { t } = useTranslation();
@@ -52,10 +51,4 @@ function InformationStudent({ userInfor, onchangeInput }) {
         </div>
     );
 }
-// {t(${`Profile.InformationStudent.notFound`})}}
 export default memo(InformationStudent);
-// export default InformationStudent;
-// const mapStateToProps = (state) => ({
-//     language: state.language.language,
-// });
-// export default connect(mapStateToProps, {})(InformationStudent);

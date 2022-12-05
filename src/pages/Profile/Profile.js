@@ -38,6 +38,7 @@ function Profile() {
     useEffect(() => {
         const fetchApiUserInfor = async () => {
             const reponse = await apiGetProfileUser();
+            // console.log('reponse', reponse);
             if (reponse.data.statusCode === 2) {
                 setUserInfor(reponse.data);
                 // console.log('useInfor', useInfor);

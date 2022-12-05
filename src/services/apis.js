@@ -26,3 +26,8 @@ export const handleApiLogin = (user) => {
 export const apiGetProfileUser = () => {
     return api.get(`/api-get-profile-user-by-id`);
 };
+
+export const handleApiEditUser = (userData) => {
+    // console.log('check userData', userData);
+    return api.put('/api-edit-user', userData);
+};

@@ -61,6 +61,7 @@ const useTypeInput = (type) => {
 const useCheckForm = (dataforms) => {
     // console.log('dataforms', dataforms);
     if (dataforms) {
+        // eslint-disable-next-line array-callback-return
         return dataforms.map((element) => {
             if (element.require) {
                 // console.log('element', element);
@@ -68,33 +69,46 @@ const useCheckForm = (dataforms) => {
                     const checkEmail = reg.test(element.value);
                     // console.log('checkEmail', checkEmail);
                     if (!checkEmail) {
+                        // console.log('change email');
                         return {
                             name: element.name,
-                            errorMessage: `Trường ${element.name} của bạn là email`,
+                            errorMessage: `Trường này của bạn phải là ${element.name}`,
+                        };
+                    } else {
+                        return {
+                            name: element.name,
+                            errorMessage: ``,
                         };
                     }
                 }
-                if (element.name === 'avatar') {
+                if (element.name === 'avatar' || element.name === 'birthday') {
                     if (!element.value) {
+                        // console.log('change avatar birthday');
                         return {
                             name: element.name,
-                            errorMessage: `Trường ${element.name} của bạn là bắt buộc`,
+                            errorMessage: `Trường này của bạn là bắt buộc`,
+                        };
+                    } else {
+                        return {
+                            name: element.name,
+                            errorMessage: ``,
                         };
                     }
                 }
-                if (element.value.length < element.length) {
-                    if (element.name !== 'email') {
+                if (element.name !== 'email') {
+                    if (element.value.length < element.length) {
+                        // console.log('change length', element.name);
                         return {
                             name: element.name,
-                            errorMessage: `Trường ${element.name} của bạn phải lớn hơn ${element.length} ký tự`,
+                            errorMessage: `Trường này phải lớn hơn ${element.length} ký tự`,
+                        };
+                    } else {
+                        return {
+                            name: element.name,
+                            errorMessage: ``,
                         };
                     }
                 }
-            } else {
-                return {
-                    name: element.name,
-                    success: true,
-                };
             }
         });
     }

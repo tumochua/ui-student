@@ -11,14 +11,15 @@ function FormInput({
     placeholder,
     type,
     invalid,
-    onBlurInput,
     icon,
     onChangeIconPassword,
+    trifurcate,
 }) {
     /// className của react nhận string nên sử lý làm sao cuối cùng trả ra chuỗi và nếu muốn nhiều className thì mỗi className cách nhau bằng dấu cách
     const classInput = classNames(style.baseInput, {
         [style.half]: half,
         [style.invalid]: invalid,
+        [style.trifurcate]: trifurcate,
     });
     const classIcon = classNames(icon, style.iconPassword, {});
 

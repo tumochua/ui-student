@@ -1,0 +1,17 @@
+.formEditWapper {
+    .formGroup {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        .previewImages {
+            width: 600px;
+            height: 400px;
+        }
+        .images {
+            cursor: pointer;
+            margin: 0 auto;
+            display: inherit;
+            object-fit: contain;
+        }
+    }
+}
