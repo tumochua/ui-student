@@ -17,7 +17,16 @@
         "InformationStudent": {
             "notFound": "Chưa Có dữ liệu"
         },
-        "edit": "Sửa"
+        "edit": "Sửa",
+        "Headers": {
+            "TabButton": {
+                "personalInfo": "Thông Tin Cá Nhân",
+                "educationalInfo": "Thông Tin Giáo Dục",
+                "familyInfo": "Thông Tin Gia Đình",
+                "proctorDetails": "Chi Tiết Giám Thị",
+                "hostelDetails": "Chi Tiết Ký Túc Xá"
+            }
+        }
     },
     "Languages": {
         "vi": "Tiếng Việt",

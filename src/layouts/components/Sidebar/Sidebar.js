@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 import { NavLink } from 'react-router-dom';
 import Profile from '@/pages/Profile/index';
+import PersonalInfo from '@/pages/PersonalInfo';
 import Notification from '@/pages/Notification';
 import Post from '@/pages/Post';
 import Share from '@/pages/Share';
@@ -13,8 +14,8 @@ function Sidebar() {
     const privateRoutes = [
         {
             id: 1,
-            path: config.routes.profile,
-            component: Profile,
+            path: config.routes.profilePersonalInfo,
+            component: PersonalInfo,
             icon: 'fa-solid fa-house',
             name: 'Navbar.home',
         },

@@ -5,7 +5,12 @@ const routes = {
     translate: '/translate',
 
     /// profile
-    profile: '/profile',
+    profilePersonalInfo: '/profile/personalinfo',
+    profileEducationalInfo: '/profile/educationalinfo',
+    profileFamilyInfo: '/profile/familyinfo',
+    profileProctorDetails: '/profile/proctordetails',
+    profileHostelDetails: '/profile/hosteldetails',
+
     editUser: '/eidt-user/:id',
     notification: '/notification',
     share: '/share',

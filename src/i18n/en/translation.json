@@ -16,7 +16,16 @@
         "InformationStudent": {
             "notFound": "no data yet"
         },
-        "edit": "Update student"
+        "edit": "Update student",
+        "Headers": {
+            "TabButton": {
+                "personalInfo": "Personal Info",
+                "educationalInfo": "Educational Info",
+                "familyInfo": "Family Info",
+                "proctorDetails": "Proctor Details",
+                "hostelDetails": "Hostel Details"
+            }
+        }
     },
     "Languages": {
         "vi": "Vietnamese",

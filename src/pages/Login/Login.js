@@ -146,7 +146,7 @@ function Login({ createUser, userRedux }) {
 
     useEffect(() => {
         if (stateAccessToken && stateRefreshToken) {
-            navigate(config.routes.profile);
+            navigate(config.routes.profilePersonalInfo);
         }
     }, [navigate, stateAccessToken, stateRefreshToken]);
 

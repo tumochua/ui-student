@@ -8,7 +8,16 @@ import Notification from '@/pages/Notification';
 import Post from '@/pages/Post';
 import Share from '@/pages/Share';
 
+// import HeaderProfile from '@/layouts/components/HeaderProfile';
+import DefaultHeaderProfile from '@/layouts/components/HeaderProfileOnly';
 import EditUser from '@/pages/Profile/Edit/EditUser';
+
+import PersonalInfo from '@/pages/PersonalInfo';
+import EducationalInfo from '@/pages/EducationalInfo';
+import FamilyInfo from '@/pages/FamilyInfo';
+import ProctorDetails from '@/pages/ProctorDetails';
+import HostelDetails from '@/pages/HostelDetails';
+
 import NotFound from '@/pages/NotFound';
 
 // import LeanRedux from '@/pages/LeanRedux/index';
@@ -30,6 +39,7 @@ const privateRoutes = [
         component: Profile,
         icon: 'fa-solid fa-house',
         name: 'Navbar.home',
+        layout: DefaultHeaderProfile,
     },
     {
         id: 2,
@@ -52,7 +62,12 @@ const privateRoutes = [
         icon: 'fa-solid fa-blog',
         name: 'Navbar.post',
     },
-    { path: config.routes.editUser, component: EditUser },
+    { path: config.routes.editUser, component: EditUser, layout: DefaultHeaderProfile },
+    { path: config.routes.profilePersonalInfo, component: PersonalInfo, layout: DefaultHeaderProfile },
+    { path: config.routes.profileEducationalInfo, component: EducationalInfo, layout: DefaultHeaderProfile },
+    { path: config.routes.profileFamilyInfo, component: FamilyInfo, layout: DefaultHeaderProfile },
+    { path: config.routes.profileProctorDetails, component: ProctorDetails, layout: DefaultHeaderProfile },
+    { path: config.routes.profileHostelDetails, component: HostelDetails, layout: DefaultHeaderProfile },
 ];
 
 export { publicRoutes, privateRoutes };

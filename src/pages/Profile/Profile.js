@@ -1,10 +1,9 @@
-import { useState, useEffect, useCallback, memo } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 ///component
 import InformationStudent from './InformationStudent/InformationStudent';
-import Language from './Language';
 import MyButton from '@/components/Button/MyButton';
 
 import { apiGetProfileUser } from '@/services/apis';
@@ -14,27 +13,11 @@ import style from './Profile.module.scss';
 
 function Profile() {
     // console.log('re-render profile');
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const navigate = useNavigate();
-    const [isModalLanguage, setIsModalLanguage] = useState(false);
     const [userInfor, setUserInfor] = useState(null);
-    const [inputFile, setInputFile] = useState(null);
-    // eslint-disable-next-line no-unused-vars
-    const [preview, setPreview] = useState(null);
 
-    const [languages, setLanguages] = useState([
-        {
-            id: 1,
-            name: t('Languages.vi'),
-            value: 'vi',
-        },
-        {
-            id: 2,
-            name: t('Languages.en'),
-            value: 'en',
-        },
-    ]);
     useEffect(() => {
         const fetchApiUserInfor = async () => {
             const reponse = await apiGetProfileUser();
@@ -53,50 +36,8 @@ function Profile() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    useEffect(() => {
-        if (inputFile) {
-            const objectUrl = URL.createObjectURL(inputFile);
-            setPreview(objectUrl);
-            return () => URL.revokeObjectURL(objectUrl);
-        }
-    }, [inputFile]);
-    useEffect(() => {
-        setLanguages([
-            {
-                id: 1,
-                name: t('Languages.vi'),
-                value: 'vi',
-            },
-            {
-                id: 2,
-                name: t('Languages.en'),
-                value: 'en',
-            },
-        ]);
-    }, [t]);
-    const handleMouseEnter = useCallback(() => {
-        setIsModalLanguage(true);
-    }, []);
-
-    const handleMouseLeave = useCallback(() => {
-        setIsModalLanguage(false);
-    }, []);
-
-    const handleChangeLanguage = useCallback(
-        (language) => {
-            i18n.changeLanguage(language.value);
-
-            setIsModalLanguage(false);
-        },
-        [i18n],
-        // [changeLanguage],
-    );
-
-    const handleOnchangeInput = useCallback((data) => {
-        setInputFile(data.value);
-    }, []);
-
     const handleRedirectEditUser = () => {
+        // console.log('userInfor', userInfor);
         if (userInfor) {
             const userId = userInfor.data.id;
             // navigate(`/${config.routes.editUser}/${userId}`);
@@ -105,31 +46,19 @@ function Profile() {
     };
 
     return (
-        <div className={style.profileWapper}>
-            <div className={style.profileHeader}>
-                <span
-                    className={style.languageWapper}
-                    onMouseEnter={() => handleMouseEnter()}
-                    onMouseLeave={() => handleMouseLeave()}
-                >
-                    {t('Profile.language')}
-                    {isModalLanguage && (
-                        <Language
-                            isModalLanguage={isModalLanguage}
-                            languages={languages}
-                            onChanLanguage={handleChangeLanguage}
-                        />
-                    )}
-                </span>
-                <span className={style.profileEdit} title="Bạn cần sửa thông tin" onClick={handleRedirectEditUser}>
-                    {/* <i className="fa-solid fa-pen"></i> */}
-                    <MyButton success medium>
-                        {t('Profile.edit')}
-                    </MyButton>
-                </span>
+        <>
+            <div className={style.profileWapper}>
+                <div className={style.profileHeader}>
+                    <span className={style.profileEdit} title="Bạn cần sửa thông tin" onClick={handleRedirectEditUser}>
+                        {/* <i className="fa-solid fa-pen"></i> */}
+                        <MyButton success medium>
+                            {t('Profile.edit')}
+                        </MyButton>
+                    </span>
+                </div>
+                <InformationStudent />
             </div>
-            <InformationStudent onchangeInput={handleOnchangeInput} userInfor={userInfor} />
-        </div>
+        </>
     );
 }
 const mapStateToProps = (state) => ({

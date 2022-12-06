@@ -1,0 +1,17 @@
+.container {
+    .content {
+        display: flex;
+        gap: 10px;
+        .languageWapper {
+            align-self: center;
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+            margin-right: 20px;
+        }
+        .tabBtn {
+            display: flex;
+            gap: 10px;
+        }
+    }
+}
