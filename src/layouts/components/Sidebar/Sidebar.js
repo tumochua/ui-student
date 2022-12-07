@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 
 import { NavLink } from 'react-router-dom';
-import Profile from '@/pages/Profile/index';
+// import Profile from '@/pages/Profile/index';
 import PersonalInfo from '@/pages/PersonalInfo';
 import Notification from '@/pages/Notification';
 import Post from '@/pages/Post';

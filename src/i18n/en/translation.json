@@ -13,6 +13,12 @@
         "codeSv": "Code Student",
         "class": "Class",
         "language": "Language",
+        "phoneNumber": "Phone Number",
+        "null": "Null",
+        "gender": "Gender",
+        "nationality": "Nationality",
+        "role": "Role",
+        "age": "Age",
         "InformationStudent": {
             "notFound": "no data yet"
         },

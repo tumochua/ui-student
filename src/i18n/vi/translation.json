@@ -9,11 +9,17 @@
     },
     "Profile": {
         "fullName": "Họ và tên",
-        "dateBirth": "Ngày Tháng Năm Sinh",
+        "dateBirth": "Ngày Tháng Năm Sinh (Năm Tháng Ngày)",
         "address": "Địa Chỉ",
         "codeSv": "Mã Sinh Viên",
         "class": "Lớp",
         "language": "Ngôn Ngữ",
+        "phoneNumber": "Số Điện Thoại",
+        "null": "Không Có",
+        "gender": "Giới Tính",
+        "nationality": "Quốc Tịch",
+        "role": "Quyền",
+        "age": "Tuổi",
         "InformationStudent": {
             "notFound": "Chưa Có dữ liệu"
         },

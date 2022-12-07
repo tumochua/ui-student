@@ -1,4 +1,4 @@
-import style from './FamilyInfo.module.scss';
+// import style from './FamilyInfo.module.scss';
 
 function FamilyInfo() {
     return <h1>FamilyInfo</h1>;

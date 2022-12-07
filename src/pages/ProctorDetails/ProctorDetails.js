@@ -1,4 +1,4 @@
-import style from './ProctorDetails.module.scss';
+// import style from './ProctorDetails.module.scss';
 
 function ProctorDetails() {
     return <h1>ProctorDetails</h1>;

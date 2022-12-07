@@ -1,0 +1,30 @@
+.container {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    .containerLeft {
+        width: 60%;
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+    }
+    .containerRight {
+        width: 40%;
+        .avatar {
+            border: 10px solid #1b1c30;
+            border-radius: 12px;
+            height: 280px;
+            display: block;
+            margin: 0 auto;
+        }
+    }
+}

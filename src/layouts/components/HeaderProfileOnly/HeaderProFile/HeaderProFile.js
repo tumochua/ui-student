@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useLocation } from 'react-router-dom';
 import style from './HeaderProFile.module.scss';
@@ -59,12 +59,6 @@ function HeaderProFile() {
             active: path === config.routes.profileHostelDetails,
             router: config.routes.profileHostelDetails,
         },
-        // {
-        //     id: 6,
-        //     name: t('Profile.edit'),
-        //     active: path === config.routes.editUser,
-        //     router: config.routes.editUser,
-        // },
     ];
 
     const handleChangeLanguage = useCallback(
@@ -83,22 +77,6 @@ function HeaderProFile() {
         setIsModalLanguage(false);
     }, []);
 
-    // const handleChangeTab = useCallback(
-    //     (router, id) => {
-    //         navigate(router);
-    //         setTabButton((prev) => {
-    //             return prev.map((tab) => {
-    //                 if (tab.id === id) {
-    //                     return { ...tab, active: true };
-    //                 } else {
-    //                     return { ...tab, active: false };
-    //                 }
-    //             });
-    //         });
-    //     },
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    //     [tabButtom],
-    // );
     const handleChangeTab = useCallback(
         (router, id) => {
             navigate(router);

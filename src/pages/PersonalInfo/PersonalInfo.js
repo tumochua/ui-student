@@ -1,7 +1,106 @@
+import { useState, useEffect, useMemo, memo } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import style from './PersonalInfo.module.scss';
 
+import { useContextStore } from '@/context';
+
+import { useChangeLanguageRole, useChangeLanguageGender } from '../../use/Languages';
+
 function PersonalInfo() {
-    return <h1>PersonalInfo</h1>;
+    const [state] = useContextStore();
+    // console.log('state', state);
+    const { t, i18n } = useTranslation();
+    const [avatar, setAvatar] = useState(null);
+    const [currentYear, setCurrentYear] = useState(() => {
+        return new Date().getFullYear();
+    });
+    // eslint-disable-next-line no-unused-vars
+    const [currentLanguage, setCurrentLanguage] = useState(() => {
+        return i18n.language;
+    });
+    const [gender, setGender] = useState(null);
+    const [role, setRole] = useState(null);
+
+    useMemo(() => {
+        if (state.userInfor) {
+            const stateImg = state.userInfor.data.image;
+            setAvatar(stateImg);
+        }
+    }, [state]);
+    useEffect(() => {
+        if (state.userInfor) {
+            const stateAgeCopy = state.userInfor.data.dob;
+            const result = new Date(stateAgeCopy).getFullYear();
+            const sumAge = currentYear - result;
+            setCurrentYear(sumAge);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [state.userInfor]);
+    useEffect(() => {
+        setCurrentLanguage(i18n.language);
+        if (state.userInfor) {
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+            const role = useChangeLanguageRole(i18n.language, state);
+            setRole(role.value);
+            // eslint-disable-next-line react-hooks/rules-of-hooks
+            const gender = useChangeLanguageGender(i18n.language, state);
+            setGender(gender.value);
+        }
+    }, [i18n.language, state]);
+
+    return (
+        <div className={style.container}>
+            <div className={style.containerLeft}>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>{t('Profile.codeSv')}</th>
+                            <th>{state.userInfor && state.userInfor.data.id}</th>
+                        </tr>
+                        <tr>
+                            <th>{t('Profile.role')}</th>
+                            <th>{role}</th>
+                        </tr>
+                        <tr>
+                            <th>{t('Profile.fullName')}</th>
+                            <th>{state.userInfor && state.userInfor.data.fullName}</th>
+                        </tr>
+                        <tr>
+                            <th>{t('Profile.gender')}</th>
+                            <th>{gender}</th>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <th>{state.userInfor && state.userInfor.data.email}</th>
+                        </tr>
+                        <tr>
+                            <th>{t('Profile.phoneNumber')}</th>
+                            <th>{(state.userInfor && state.userInfor.data.mobile) || t('Profile.null')}</th>
+                        </tr>
+                        <tr>
+                            <th>{t('Profile.address')}</th>
+                            <th>{state.userInfor && state.userInfor.data.address}</th>
+                        </tr>
+                        <tr>
+                            <th>{t('Profile.dateBirth')}</th>
+                            <th>
+                                {state.userInfor && state.userInfor.data.dob} {t('Profile.age')} : {currentYear}
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th>{t('Profile.nationality')}</th>
+                            <th>Việt Nam</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div className={style.containerRight}>
+                {avatar && <img src={`${avatar}`} alt="avatar" className={style.avatar} />}
+            </div>
+        </div>
+    );
 }
 
-export default PersonalInfo;
+export default memo(PersonalInfo);
