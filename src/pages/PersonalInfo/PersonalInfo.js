@@ -12,9 +12,7 @@ function PersonalInfo() {
     // console.log('state', state);
     const { t, i18n } = useTranslation();
     const [avatar, setAvatar] = useState(null);
-    const [currentYear, setCurrentYear] = useState(() => {
-        return new Date().getFullYear();
-    });
+    const [statecurrentYear, setCurrentYear] = useState(null);
     // eslint-disable-next-line no-unused-vars
     const [currentLanguage, setCurrentLanguage] = useState(() => {
         return i18n.language;
@@ -32,6 +30,7 @@ function PersonalInfo() {
         if (state.userInfor) {
             const stateAgeCopy = state.userInfor.data.dob;
             const result = new Date(stateAgeCopy).getFullYear();
+            const currentYear = new Date().getFullYear();
             const sumAge = currentYear - result;
             setCurrentYear(sumAge);
         }
@@ -45,6 +44,7 @@ function PersonalInfo() {
             setRole(role.value);
             // eslint-disable-next-line react-hooks/rules-of-hooks
             const gender = useChangeLanguageGender(i18n.language, state);
+            // console.log('gender', gender);
             setGender(gender.value);
         }
     }, [i18n.language, state]);
@@ -57,6 +57,10 @@ function PersonalInfo() {
                         <tr>
                             <th>{t('Profile.codeSv')}</th>
                             <th>{state.userInfor && state.userInfor.data.id}</th>
+                        </tr>
+                        <tr>
+                            <th>{t('Profile.class')}</th>
+                            <th>{state.userInfor && state.userInfor.data.classData.className}</th>
                         </tr>
                         <tr>
                             <th>{t('Profile.role')}</th>
@@ -85,7 +89,7 @@ function PersonalInfo() {
                         <tr>
                             <th>{t('Profile.dateBirth')}</th>
                             <th>
-                                {state.userInfor && state.userInfor.data.dob} {t('Profile.age')} : {currentYear}
+                                {state.userInfor && state.userInfor.data.dob} {t('Profile.age')} : {statecurrentYear}
                             </th>
                         </tr>
 

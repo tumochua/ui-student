@@ -6,6 +6,7 @@ import Register from '@/pages/Register/index';
 import Profile from '@/pages/Profile/index';
 import Notification from '@/pages/Notification';
 import Post from '@/pages/Post';
+import Blog from '@/pages/Blog';
 import Share from '@/pages/Share';
 
 // import HeaderProfile from '@/layouts/components/HeaderProfile';
@@ -13,7 +14,7 @@ import DefaultHeaderProfile from '@/layouts/components/HeaderProfileOnly';
 import EditUser from '@/pages/Profile/Edit/EditUser';
 
 import PersonalInfo from '@/pages/PersonalInfo';
-import EducationalInfo from '@/pages/EducationalInfo';
+import EducationalInfo from '@/pages/ClassInfo';
 import FamilyInfo from '@/pages/FamilyInfo';
 import ProctorDetails from '@/pages/ProctorDetails';
 import HostelDetails from '@/pages/HostelDetails';
@@ -68,6 +69,7 @@ const privateRoutes = [
     { path: config.routes.profileFamilyInfo, component: FamilyInfo, layout: DefaultHeaderProfile },
     { path: config.routes.profileProctorDetails, component: ProctorDetails, layout: DefaultHeaderProfile },
     { path: config.routes.profileHostelDetails, component: HostelDetails, layout: DefaultHeaderProfile },
+    { path: config.routes.blog, component: Blog, layout: DefaultHeaderProfile },
 ];
 
 export { publicRoutes, privateRoutes };

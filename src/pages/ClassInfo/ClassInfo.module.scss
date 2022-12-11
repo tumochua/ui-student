@@ -1,6 +1,6 @@
 .container {
+    margin-top: 10px;
     table {
-        margin-top: 20px;
         font-family: arial, sans-serif;
         border-collapse: collapse;
         width: 100%;
@@ -11,5 +11,14 @@
         border: 1px solid #dddddd;
         text-align: left;
         padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+    .listUser {
+        .itemUser {
+            list-style: none;
+        }
     }
 }

@@ -20,17 +20,28 @@
         "nationality": "Quốc Tịch",
         "role": "Quyền",
         "age": "Tuổi",
+        "edit": "Sửa",
         "InformationStudent": {
             "notFound": "Chưa Có dữ liệu"
         },
-        "edit": "Sửa",
+        "FamilyInfo": {
+            "fullNameFather": "Họ Tên Bố",
+            "fullNameMommy": "Họ Tên Mẹ",
+            "genderFather": "Giới Tính Bố",
+            "genderMommy": "Giới Tính Mẹ",
+            "contactEmail": "Email Liên Hệ",
+            "contactPhone": "Số Điện Thoại Liên Hệ",
+            "addressFather": "Địa Chỉ Bố",
+            "addressMommy": "Địa Chỉ Mẹ"
+        },
         "Headers": {
             "TabButton": {
                 "personalInfo": "Thông Tin Cá Nhân",
-                "educationalInfo": "Thông Tin Giáo Dục",
+                "educationalInfo": "Thông Tin Lớp",
                 "familyInfo": "Thông Tin Gia Đình",
                 "proctorDetails": "Chi Tiết Giám Thị",
-                "hostelDetails": "Chi Tiết Ký Túc Xá"
+                "hostelDetails": "Chi Tiết Ký Túc Xá",
+                "blog": "Viết Bài"
             }
         }
     },
@@ -42,6 +53,9 @@
         "home": "Trang chủ",
         "notification": "Thông Báo",
         "share": "Chia sẻ thông tin",
-        "post": "Viết bài"
+        "post": "Bài Viết"
+    },
+    "Blog": {
+        "post": "Viết Bài"
     }
 }

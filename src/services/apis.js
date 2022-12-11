@@ -31,3 +31,8 @@ export const handleApiEditUser = (userData) => {
     // console.log('check userData', userData);
     return api.put('/api-edit-user', userData);
 };
+
+export const apiGetListStudentOfClass = (className) => {
+    // console.log('check className', className);
+    return api.get(`/api-list-students-of-class?className=${className}`);
+};

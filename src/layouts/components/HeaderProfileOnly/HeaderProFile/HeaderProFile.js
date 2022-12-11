@@ -59,6 +59,12 @@ function HeaderProFile() {
             active: path === config.routes.profileHostelDetails,
             router: config.routes.profileHostelDetails,
         },
+        {
+            id: 6,
+            name: t('Profile.Headers.TabButton.blog'),
+            active: path === config.routes.blog,
+            router: config.routes.blog,
+        },
     ];
 
     const handleChangeLanguage = useCallback(

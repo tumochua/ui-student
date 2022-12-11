@@ -10,6 +10,7 @@ const routes = {
     profileFamilyInfo: '/profile/familyinfo',
     profileProctorDetails: '/profile/proctordetails',
     profileHostelDetails: '/profile/hosteldetails',
+    blog: '/blog',
 
     editUser: '/eidt-user/:id',
     notification: '/notification',

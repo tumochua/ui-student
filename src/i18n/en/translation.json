@@ -19,17 +19,28 @@
         "nationality": "Nationality",
         "role": "Role",
         "age": "Age",
+        "edit": "Update student",
         "InformationStudent": {
             "notFound": "no data yet"
         },
-        "edit": "Update student",
+        "FamilyInfo": {
+            "fullNameFather": "FullName Father",
+            "fullNameMommy": "FullName Mommy",
+            "genderFather": "Gender Father",
+            "genderMommy": "Gender Mommy",
+            "contactEmail": "Contact Email",
+            "contactPhone": "Contact Phone",
+            "addressFather": "Address Father",
+            "addressMommy": "Address Mommy"
+        },
         "Headers": {
             "TabButton": {
                 "personalInfo": "Personal Info",
-                "educationalInfo": "Educational Info",
+                "educationalInfo": "Class Info",
                 "familyInfo": "Family Info",
                 "proctorDetails": "Proctor Details",
-                "hostelDetails": "Hostel Details"
+                "hostelDetails": "Hostel Details",
+                "blog": "Blog"
             }
         }
     },
@@ -42,5 +53,8 @@
         "notification": "Notification",
         "share": "Share Infor",
         "post": "Post"
+    },
+    "Blog": {
+        "post": "post"
     }
 }
