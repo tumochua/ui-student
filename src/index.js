@@ -10,16 +10,19 @@ import store from './store';
 
 //react context
 
-import { ContextProvider } from './context';
+import { ContextProviderUser } from './context';
 
+///i18n
+// import { I18nextProvider } from 'react-i18next';
+import './i18n/I18n';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
         <GlobalStyles>
             <Provider store={store}>
-                <ContextProvider>
+                <ContextProviderUser>
                     <App />
-                </ContextProvider>
+                </ContextProviderUser>
             </Provider>
         </GlobalStyles>
     </React.StrictMode>,

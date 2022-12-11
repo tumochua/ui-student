@@ -1,0 +1,23 @@
+.navbarList {
+    list-style: none;
+
+    .navbarIitem {
+        color: var(--black);
+        cursor: pointer;
+        &:hover {
+            opacity: 0.8;
+        }
+        .navbarLi {
+            padding: 6px;
+            .navlinkName {
+                margin-left: 8px;
+                display: inline-block;
+                text-decoration: none !important;
+            }
+        }
+    }
+    .active {
+        display: initial;
+        background: red;
+    }
+}

@@ -1,0 +1,17 @@
+.languagectn {
+    display: inline-block;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    top: 100%;
+}
+.itemLanguage {
+    // margin-top: 5px;
+    // margin-bottom: 5px;
+    padding: 5px;
+    &:hover {
+        opacity: 0.8;
+        background-color: #f0f0f0;
+        color: #292929;
+    }
+}

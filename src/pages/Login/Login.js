@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 /// react-router-dom
 import { Link, useNavigate } from 'react-router-dom';
 
+import Cookies from 'js-cookie';
 /// redux
 import { connect } from 'react-redux';
 
@@ -43,6 +44,9 @@ function Login({ createUser, userRedux }) {
     const [typeToast, setTypeToast] = useState('default');
     const [toastTitle, setToastTitle] = useState('default');
     const [toastDescription, setToastDescription] = useState('default');
+
+    const [stateAccessToken, setAccessToken] = useState(null);
+    const [stateRefreshToken, setRefreshToken] = useState(null);
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -104,14 +108,22 @@ function Login({ createUser, userRedux }) {
                 setIsLoading(true);
                 try {
                     const response = await createUser(user);
-                    if (response === 'The information you are entering is incorrect, please login again later') {
+                    // console.log('response', response);
+
+                    if (response && response.data.data.statusCode === 2) {
+                        setAccessToken(Cookies.get('accessToken'));
+                        setRefreshToken(Cookies.get('refreshToken'));
+                        return;
+                    }
+                    if (response && response.data.data.statusCode === 4) {
                         handleSetState({
                             type: 'warning',
                             icon: 'fa fa-check-circle',
                             title: 'warning',
-                            description: response,
+                            description: response.data.data.message,
                         });
                         setIstoast(true);
+                        return;
                     }
                 } catch (error) {
                     console.log(error);
@@ -133,16 +145,10 @@ function Login({ createUser, userRedux }) {
     }, [result, error]);
 
     useEffect(() => {
-        if (userRedux && userRedux.data.statusCode === 2) {
-            const userId = userRedux.data.user.id;
-            if (userId) {
-                navigate(`/profile/${userId}`);
-            }
-            return;
+        if (stateAccessToken && stateRefreshToken) {
+            navigate(config.routes.profilePersonalInfo);
         }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [userRedux]);
+    }, [navigate, stateAccessToken, stateRefreshToken]);
 
     const handleCloseToast = () => {
         setIstoast(false);

@@ -50,16 +50,73 @@ const useValidateForm = (user) => {
     return data;
 };
 
-const useShowHideIconPassword = (param) => {
-    return param === 'fa-sharp fa-solid fa-eye-slash' ? 'fa-solid fa-eye' : 'fa-sharp fa-solid fa-eye-slash';
+const useShowHideIconPassword = (icon) => {
+    return icon === 'fa-sharp fa-solid fa-eye-slash' ? 'fa-solid fa-eye' : 'fa-sharp fa-solid fa-eye-slash';
 };
 
 const useTypeInput = (type) => {
     return type === 'password' ? 'text' : 'password';
 };
 
+const useCheckForm = (dataforms) => {
+    // console.log('dataforms', dataforms);
+    if (dataforms) {
+        // eslint-disable-next-line array-callback-return
+        return dataforms.map((element) => {
+            if (element.require) {
+                // console.log('element', element);
+                if (element.name === 'email') {
+                    const checkEmail = reg.test(element.value);
+                    // console.log('checkEmail', checkEmail);
+                    if (!checkEmail) {
+                        // console.log('change email');
+                        return {
+                            name: element.name,
+                            errorMessage: `Trường này của bạn phải là ${element.name}`,
+                        };
+                    } else {
+                        return {
+                            name: element.name,
+                            errorMessage: ``,
+                        };
+                    }
+                }
+                if (element.name === 'avatar' || element.name === 'birthday') {
+                    if (!element.value) {
+                        // console.log('change avatar birthday');
+                        return {
+                            name: element.name,
+                            errorMessage: `Trường này của bạn là bắt buộc`,
+                        };
+                    } else {
+                        return {
+                            name: element.name,
+                            errorMessage: ``,
+                        };
+                    }
+                }
+                if (element.name !== 'email') {
+                    if (element.value.length < element.length) {
+                        // console.log('change length', element.name);
+                        return {
+                            name: element.name,
+                            errorMessage: `Trường này phải lớn hơn ${element.length} ký tự`,
+                        };
+                    } else {
+                        return {
+                            name: element.name,
+                            errorMessage: ``,
+                        };
+                    }
+                }
+            }
+        });
+    }
+};
+
 module.exports = {
     useValidateForm,
     useShowHideIconPassword,
     useTypeInput,
+    useCheckForm,
 };

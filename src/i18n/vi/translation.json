@@ -1,0 +1,61 @@
+{
+    "Headers": {
+        "studentPortal": "Cổng Sinh Viên"
+    },
+
+    "Home": {
+        "home": "Trang chủ",
+        "welcome": "Xin chào React"
+    },
+    "Profile": {
+        "fullName": "Họ và tên",
+        "dateBirth": "Ngày Tháng Năm Sinh (Năm Tháng Ngày)",
+        "address": "Địa Chỉ",
+        "codeSv": "Mã Sinh Viên",
+        "class": "Lớp",
+        "language": "Ngôn Ngữ",
+        "phoneNumber": "Số Điện Thoại",
+        "null": "Không Có",
+        "gender": "Giới Tính",
+        "nationality": "Quốc Tịch",
+        "role": "Quyền",
+        "age": "Tuổi",
+        "edit": "Sửa",
+        "InformationStudent": {
+            "notFound": "Chưa Có dữ liệu"
+        },
+        "FamilyInfo": {
+            "fullNameFather": "Họ Tên Bố",
+            "fullNameMommy": "Họ Tên Mẹ",
+            "genderFather": "Giới Tính Bố",
+            "genderMommy": "Giới Tính Mẹ",
+            "contactEmail": "Email Liên Hệ",
+            "contactPhone": "Số Điện Thoại Liên Hệ",
+            "addressFather": "Địa Chỉ Bố",
+            "addressMommy": "Địa Chỉ Mẹ"
+        },
+        "Headers": {
+            "TabButton": {
+                "personalInfo": "Thông Tin Cá Nhân",
+                "educationalInfo": "Thông Tin Lớp",
+                "familyInfo": "Thông Tin Gia Đình",
+                "proctorDetails": "Chi Tiết Giám Thị",
+                "hostelDetails": "Chi Tiết Ký Túc Xá",
+                "blog": "Viết Bài"
+            }
+        }
+    },
+    "Languages": {
+        "vi": "Tiếng Việt",
+        "en": "Tiếng Anh"
+    },
+    "Navbar": {
+        "home": "Trang chủ",
+        "notification": "Thông Báo",
+        "share": "Chia sẻ thông tin",
+        "post": "Bài Viết"
+    },
+    "Blog": {
+        "post": "Viết Bài"
+    }
+}

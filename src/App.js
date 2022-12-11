@@ -1,14 +1,12 @@
 import { Fragment } from 'react';
 
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import './App.css';
 import { publicRoutes, privateRoutes } from '@/routes';
-import config from './config';
 
 import DefaultLayout from './layouts/DefaultLayout';
-
+import ProtectedRouter from './components/ProtectedRouter';
 function App() {
     return (
         <Router>
@@ -41,23 +39,19 @@ function App() {
                     } else if (route.layout === null) {
                         Layout = Fragment;
                     }
-                    const accessToken = Cookies.get('accessToken');
-                    const refreshToken = Cookies.get('refreshToken');
-                    const user = localStorage.getItem('user');
-                    const path = config.routes.login;
-                    if (!accessToken || !refreshToken || !user) {
-                        return <Route key={index} path={route.path} element={<Navigate to={path} replace />} />;
-                    }
+
                     return (
-                        <Route
-                            key={index}
-                            path={route.path}
-                            element={
-                                <Layout>
-                                    <Page />
-                                </Layout>
-                            }
-                        />
+                        <Route key={index} element={<ProtectedRouter />}>
+                            <Route
+                                path={route.path}
+                                // key={index}
+                                element={
+                                    <Layout>
+                                        <Page />
+                                    </Layout>
+                                }
+                            />
+                        </Route>
                     );
                 })}
             </Routes>

@@ -23,6 +23,16 @@ export const handleApiLogin = (user) => {
     return api.post('api-login', user);
 };
 
-export const apiGetProfileUser = (userId) => {
-    return api.get(`/api-get-profile-user-by-id?userId=${userId}`);
+export const apiGetProfileUser = () => {
+    return api.get(`/api-get-profile-user-by-id`);
+};
+
+export const handleApiEditUser = (userData) => {
+    // console.log('check userData', userData);
+    return api.put('/api-edit-user', userData);
+};
+
+export const apiGetListStudentOfClass = (className) => {
+    // console.log('check className', className);
+    return api.get(`/api-list-students-of-class?className=${className}`);
 };
