@@ -56,6 +56,11 @@
         "post": "Bài Viết"
     },
     "Blog": {
-        "post": "Viết Bài"
+        "post": "Viết Bài",
+        "title": "Tiêu Đề Bài Viết",
+        "type": "Loại vd:(học tập, giải trí, bóng đá)",
+        "note": "Lưu ý: Thay vì upload ảnh . Mọi người sử dụng link để thay thế ảnh",
+        "featuredPosts": "Bài Viết Nổi Bật",
+        "time": "ngày trước"
     }
 }

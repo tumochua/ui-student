@@ -36,3 +36,15 @@ export const apiGetListStudentOfClass = (className) => {
     // console.log('check className', className);
     return api.get(`/api-list-students-of-class?className=${className}`);
 };
+
+export const apiCreatePost = (post) => {
+    return api.post('/api-create-post', post);
+};
+
+export const apiGetListPosts = () => {
+    return api.get('/api-get-list-posts');
+};
+
+export const apiGetDetailPost = (postId) => {
+    return api.get(`/api-get-detail-post-by-id?postId=${postId}`);
+};

@@ -1,7 +1,20 @@
 import style from './MyButton.module.scss';
 import classNames from 'classnames';
 
-function MyButton({ children, danger, disabled, success, small, medium, large, fullWidth, top, error, hanldeClick }) {
+function MyButton({
+    children,
+    danger,
+    disabled,
+    success,
+    small,
+    medium,
+    large,
+    fullWidth,
+    top,
+    error,
+    hanldeClick,
+    opacity,
+}) {
     // console.log(style);
     const btnClassses = classNames({
         [style.baseBtn]: true,
@@ -14,6 +27,7 @@ function MyButton({ children, danger, disabled, success, small, medium, large, f
         [style.fullWidth]: fullWidth,
         [style.top]: top,
         [style.error]: error,
+        [style.opacity]: opacity,
     });
 
     return (

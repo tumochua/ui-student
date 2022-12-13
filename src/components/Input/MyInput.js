@@ -13,6 +13,7 @@ function MyInput({
     handleChanIcon,
     boder = true,
     opacity = true,
+    bottom,
 }) {
     const handleOnchangeInput = (e) => {
         if (name === 'inputFile') {
@@ -39,6 +40,7 @@ function MyInput({
         [style.invalid]: invalid,
         [style.boder]: !boder,
         [style.opacity]: !opacity,
+        [style.bottom]: bottom,
         // [style.formControll]: true,
     });
 

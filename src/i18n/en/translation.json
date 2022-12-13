@@ -55,6 +55,11 @@
         "post": "Post"
     },
     "Blog": {
-        "post": "post"
+        "post": "Post",
+        "title": "Title Post",
+        "type": "Type vd:(learn, football)",
+        "note": "Note: Instead of uploading . People use links to replace photos",
+        "featuredPosts": "Featured Posts",
+        "time": "yesterday"
     }
 }

@@ -1,6 +1,16 @@
 .container {
-    margin-top: 20px;
+    margin-top: 70px;
+    .note {
+        margin-bottom: 10px;
+    }
+    .headerWaper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 10px;
+    }
     .markDown {
         height: 100%;
+        z-index: 0;
     }
 }
