@@ -14,7 +14,7 @@ function Post() {
     const navigate = useNavigate();
     const [posts, setPosts] = useState(null);
     const [seachPosts, setSeachPosts] = useState('');
-    const [tabPosts, setTabPosts] = useState([
+    const [tabTypePosts, setTabTypePosts] = useState([
         {
             id: 1,
             medium: true,
@@ -66,7 +66,7 @@ function Post() {
         setSeachPosts(data.value);
     };
     const handleChangeTypeSeach = (id) => {
-        const newState = tabPosts.map((tab) => {
+        const newState = tabTypePosts.map((tab) => {
             if (tab.id === id) {
                 return {
                     ...tab,
@@ -79,7 +79,7 @@ function Post() {
                 };
             }
         });
-        setTabPosts(newState);
+        setTabTypePosts(newState);
     };
 
     return (
@@ -97,8 +97,8 @@ function Post() {
                 </div>
             </div>
             <div className={style.tabCtn}>
-                {tabPosts &&
-                    tabPosts.map((tab) => {
+                {tabTypePosts &&
+                    tabTypePosts.map((tab) => {
                         return (
                             <MyButton
                                 medium={tab.medium}
