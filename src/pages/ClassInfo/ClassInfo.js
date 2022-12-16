@@ -7,6 +7,7 @@ import { apiGetListStudentOfClass } from '@/services/apis';
 function ClassInfo() {
     const [state] = useContextStore();
     const [className, setClassName] = useState(null);
+    // eslint-disable-next-line no-unused-vars
     const [listClass, setListClass] = useState(null);
     // if (state.userInfor) {
     //     console.log('state', state.userInfor.data);

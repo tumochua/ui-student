@@ -6,7 +6,8 @@ import Register from '@/pages/Register/index';
 import Profile from '@/pages/Profile/index';
 import Notification from '@/pages/Notification';
 import Post from '@/pages/Post';
-import Blog from '@/pages/Blog';
+import Blog from '@/pages/WriteBlog';
+import DetailPost from '@/pages/Post/DetailPost';
 import Share from '@/pages/Share';
 
 // import HeaderProfile from '@/layouts/components/HeaderProfile';
@@ -70,6 +71,7 @@ const privateRoutes = [
     { path: config.routes.profileProctorDetails, component: ProctorDetails, layout: DefaultHeaderProfile },
     { path: config.routes.profileHostelDetails, component: HostelDetails, layout: DefaultHeaderProfile },
     { path: config.routes.blog, component: Blog, layout: DefaultHeaderProfile },
+    { path: config.routes.detailPost, component: DetailPost },
 ];
 
 export { publicRoutes, privateRoutes };

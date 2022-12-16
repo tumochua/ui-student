@@ -36,3 +36,32 @@ export const apiGetListStudentOfClass = (className) => {
     // console.log('check className', className);
     return api.get(`/api-list-students-of-class?className=${className}`);
 };
+
+export const apiCreatePost = (post) => {
+    return api.post('/api-create-post', post);
+};
+
+export const apiGetListPosts = () => {
+    return api.get('/api-get-list-posts');
+};
+
+export const apiGetDetailPost = (postId) => {
+    // console.log('postId', postId);
+    return api.get(`/api-get-detail-post-by-id?postId=${postId}`);
+};
+
+export const apiLikePost = (postId) => {
+    // console.log('postId', postId);
+    // {
+    //     data: {
+    //         id: userId
+    //     }
+    return api.put('/api-like-post', postId);
+};
+
+export const apiQuitLikePosts = (postsId) => {
+    // console.log('posts', postsId);
+    return api.delete('/api-quit-like-post', {
+        data: postsId,
+    });
+};
