@@ -1,0 +1,11 @@
+.baseSelects {
+    width: 80%;
+    padding: 10px;
+    height: calc(100% - 12px);
+    border: 1px solid var(--input-boder);
+    box-shadow: var(--input-box-shadow);
+    outline: none;
+    &:focus {
+        border: 1px solid var(--input-boder-focus);
+    }
+}

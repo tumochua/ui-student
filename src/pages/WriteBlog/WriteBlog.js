@@ -5,15 +5,16 @@ import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 
-import style from './Blog.module.scss';
+import style from './WriteBlog.module.scss';
 
 import MyButton from '@/components/Button/MyButton';
 import MyInput from '@/components/Input/MyInput';
 import Loading from '@/components/Loading';
+import MySelect from '@/components/Selects/MySelect';
 
 import { apiCreatePost } from '@/services/apis';
 
-function Blog() {
+function WriteBlog() {
     const { t } = useTranslation();
     const mdParser = new MarkdownIt(/* Markdown-it options */);
     const [posts, setPost] = useState({
@@ -21,10 +22,43 @@ function Blog() {
         textMarkDown: '',
         textHtmlMarkDown: '',
         type: '',
+        image: '',
     });
     const [success, setSuccess] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    // const [valuePosts, setValuePosts] = useState(null);
+
+    const [selectsType, setSlectsType] = useState([
+        {
+            id: 1,
+            name: t('Blog.choose'),
+            value: t('Blog.choose'),
+        },
+        {
+            id: 2,
+            name: t('Blog.learn'),
+            value: t('Blog.learn'),
+        },
+        {
+            id: 3,
+            name: t('Blog.entertainment'),
+            value: t('Blog.entertainment'),
+        },
+        {
+            id: 4,
+            name: t('Blog.sporting'),
+            value: t('Blog.sporting'),
+        },
+        {
+            id: 5,
+            name: t('Blog.q&a'),
+            value: t('Blog.q&a'),
+        },
+        {
+            id: 6,
+            name: t('Blog.other'),
+            value: t('Blog.other'),
+        },
+    ]);
 
     function handleEditorChange({ html, text }) {
         // console.log('html', html);
@@ -40,21 +74,23 @@ function Blog() {
     const handleCreatePost = () => {
         setIsLoading(true);
         try {
+            // console.log(posts);
             (async () => {
                 const response = await apiCreatePost(posts);
                 if (response.data.statusCode === 2) {
                     setIsLoading(false);
                 }
             })();
-
             setPost({
                 title: '',
                 textMarkDown: '',
                 textHtmlMarkDown: '',
                 type: '',
+                image: '',
             });
         } catch (error) {
             console.log(error);
+        } finally {
             setIsLoading(false);
         }
     };
@@ -77,6 +113,40 @@ function Blog() {
             }
         }
     }, [posts]);
+    useEffect(() => {
+        setSlectsType([
+            {
+                id: 1,
+                name: t('Blog.choose'),
+                value: t('Blog.choose'),
+            },
+            {
+                id: 2,
+                name: t('Blog.learn'),
+                value: t('Blog.learn'),
+            },
+            {
+                id: 3,
+                name: t('Blog.entertainment'),
+                value: t('Blog.entertainment'),
+            },
+            {
+                id: 4,
+                name: t('Blog.sporting'),
+                value: t('Blog.sporting'),
+            },
+            {
+                id: 5,
+                name: t('Blog.q&a'),
+                value: t('Blog.q&a'),
+            },
+            {
+                id: 6,
+                name: t('Blog.other'),
+                value: t('Blog.other'),
+            },
+        ]);
+    }, [t]);
 
     const handleOnChangeTitle = (data) => {
         setPost((prevState) => {
@@ -86,6 +156,15 @@ function Blog() {
             };
         });
     };
+    const handleSlectType = (data) => {
+        setPost((prevState) => {
+            return {
+                ...prevState,
+                type: data,
+            };
+        });
+    };
+
     return (
         <>
             {isLoading ? <Loading /> : null}
@@ -114,11 +193,19 @@ function Blog() {
                             placeholder={t('Blog.title')}
                             handleOnchange={handleOnChangeTitle}
                         />
-                        <MyInput
+                        <MySelect options={selectsType} onChanType={handleSlectType} value={posts.type} />
+                        {/* <MyInput
                             bottom={2}
                             value={posts.type}
                             name="type"
                             placeholder={t('Blog.type')}
+                            handleOnchange={handleOnChangeTitle}
+                        /> */}
+                        <MyInput
+                            bottom={2}
+                            value={posts.image}
+                            name="image"
+                            placeholder={t('Blog.image')}
                             handleOnchange={handleOnChangeTitle}
                         />
                     </div>
@@ -139,4 +226,4 @@ function Blog() {
     );
 }
 
-export default Blog;
+export default WriteBlog;

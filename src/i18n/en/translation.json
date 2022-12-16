@@ -60,6 +60,13 @@
         "type": "Type vd:(learn, football)",
         "note": "Note: Instead of uploading . People use links to replace photos",
         "featuredPosts": "Featured Posts",
-        "time": "yesterday"
+        "time": "yesterday",
+        "image": "Link image",
+        "learn": "Study",
+        "entertainment": "Entertainment",
+        "sporting": "Sporting",
+        "q&a": "Q&A",
+        "other": "Other",
+        "choose": "--Choose an option--"
     }
 }

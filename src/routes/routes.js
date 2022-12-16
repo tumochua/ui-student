@@ -6,7 +6,7 @@ import Register from '@/pages/Register/index';
 import Profile from '@/pages/Profile/index';
 import Notification from '@/pages/Notification';
 import Post from '@/pages/Post';
-import Blog from '@/pages/Blog';
+import Blog from '@/pages/WriteBlog';
 import DetailPost from '@/pages/Post/DetailPost';
 import Share from '@/pages/Share';
 
