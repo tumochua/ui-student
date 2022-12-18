@@ -37,7 +37,7 @@ function HeaderProFile() {
         },
         {
             id: 2,
-            name: t('Profile.Headers.TabButton.educationalInfo'),
+            name: t('Profile.Headers.TabButton.managePosts'),
             active: path === config.routes.profileEducationalInfo,
             router: config.routes.profileEducationalInfo,
         },

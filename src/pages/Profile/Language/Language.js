@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import style from './Language.module.scss';
-import Modal from '@/components/Menu';
+import Menu from '@/components/Menu';
 function Language({ languages, onChanLanguage }) {
     // console.log('language', languages);
     function JsxLanguage() {
@@ -25,9 +25,9 @@ function Language({ languages, onChanLanguage }) {
         <>
             {/* {isModalLanguage ? ( */}
             <span className={style.languagectn}>
-                <Modal small showBefore>
+                <Menu small showBefore>
                     <JsxLanguage />
-                </Modal>
+                </Menu>
             </span>
             {/* ) : null} */}
         </>

@@ -6,7 +6,7 @@ const routes = {
 
     /// profile
     profilePersonalInfo: '/profile/personalinfo',
-    profileEducationalInfo: '/profile/educationalinfo',
+    profileEducationalInfo: '/profile/managePosts',
     profileFamilyInfo: '/profile/familyinfo',
     profileProctorDetails: '/profile/proctordetails',
     profileHostelDetails: '/profile/hosteldetails',
@@ -17,7 +17,7 @@ const routes = {
     editUser: '/eidt-user/:id',
     notification: '/notification',
     share: '/share',
-    post: '/post',
+    post: '/post/page:id',
 
     /// not found
     notFound: '*',
