@@ -37,7 +37,7 @@
         "Headers": {
             "TabButton": {
                 "personalInfo": "Thông Tin Cá Nhân",
-                "educationalInfo": "Thông Tin Lớp",
+                "managePosts": "Quản Lý Bài Viết",
                 "familyInfo": "Thông Tin Gia Đình",
                 "proctorDetails": "Chi Tiết Giám Thị",
                 "hostelDetails": "Chi Tiết Ký Túc Xá",
@@ -67,7 +67,14 @@
         "entertainment": "Giải Trí",
         "sporting": "Thể Thao",
         "q&a": "Hỏi Đáp",
+        "feedback": "Góp Ý hoặc Đánh Giá",
         "other": "Khác",
-        "choose": "--Chọn một sự lựa chọn--"
+        "choose": "--Chọn một sự lựa chọn--",
+        "edit": "Sửa",
+        "delete": "Xóa",
+        "paging": {
+            "previous": "Trước",
+            "next": "Tiếp Theo"
+        }
     }
 }

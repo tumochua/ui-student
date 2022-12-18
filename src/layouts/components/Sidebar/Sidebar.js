@@ -35,7 +35,8 @@ function Sidebar() {
         },
         {
             id: 4,
-            path: config.routes.post,
+            // path: `${config.routes.post}`,
+            path: `/post/page=1`,
             component: Post,
             icon: 'fa-solid fa-blog',
             name: 'Navbar.post',

@@ -36,7 +36,7 @@
         "Headers": {
             "TabButton": {
                 "personalInfo": "Personal Info",
-                "educationalInfo": "Class Info",
+                "managePosts": "Manage Posts",
                 "familyInfo": "Family Info",
                 "proctorDetails": "Proctor Details",
                 "hostelDetails": "Hostel Details",
@@ -67,6 +67,13 @@
         "sporting": "Sporting",
         "q&a": "Q&A",
         "other": "Other",
-        "choose": "--Choose an option--"
+        "feedback": "comments or reviews",
+        "choose": "--Choose an option--",
+        "edit": "Edit",
+        "delete": "Delete",
+        "paging": {
+            "previous": "Previous",
+            "next": "Next"
+        }
     }
 }

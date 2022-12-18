@@ -14,6 +14,8 @@ function MyButton({
     error,
     hanldeClick,
     opacity,
+    hoverBorder,
+    accent,
 }) {
     // console.log(style);
     const btnClassses = classNames({
@@ -28,6 +30,8 @@ function MyButton({
         [style.top]: top,
         [style.error]: error,
         [style.opacity]: opacity,
+        [style.hoverBorder]: hoverBorder,
+        [style.accent]: accent,
     });
 
     return (

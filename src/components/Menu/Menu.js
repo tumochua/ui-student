@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 import style from './Menu.module.scss';
 
-function Modal({ small, showBefore, children }) {
+function Menu({ small, showBefore, children }) {
     const classes = classNames({
         [style.modalWapper]: true,
         [style.small]: small,
@@ -18,4 +18,4 @@ function Modal({ small, showBefore, children }) {
     );
 }
 
-export default Modal;
+export default Menu;

@@ -41,8 +41,8 @@ export const apiCreatePost = (post) => {
     return api.post('/api-create-post', post);
 };
 
-export const apiGetListPosts = () => {
-    return api.get('/api-get-list-posts');
+export const apiGetListPosts = (page) => {
+    return api.get(`/api-get-list-posts?page=${page}`);
 };
 
 export const apiGetDetailPost = (postId) => {
@@ -64,4 +64,18 @@ export const apiQuitLikePosts = (postsId) => {
     return api.delete('/api-quit-like-post', {
         data: postsId,
     });
+};
+
+export const apiSearchPosts = (value, type) => {
+    // console.log(type);
+    return api.get(`/api-search-posts`, {
+        params: {
+            value,
+            type,
+        },
+    });
+};
+
+export const apiGetAllPostsByUser = () => {
+    return api.get('/api-get-all-posts-by-user');
 };
