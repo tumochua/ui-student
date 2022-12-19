@@ -144,19 +144,28 @@ function Post() {
                     setPosts(response.data.data);
                 }
             })();
+        } else {
+            (async () => {
+                const response = await apiGetListPosts(currentPage);
+                // console.log('response', response.data);
+                // console.log('response', response.data.posts[0].userData);
+                if (response.data.statusCode === 2) {
+                    setPosts(response.data.posts);
+                }
+            })();
         }
-    }, [debouncedValue]);
+    }, [debouncedValue, currentPage]);
 
-    useEffect(() => {
-        (async () => {
-            const response = await apiGetListPosts(currentPage);
-            // console.log('response', response.data);
-            // console.log('response', response.data.posts[0].userData);
-            if (response.data.statusCode === 2) {
-                setPosts(response.data.posts);
-            }
-        })();
-    }, [currentPage]);
+    // useEffect(() => {
+    //     (async () => {
+    //         const response = await apiGetListPosts(currentPage);
+    //         // console.log('response', response.data);
+    //         // console.log('response', response.data.posts[0].userData);
+    //         if (response.data.statusCode === 2) {
+    //             setPosts(response.data.posts);
+    //         }
+    //     })();
+    // }, [currentPage]);
     useEffect(() => {
         // console.log(currentPage);
         if (currentPage > 1) {
@@ -174,13 +183,6 @@ function Post() {
         useChangeActive();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    // useEffect(() => {
-    //     // console.log('re-render');
-    //     prevPage.current = currentPage;
-    //     // console.log(prevPage.current);
-    //     // console.log(currentPage);
-    // }, [currentPage]);
     useEffect(() => {
         // eslint-disable-next-line react-hooks/rules-of-hooks
         useCheckPagefinal();
@@ -281,9 +283,6 @@ function Post() {
         }
         // console.log(currentPage);
     };
-
-    // console.log(prevPage.current);
-    // console.log(currentPage);
 
     return (
         <>

@@ -72,6 +72,7 @@
         "choose": "--Chọn một sự lựa chọn--",
         "edit": "Sửa",
         "delete": "Xóa",
+        "editPosts": "Sửa Bài Viết",
         "paging": {
             "previous": "Trước",
             "next": "Tiếp Theo"

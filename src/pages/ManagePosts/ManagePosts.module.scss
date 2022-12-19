@@ -12,7 +12,7 @@
             cursor: pointer;
             font-size: 2rem;
             float: right;
-            opacity: 0.8;
+            opacity: 0.7;
             &:hover {
                 opacity: 1;
             }
@@ -36,6 +36,7 @@
             }
         }
         .postsRight {
+            padding: 10px;
             .postsImage {
                 cursor: pointer;
                 border-radius: 10px;

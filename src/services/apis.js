@@ -79,3 +79,13 @@ export const apiSearchPosts = (value, type) => {
 export const apiGetAllPostsByUser = () => {
     return api.get('/api-get-all-posts-by-user');
 };
+
+export const apiDeletePosts = (postsData) => {
+    return api.delete('/api-delete-posts', {
+        data: { postsData },
+    });
+};
+
+export const apiEditPosts = (postId, editPosts) => {
+    return api.put('/api-edit-posts-by-user', { postId, editPosts });
+};

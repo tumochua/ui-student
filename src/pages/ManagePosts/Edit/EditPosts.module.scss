@@ -1,0 +1,13 @@
+.container {
+    .body {
+        .formPosts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            .mdEditor {
+                margin-top: 20px;
+                height: 200px;
+            }
+        }
+    }
+}

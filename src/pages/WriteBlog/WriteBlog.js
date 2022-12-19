@@ -194,13 +194,6 @@ function WriteBlog() {
                             handleOnchange={handleOnChangeTitle}
                         />
                         <MySelect options={selectsType} onChanType={handleSlectType} value={posts.type} />
-                        {/* <MyInput
-                            bottom={2}
-                            value={posts.type}
-                            name="type"
-                            placeholder={t('Blog.type')}
-                            handleOnchange={handleOnChangeTitle}
-                        /> */}
                         <MyInput
                             bottom={2}
                             value={posts.image}
@@ -217,10 +210,6 @@ function WriteBlog() {
                         className={style.markDown}
                     />
                 </div>
-                {/* <MyButton success opacity={!success} medium top hanldeClick={handleCreatePost}>
-                    {t('Blog.post')}
-                </MyButton> */}
-                {/* {post.textHtmlMarkDown && <div dangerouslySetInnerHTML={{ __html: `${post.textHtmlMarkDown}` }}></div>} */}
             </div>
         </>
     );

@@ -18,6 +18,7 @@ const routes = {
     notification: '/notification',
     share: '/share',
     post: '/post/page:id',
+    editPosts: '/edit-posts/:id',
 
     /// not found
     notFound: '*',

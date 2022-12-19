@@ -6,15 +6,17 @@ function MySelect({ options, onChanType, value }) {
         onChanType(event.target.value);
     };
     return (
-        <div>
-            <select value={selected} onChange={handleChange} className={style.baseSelects}>
-                {options.map((option) => (
-                    <option key={option.id} value={option.value}>
-                        {option.value}
-                    </option>
-                ))}
-            </select>
-        </div>
+        <>
+            {options && (
+                <select value={selected} onChange={handleChange} className={style.baseSelects}>
+                    {options.map((option) => (
+                        <option key={option.id} value={option.value}>
+                            {option.value}
+                        </option>
+                    ))}
+                </select>
+            )}
+        </>
     );
 }
 

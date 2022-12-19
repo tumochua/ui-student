@@ -71,6 +71,7 @@
         "choose": "--Choose an option--",
         "edit": "Edit",
         "delete": "Delete",
+        "editPosts": "Edit Posts",
         "paging": {
             "previous": "Previous",
             "next": "Next"
