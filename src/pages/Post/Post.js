@@ -147,7 +147,7 @@ function Post() {
         } else {
             (async () => {
                 const response = await apiGetListPosts(currentPage);
-                // console.log('response', response.data);
+                // console.log('response', response.data)
                 // console.log('response', response.data.posts[0].userData);
                 if (response.data.statusCode === 2) {
                     setPosts(response.data.posts);
@@ -217,7 +217,6 @@ function Post() {
         // let typeValue = typeValue;
         const response = await apiSearchPosts('', typeValue);
         if (response.data.statusCode === 2) {
-            console.log(response.data.data);
             // console.log(posts);
             setPosts(response.data.data);
         }

@@ -41,7 +41,8 @@
                 "familyInfo": "Thông Tin Gia Đình",
                 "proctorDetails": "Chi Tiết Giám Thị",
                 "hostelDetails": "Chi Tiết Ký Túc Xá",
-                "blog": "Viết Bài"
+                "blog": "Viết Bài",
+                "approve": "Duyệt Bài"
             }
         }
     },

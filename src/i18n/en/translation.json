@@ -40,7 +40,8 @@
                 "familyInfo": "Family Info",
                 "proctorDetails": "Proctor Details",
                 "hostelDetails": "Hostel Details",
-                "blog": "Blog"
+                "blog": "Blog",
+                "approve": "Approve"
             }
         }
     },
