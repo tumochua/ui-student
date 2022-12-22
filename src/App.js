@@ -41,10 +41,9 @@ function App() {
                     }
 
                     return (
-                        <Route key={index} element={<ProtectedRouter />}>
+                        <Route key={index} element={<ProtectedRouter route={route} />}>
                             <Route
                                 path={route.path}
-                                // key={index}
                                 element={
                                     <Layout>
                                         <Page />

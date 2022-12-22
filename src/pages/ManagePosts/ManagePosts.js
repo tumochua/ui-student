@@ -2,13 +2,15 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import style from './ManagePosts.module.scss';
 import config from '@/config';
-import { apiGetAllPostsByUser } from '@/services/apis';
+import { apiGetAllPostsByUser, apiDeletePosts } from '@/services/apis';
 import Menus from '@/components/Menus';
 import { MENUS } from '@/Data';
 function ManagePosts() {
     const navigate = useNavigate();
     const [postsUser, setPostsUser] = useState(null);
     const [isMenuPosts, setIsMenuPosts] = useState(null);
+    const [postsData, setPostsData] = useState(null);
+    const [isCallApi, setIsCallApi] = useState(false);
     const wrapperRef = useRef(null);
     useEffect(() => {
         (async () => {
@@ -17,7 +19,7 @@ function ManagePosts() {
                 setPostsUser(response.data);
             }
         })();
-    }, []);
+    }, [isCallApi]);
     useEffect(() => {
         if (postsUser) {
             // console.log(postsUser);
@@ -29,8 +31,28 @@ function ManagePosts() {
             document.removeEventListener('click', handleClickOutside);
         };
     }, []);
+
+    useEffect(() => {
+        if (postsData) {
+            if (postsData.type === 'edit') {
+                navigate(`/edit-posts/${postsData.postId}`, { state: { id: postsData.postId } });
+            }
+            if (postsData.type === 'delete') {
+                (async () => {
+                    const response = await apiDeletePosts(postsData);
+                    // console.log(response.data);
+                    if (response.data.statusCode === 2) {
+                        setIsCallApi(!isCallApi);
+                    }
+                })();
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isCallApi, postsData]);
+
     const handleClickOutside = () => {
         setIsMenuPosts(false);
+        // setIsMenuPosts(!isMenuPosts);
     };
 
     const handleDetailPosts = (postsId) => {
@@ -40,10 +62,16 @@ function ManagePosts() {
     const handleChangeMenu = (id, event) => {
         event.stopPropagation();
         setIsMenuPosts(id);
+        if (isMenuPosts) {
+            setIsMenuPosts(false);
+        }
     };
 
-    const handleChangeItemMenu = (menuItem) => {
-        console.log(menuItem);
+    const handleChangeItemMenu = (type, postId) => {
+        setPostsData({
+            type,
+            postId,
+        });
     };
 
     return (
@@ -58,10 +86,12 @@ function ManagePosts() {
                                 ref={wrapperRef}
                             >
                                 <i className={`fa-solid fa-ellipsis ${style.iconOptions}`}></i>
+                                {/* {JSON.stringify(isMenuPosts)} */}
                                 <Menus
                                     position="top-right"
                                     menus={MENUS}
                                     isMenuPosts={isMenuPosts === posts.id ? true : false}
+                                    postId={posts.id}
                                     onChangeItemMenu={handleChangeItemMenu}
                                 ></Menus>
                             </div>

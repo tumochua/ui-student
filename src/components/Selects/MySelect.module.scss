@@ -1,3 +1,7 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
 .baseSelects {
     width: 80%;
     padding: 10px;
@@ -8,4 +12,12 @@
     &:focus {
         border: 1px solid var(--input-boder-focus);
     }
+}
+
+.height {
+    height: 55px;
+}
+
+.width {
+    width: 100%;
 }

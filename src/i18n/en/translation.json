@@ -20,6 +20,9 @@
         "role": "Role",
         "age": "Age",
         "edit": "Update student",
+        "male": "Male",
+        "female": "Female",
+        "other": "Other",
         "InformationStudent": {
             "notFound": "no data yet"
         },
@@ -40,7 +43,9 @@
                 "familyInfo": "Family Info",
                 "proctorDetails": "Proctor Details",
                 "hostelDetails": "Hostel Details",
-                "blog": "Blog"
+                "blog": "Blog",
+                "approve": "Approve",
+                "edit": "Edit user information"
             }
         }
     },
@@ -71,9 +76,18 @@
         "choose": "--Choose an option--",
         "edit": "Edit",
         "delete": "Delete",
+        "editPosts": "Edit Posts",
         "paging": {
             "previous": "Previous",
             "next": "Next"
+        },
+        "Approve": {
+            "title": "Title",
+            "status": "Status",
+            "date": "Date",
+            "actions": "Actions",
+            "delete": "Delete",
+            "verify": "Verify"
         }
     }
 }

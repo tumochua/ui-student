@@ -1,20 +1,33 @@
+import classNames from 'classnames';
 import style from './MySelect.module.scss';
 
-function MySelect({ options, onChanType, value }) {
+function MySelect({ options, onChanType, value, label, height, width }) {
     const selected = value;
     const handleChange = (event) => {
         onChanType(event.target.value);
     };
+    const classOption = classNames({
+        [style.height]: height,
+        [style.baseSelects]: true,
+        [style.width]: width,
+    });
+    // console.log(selected);
+    // console.log(options);
     return (
-        <div>
-            <select value={selected} onChange={handleChange} className={style.baseSelects}>
-                {options.map((option) => (
-                    <option key={option.id} value={option.value}>
-                        {option.value}
-                    </option>
-                ))}
-            </select>
-        </div>
+        <>
+            <div className={style.container}>
+                {label && <span> {label}</span>}
+                {options && (
+                    <select value={selected} onChange={handleChange} className={classOption}>
+                        {options.map((option) => (
+                            <option key={option.id} value={option.value}>
+                                {option.name}
+                            </option>
+                        ))}
+                    </select>
+                )}
+            </div>
+        </>
     );
 }
 

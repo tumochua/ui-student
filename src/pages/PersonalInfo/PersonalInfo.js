@@ -21,13 +21,14 @@ function PersonalInfo() {
     const [role, setRole] = useState(null);
 
     useMemo(() => {
-        if (state.userInfor) {
+        if (state.userInfor && state.userInfor.data) {
+            // console.log(state.userInfor);
             const stateImg = state.userInfor.data.image;
             setAvatar(stateImg);
         }
     }, [state]);
     useEffect(() => {
-        if (state.userInfor) {
+        if (state.userInfor && state.userInfor.data) {
             const stateAgeCopy = state.userInfor.data.dob;
             const result = new Date(stateAgeCopy).getFullYear();
             const currentYear = new Date().getFullYear();
@@ -38,14 +39,18 @@ function PersonalInfo() {
     }, [state.userInfor]);
     useEffect(() => {
         setCurrentLanguage(i18n.language);
-        if (state.userInfor) {
+        if (state.userInfor && state.userInfor.data) {
             // eslint-disable-next-line react-hooks/rules-of-hooks
             const role = useChangeLanguageRole(i18n.language, state);
-            setRole(role.value);
+            if (role) {
+                setRole(role.value);
+            }
             // eslint-disable-next-line react-hooks/rules-of-hooks
             const gender = useChangeLanguageGender(i18n.language, state);
             // console.log('gender', gender);
-            setGender(gender.value);
+            if (gender) {
+                setGender(gender.value);
+            }
         }
     }, [i18n.language, state]);
 
@@ -56,11 +61,16 @@ function PersonalInfo() {
                     <tbody>
                         <tr>
                             <th>{t('Profile.codeSv')}</th>
-                            <th>{state.userInfor && state.userInfor.data.id}</th>
+                            <th>{state.userInfor && state.userInfor.data && state.userInfor.data.id}</th>
                         </tr>
                         <tr>
                             <th>{t('Profile.class')}</th>
-                            <th>{state.userInfor && state.userInfor.data.classData.className}</th>
+                            <th>
+                                {state.userInfor &&
+                                    state.userInfor.data &&
+                                    state.userInfor.data.classData &&
+                                    state.userInfor.data.classData.className}
+                            </th>
                         </tr>
                         <tr>
                             <th>{t('Profile.role')}</th>
@@ -68,7 +78,7 @@ function PersonalInfo() {
                         </tr>
                         <tr>
                             <th>{t('Profile.fullName')}</th>
-                            <th>{state.userInfor && state.userInfor.data.fullName}</th>
+                            <th>{state.userInfor && state.userInfor.data && state.userInfor.data.fullName}</th>
                         </tr>
                         <tr>
                             <th>{t('Profile.gender')}</th>
@@ -76,20 +86,24 @@ function PersonalInfo() {
                         </tr>
                         <tr>
                             <th>Email</th>
-                            <th>{state.userInfor && state.userInfor.data.email}</th>
+                            <th>{state.userInfor && state.userInfor.data && state.userInfor.data.email}</th>
                         </tr>
                         <tr>
                             <th>{t('Profile.phoneNumber')}</th>
-                            <th>{(state.userInfor && state.userInfor.data.mobile) || t('Profile.null')}</th>
+                            <th>
+                                {(state.userInfor && state.userInfor.data && state.userInfor.data.mobile) ||
+                                    t('Profile.null')}
+                            </th>
                         </tr>
                         <tr>
                             <th>{t('Profile.address')}</th>
-                            <th>{state.userInfor && state.userInfor.data.address}</th>
+                            <th>{state.userInfor && state.userInfor.data && state.userInfor.data.address}</th>
                         </tr>
                         <tr>
                             <th>{t('Profile.dateBirth')}</th>
                             <th>
-                                {state.userInfor && state.userInfor.data.dob} {t('Profile.age')} : {statecurrentYear}
+                                {state.userInfor && state.userInfor.data && state.userInfor.data.dob} {t('Profile.age')}{' '}
+                                : {statecurrentYear}
                             </th>
                         </tr>
 

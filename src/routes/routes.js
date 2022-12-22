@@ -19,6 +19,9 @@ import ManagePosts from '@/pages/ManagePosts';
 import FamilyInfo from '@/pages/FamilyInfo';
 import ProctorDetails from '@/pages/ProctorDetails';
 import HostelDetails from '@/pages/HostelDetails';
+import EditPosts from '@/pages/ManagePosts/Edit/EditPosts';
+import Approve from '@/pages/Approve';
+import Teacher from '@/pages/Teacher';
 
 import NotFound from '@/pages/NotFound';
 
@@ -72,6 +75,9 @@ const privateRoutes = [
     { path: config.routes.profileHostelDetails, component: HostelDetails, layout: DefaultHeaderProfile },
     { path: config.routes.blog, component: Blog, layout: DefaultHeaderProfile },
     { path: config.routes.detailPost, component: DetailPost },
+    { path: config.routes.editPosts, component: EditPosts },
+    { path: config.routes.approve, component: Approve, layout: DefaultHeaderProfile, isRole: true },
+    { path: config.routes.teacher, component: Teacher, layout: DefaultHeaderProfile, isTeacher: true },
 ];
 
 export { publicRoutes, privateRoutes };

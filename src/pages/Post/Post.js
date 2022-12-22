@@ -131,6 +131,7 @@ function Post() {
         //     active: false,
         // },
     ]);
+    const [isLengthPosts, setIsLengthPosts] = useState(null);
     // const prevPage = useRef(currentPage);
 
     const debouncedValue = useDebounce(searchPosts, 500);
@@ -144,19 +145,31 @@ function Post() {
                     setPosts(response.data.data);
                 }
             })();
+        } else {
+            (async () => {
+                const response = await apiGetListPosts(currentPage);
+                // console.log('response', response.data);
+                // console.log('response', response.data.posts[0].userData);
+                if (response.data.statusCode === 2) {
+                    setPosts(response.data.posts);
+                }
+                if (response.data.pageSize === 12) {
+                    setIsLengthPosts(true);
+                }
+            })();
         }
-    }, [debouncedValue]);
+    }, [debouncedValue, currentPage]);
 
-    useEffect(() => {
-        (async () => {
-            const response = await apiGetListPosts(currentPage);
-            // console.log('response', response.data);
-            // console.log('response', response.data.posts[0].userData);
-            if (response.data.statusCode === 2) {
-                setPosts(response.data.posts);
-            }
-        })();
-    }, [currentPage]);
+    // useEffect(() => {
+    //     (async () => {
+    //         const response = await apiGetListPosts(currentPage);
+    //         // console.log('response', response.data);
+    //         // console.log('response', response.data.posts[0].userData);
+    //         if (response.data.statusCode === 2) {
+    //             setPosts(response.data.posts);
+    //         }
+    //     })();
+    // }, [currentPage]);
     useEffect(() => {
         // console.log(currentPage);
         if (currentPage > 1) {
@@ -174,13 +187,6 @@ function Post() {
         useChangeActive();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-
-    // useEffect(() => {
-    //     // console.log('re-render');
-    //     prevPage.current = currentPage;
-    //     // console.log(prevPage.current);
-    //     // console.log(currentPage);
-    // }, [currentPage]);
     useEffect(() => {
         // eslint-disable-next-line react-hooks/rules-of-hooks
         useCheckPagefinal();
@@ -215,7 +221,6 @@ function Post() {
         // let typeValue = typeValue;
         const response = await apiSearchPosts('', typeValue);
         if (response.data.statusCode === 2) {
-            console.log(response.data.data);
             // console.log(posts);
             setPosts(response.data.data);
         }
@@ -282,9 +287,6 @@ function Post() {
         // console.log(currentPage);
     };
 
-    // console.log(prevPage.current);
-    // console.log(currentPage);
-
     return (
         <>
             <div className={style.headers}>
@@ -318,64 +320,71 @@ function Post() {
                 {posts &&
                     posts.map((post) => {
                         return (
-                            <div className={style.postCards} key={post.id} onClick={() => handleDetailPost(post.id)}>
-                                <div className={style.postCardImage}>
-                                    <img
-                                        // src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled-1150x647.png"
-                                        src={
-                                            post.image
-                                                ? post.image
-                                                : 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled-1150x647.png'
-                                        }
-                                        alt="not found"
-                                        className={style.image}
-                                    />
+                            post.status === 'S1' && (
+                                <div
+                                    className={style.postCards}
+                                    key={post.id}
+                                    onClick={() => handleDetailPost(post.id)}
+                                >
+                                    <div className={style.postCardImage}>
+                                        <img
+                                            // src="https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled-1150x647.png"
+                                            src={
+                                                post.image
+                                                    ? post.image
+                                                    : 'https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-1-scaled-1150x647.png'
+                                            }
+                                            alt="not found"
+                                            className={style.image}
+                                        />
+                                    </div>
+                                    <div className={style.title}>{post.title}</div>
+                                    <div className={style.cardInfor}>
+                                        <img src={post.userData.image} alt="avatar" className={style.avatar} />
+                                        <div>{post.userData.fullName}</div>
+                                        <span>{handleConvertRimestampToDate(post.date, new Date())}</span>
+                                        {/* <span>{console.log(handleConvertRimestampToDate(post.date, new Date()))}</span> */}
+                                    </div>
                                 </div>
-                                <div className={style.title}>{post.title}</div>
-                                <div className={style.cardInfor}>
-                                    <img src={post.userData.image} alt="avatar" className={style.avatar} />
-                                    <div>{post.userData.fullName}</div>
-                                    <span>{handleConvertRimestampToDate(post.date, new Date())}</span>
-                                    {/* <span>{console.log(handleConvertRimestampToDate(post.date, new Date()))}</span> */}
-                                </div>
-                            </div>
+                            )
                         );
                     })}
             </div>
-            <div className={style.pagingContainer}>
-                {/* {JSON.stringify(isPagePrevious)} */}
-                <span
-                    className={`${style.previous} ${isPagePrevious ? style.isPagePrevious : ''}`}
-                    onClick={handleChangePrevious}
-                >
-                    <i className={`fa-solid fa-arrow-left ${style.arrowFeft}`}></i>
-                    {t('Blog.paging.previous')}
-                </span>
-                {/* {isPagePrevious && (
-                )} */}
-                {pagings &&
-                    pagings.map((page) => {
-                        return (
-                            <MyButton
-                                key={page.id}
-                                hanldeClick={() => handleChangePage(page.id)}
-                                accent={page.active}
-                                medium
-                                hoverBorder
-                            >
-                                {page.value}
-                            </MyButton>
-                        );
-                    })}
+            {isLengthPosts && (
+                <div className={style.pagingContainer}>
+                    {/* {JSON.stringify(isPagePrevious)} */}
+                    <span
+                        className={`${style.previous} ${isPagePrevious ? style.isPagePrevious : ''}`}
+                        onClick={handleChangePrevious}
+                    >
+                        <i className={`fa-solid fa-arrow-left ${style.arrowFeft}`}></i>
+                        {t('Blog.paging.previous')}
+                    </span>
+                    {/* {posts && console.log(posts.length)} */}
+                    {pagings &&
+                        pagings.map((page) => {
+                            return (
+                                <MyButton
+                                    key={page.id}
+                                    hanldeClick={() => handleChangePage(page.id)}
+                                    accent={page.active}
+                                    medium
+                                    hoverBorder
+                                >
+                                    {page.value}
+                                </MyButton>
+                            );
+                        })}
 
-                <span
-                    className={`${style.next} ${isFinalPage ? `${style.isFinalPage}` : ''}`}
-                    onClick={handleChangeNext}
-                >
-                    {t('Blog.paging.next')}
-                    <i className={`fa-solid fa-arrow-right ${style.arrowRight}`}></i>
-                </span>
-            </div>
+                    <span
+                        className={`${style.next} ${isFinalPage ? `${style.isFinalPage}` : ''}`}
+                        onClick={handleChangeNext}
+                    >
+                        {t('Blog.paging.next')}
+                        <i className={`fa-solid fa-arrow-right ${style.arrowRight}`}></i>
+                    </span>
+                </div>
+            )}
         </>
     );
 }

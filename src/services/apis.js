@@ -32,6 +32,9 @@ export const handleApiEditUser = (userData) => {
     return api.put('/api-edit-user', userData);
 };
 
+export const handleApiCreateFamily = (family) => {
+    return api.post('/api-create-family', family);
+};
 export const apiGetListStudentOfClass = (className) => {
     // console.log('check className', className);
     return api.get(`/api-list-students-of-class?className=${className}`);
@@ -78,4 +81,27 @@ export const apiSearchPosts = (value, type) => {
 
 export const apiGetAllPostsByUser = () => {
     return api.get('/api-get-all-posts-by-user');
+};
+
+export const apiDeletePosts = (postsData) => {
+    return api.delete('/api-delete-posts', {
+        data: { postsData },
+    });
+};
+
+export const apiEditPosts = (postId, editPosts) => {
+    return api.put('/api-edit-posts-by-user', { postId, editPosts });
+};
+
+export const apiVerifyPosts = (status) => {
+    // console.log(status);
+    return api.get('/api-get-verify-posts', {
+        params: {
+            status,
+        },
+    });
+};
+
+export const apiConfirmPosts = (status) => {
+    return api.put('/api-confirm-posts', { status });
 };
