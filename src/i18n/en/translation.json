@@ -20,6 +20,9 @@
         "role": "Role",
         "age": "Age",
         "edit": "Update student",
+        "male": "Male",
+        "female": "Female",
+        "other": "Other",
         "InformationStudent": {
             "notFound": "no data yet"
         },
@@ -41,7 +44,8 @@
                 "proctorDetails": "Proctor Details",
                 "hostelDetails": "Hostel Details",
                 "blog": "Blog",
-                "approve": "Approve"
+                "approve": "Approve",
+                "edit": "Edit user information"
             }
         }
     },
@@ -76,6 +80,14 @@
         "paging": {
             "previous": "Previous",
             "next": "Next"
+        },
+        "Approve": {
+            "title": "Title",
+            "status": "Status",
+            "date": "Date",
+            "actions": "Actions",
+            "delete": "Delete",
+            "verify": "Verify"
         }
     }
 }

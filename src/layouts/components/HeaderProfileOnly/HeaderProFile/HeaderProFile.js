@@ -89,10 +89,17 @@ function HeaderProFile() {
             router: config.routes.teacher,
             isAdmin: role === 'R5' || role === 'R4' || role === 'R3' || role === 'R2',
         },
+        {
+            id: 9,
+            name: t('Profile.Headers.TabButton.edit'),
+            active: path === config.routes.editUser,
+            router: config.routes.editUser,
+            isAdmin: role === 'R5' || role === 'R4' || role === 'R3' || role === 'R2',
+        },
     ];
 
     useEffect(() => {
-        if (state.userInfor) {
+        if (state.userInfor && state.userInfor.data) {
             setRole(state.userInfor.data.roleId);
         }
     }, [role, state]);

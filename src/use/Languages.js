@@ -1,5 +1,5 @@
 export const useChangeLanguageRole = (language, state) => {
-    if (state.userInfor) {
+    if (state.userInfor && state.userInfor.data) {
         switch (language) {
             case 'vi':
                 return {
@@ -18,7 +18,7 @@ export const useChangeLanguageRole = (language, state) => {
 };
 export const useChangeLanguageGender = (language, state) => {
     // console.log('state', state);
-    if (state.userInfor) {
+    if (state.userInfor && state.userInfor.data) {
         switch (language) {
             case 'vi':
                 return {

@@ -21,6 +21,9 @@
         "role": "Quyền",
         "age": "Tuổi",
         "edit": "Sửa",
+        "male": "Nam",
+        "female": "Nữ",
+        "other": "Khác",
         "InformationStudent": {
             "notFound": "Chưa Có dữ liệu"
         },
@@ -42,7 +45,8 @@
                 "proctorDetails": "Chi Tiết Giám Thị",
                 "hostelDetails": "Chi Tiết Ký Túc Xá",
                 "blog": "Viết Bài",
-                "approve": "Duyệt Bài"
+                "approve": "Duyệt Bài",
+                "edit": "Sửa Thông Tin"
             }
         }
     },
@@ -77,6 +81,14 @@
         "paging": {
             "previous": "Trước",
             "next": "Tiếp Theo"
+        },
+        "Approve": {
+            "title": "Tiêu Đề Bài Viết",
+            "status": "Trạng Thái",
+            "date": "Thời Gian",
+            "actions": "Hành Động",
+            "delete": "Xóa",
+            "verify": "Duyệt"
         }
     }
 }

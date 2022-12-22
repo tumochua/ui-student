@@ -16,7 +16,8 @@ const routes = {
     teacher: '/teacher',
     // detailPost: '/detail-post/:id',
 
-    editUser: '/eidt-user/:id',
+    // editUser: '/eidt-user/:id',
+    editUser: '/eidt-user',
     notification: '/notification',
     share: '/share',
     post: '/post/page:id',

@@ -9,7 +9,7 @@ function ProtectedRouter({ route }) {
     // const navigate = useNavigate();
     const [role, setRole] = useState(null);
     useEffect(() => {
-        if (state.userInfor) {
+        if (state.userInfor && state.userInfor.data) {
             setRole(state.userInfor.data.roleId);
         }
     }, [state]);
