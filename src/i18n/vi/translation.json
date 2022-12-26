@@ -90,5 +90,15 @@
             "delete": "Xóa",
             "verify": "Duyệt"
         }
+    },
+    "Notification": {
+        "notification": "Thông Báo",
+        "createMes": "Vui Lòng Chờ Quản Trị Viên Duyệt Bài",
+        "resMes": "Bài Viết Của Bạn Đã Được Duyệt"
+    },
+    "Confirm": {
+        "title": "Bạn có chắc muốn xóa bài viết này không ??",
+        "reason": "Lý do ...",
+        "error": "Cần nhập lý do xóa bài viết này"
     }
 }

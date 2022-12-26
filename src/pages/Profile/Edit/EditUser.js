@@ -269,20 +269,20 @@ function EditUser() {
                             placeholder="avatar"
                             type="file"
                         ></FormInput>
-                        {true && (
-                            <Modal isShowModal={isShowModal} onShowHideModal={handleShowHideModal}>
-                                {preview && (
-                                    <img
-                                        className={classModal}
-                                        src={preview}
-                                        alt="preview"
-                                        width={100}
-                                        height={100}
-                                        onClick={handlePreviewModalImage}
-                                    />
-                                )}
-                            </Modal>
-                        )}
+                        {/* {console.log(isShowModal)} */}
+                        <Modal showModal={preview ? true : ''} onShowHideModal={handleShowHideModal}>
+                            {console.log(preview)}
+                            {preview && (
+                                <img
+                                    className={classModal}
+                                    src={preview}
+                                    alt="preview"
+                                    width={100}
+                                    height={100}
+                                    onClick={handlePreviewModalImage}
+                                />
+                            )}
+                        </Modal>
                     </div>
                 </form>
                 <form>

@@ -6,7 +6,8 @@ import style from './PersonalInfo.module.scss';
 import { useContextStore } from '@/context';
 
 import { useChangeLanguageRole, useChangeLanguageGender } from '../../use/Languages';
-
+// import io from 'socket.io-client';
+// const socket = io(process.env.REACT_APP_BACKEND_URL);
 function PersonalInfo() {
     const [state] = useContextStore();
     // console.log('state', state);
@@ -28,6 +29,9 @@ function PersonalInfo() {
         }
     }, [state]);
     useEffect(() => {
+        // socket.on('connection', () => {
+        //     console.log('change');
+        // });
         if (state.userInfor && state.userInfor.data) {
             const stateAgeCopy = state.userInfor.data.dob;
             const result = new Date(stateAgeCopy).getFullYear();

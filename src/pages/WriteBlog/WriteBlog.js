@@ -14,7 +14,11 @@ import MySelect from '@/components/Selects/MySelect';
 
 import { apiCreatePost } from '@/services/apis';
 
+import { useContextStore } from '@/context';
+import io from 'socket.io-client';
+const socket = io(process.env.REACT_APP_BACKEND_URL);
 function WriteBlog() {
+    const [state] = useContextStore();
     const { t } = useTranslation();
     const mdParser = new MarkdownIt(/* Markdown-it options */);
     const [posts, setPost] = useState({
@@ -59,6 +63,7 @@ function WriteBlog() {
             value: t('Blog.other'),
         },
     ]);
+    const [sendNotification, setSendNotification] = useState(null);
 
     function handleEditorChange({ html, text }) {
         // console.log('html', html);
@@ -77,23 +82,43 @@ function WriteBlog() {
             // console.log(posts);
             (async () => {
                 const response = await apiCreatePost(posts);
+                // console.log(response.datapostsId);
                 if (response.data.statusCode === 2) {
                     setIsLoading(false);
+                    if (state.userInfor) {
+                        setSendNotification({
+                            userId: state.userInfor.data.id,
+                            userName: state.userInfor.data.fullName,
+                            roleId: state.userInfor.data.roleId,
+                            postsId: response.data.postsId,
+                            statusId: 'T0',
+                            description: t('Notification.createMes'),
+                            title: posts.title,
+                            image: posts.image,
+                            readId: 'D0',
+                        });
+                    }
                 }
             })();
-            setPost({
-                title: '',
-                textMarkDown: '',
-                textHtmlMarkDown: '',
-                type: '',
-                image: '',
-            });
+            // setPost({
+            //     title: '',
+            //     textMarkDown: '',
+            //     textHtmlMarkDown: '',
+            //     type: '',
+            //     image: '',
+            // });
         } catch (error) {
             console.log(error);
         } finally {
             setIsLoading(false);
         }
     };
+    useEffect(() => {
+        if (sendNotification) {
+            // console.log(sendNotification);
+            socket.emit('createNotificationPosts', sendNotification);
+        }
+    }, [sendNotification, posts]);
     useEffect(() => {
         document.title = t('Blog.post');
         if (posts.title) {
