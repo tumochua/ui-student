@@ -112,3 +112,7 @@ export const apiGetListNotification = () => {
 export const apiCleanNotification = () => {
     return api.put('/api-clean-notification');
 };
+
+export const apiSeeAllNotification = () => {
+    return api.get('/api-list-see-all-notification');
+};

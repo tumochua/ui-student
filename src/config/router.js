@@ -6,13 +6,13 @@ const routes = {
 
     /// profile
     profilePersonalInfo: '/profile/personalinfo',
-    profileEducationalInfo: '/profile/managePosts',
+    managePosts: '/managePosts',
     profileFamilyInfo: '/profile/familyinfo',
     profileProctorDetails: '/profile/proctordetails',
     profileHostelDetails: '/profile/hosteldetails',
     blog: '/new-blog',
     detailPost: '/detail-post',
-    approve: '/profile/approve',
+    approve: '/approve',
     teacher: '/teacher',
     // detailPost: '/detail-post/:id',
 

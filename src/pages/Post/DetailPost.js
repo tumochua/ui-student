@@ -15,7 +15,7 @@ function DetailPost() {
     useEffect(() => {
         (async () => {
             const response = await apiGetDetailPost(postId);
-            console.log('response', response.data);
+            // console.log('response', response.data);
             if (response) {
                 setDetaiPost(response.data);
                 setSizeLike(response.data.post.likeData);

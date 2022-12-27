@@ -271,7 +271,7 @@ function EditUser() {
                         ></FormInput>
                         {/* {console.log(isShowModal)} */}
                         <Modal showModal={preview ? true : ''} onShowHideModal={handleShowHideModal}>
-                            {console.log(preview)}
+                            {/* {console.log(preview)} */}
                             {preview && (
                                 <img
                                     className={classModal}

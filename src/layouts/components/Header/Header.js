@@ -7,6 +7,7 @@ import style from './Header.module.scss';
 import { apiGetProfileUser, apiGetListNotification, apiCleanNotification } from '@/services/apis';
 // import images from '@/assets/images';
 import Modal from '@/components/Modal';
+import MyButton from '@/components/Button/MyButton';
 import config from '@/config';
 function Header() {
     const socket = io(process.env.REACT_APP_BACKEND_URL);
@@ -42,11 +43,10 @@ function Header() {
     // ]);
     const [notificationData, setNotificationData] = useState(null);
     const [isModalNotification, setIsModalNotification] = useState(false);
-    const [sizeNotification, setSizeNotification] = useState({
-        size: null,
-    });
+    const [sizeNotification, setSizeNotification] = useState(null);
     const [isReRender, setIsReRender] = useState(false);
     // const [isRead, setIsRead] = useState(false);
+    const [roleNotificationData, setRoleNotificationData] = useState(null);
 
     useEffect(() => {
         if (userInfo) {
@@ -60,40 +60,56 @@ function Header() {
     useEffect(() => {
         (async () => {
             const response = await apiGetListNotification();
-            // console.log(response.data);
+            // console.log(response.data.data);
             if (response.data.statusCode) {
                 setNotificationData(response.data.data);
             }
         })();
     }, [isReRender]);
-
     useEffect(() => {
         if (notificationData) {
-            // console.log(notificationData);
-            const newNotificationData = notificationData.filter((element) => {
+            const filterNotificationData = notificationData.filter((notification) => {
+                return notification.roleId === 'R5' || notification.roleId === 'R4' || notification.roleId === 'R3';
+            });
+            setRoleNotificationData(filterNotificationData);
+        }
+    }, [notificationData]);
+    useEffect(() => {
+        if (roleNotificationData) {
+            // console.log(roleNotificationData);
+        }
+    }, [roleNotificationData]);
+
+    useEffect(() => {
+        if (roleNotificationData) {
+            // console.log(roleNotificationData);
+            const newNotificationData = roleNotificationData.filter((element) => {
                 return element.readId === 'D0';
             });
             // console.log(newNotificationData);
             // console.log(sizeNotification);
             if (newNotificationData.length > 0) {
-                setSizeNotification((prevState) => {
-                    return { ...prevState, size: newNotificationData.length };
-                });
+                setSizeNotification(newNotificationData.length);
+                // return { ...prevState, size: newNotificationData.length };
+                // setSizeNotification((prevState) => {
+                // });
             } else {
                 setSizeNotification(null);
             }
         }
-    }, [notificationData]);
+    }, [roleNotificationData]);
 
     useEffect(() => {
         socket.on('resCreateMesPosts', (arg) => {
             // console.log('resCreateMesPosts');
             // const newArg = [arg];
             // console.log(newArg);
-            setIsReRender(!isReRender);
+            setIsReRender(true);
+            // console.log('re-render', arg);
         });
         socket.on('resApprovedPosts', (arg) => {
-            setIsReRender(!isReRender);
+            setIsReRender(false);
+            // console.log('re-render', arg);
             // console.log('resApprovedPosts');
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -143,6 +159,10 @@ function Header() {
     //     }
     // };
 
+    const handleSeeAllNotification = () => {
+        navigate(config.routes.notification);
+    };
+
     return (
         <div className={style.headerWapper}>
             <div className={style.headerLeft}>
@@ -160,8 +180,8 @@ function Header() {
                     <Modal position="topCenter" showModal={isModalNotification}>
                         <h1>{t('Notification.notification')}</h1>
                         <ul className={style.moDalContent}>
-                            {notificationData &&
-                                notificationData.map((item) => {
+                            {roleNotificationData &&
+                                roleNotificationData.map((item) => {
                                     return (
                                         <li key={item.id} className={style.itemNotification}>
                                             <div
@@ -182,10 +202,13 @@ function Header() {
                                     );
                                 })}
                         </ul>
+                        <div className={style.bottom}>
+                            <MyButton border hanldeClick={handleSeeAllNotification}>
+                                {t('Notification.seeAll')}
+                            </MyButton>
+                        </div>
                     </Modal>
-                    {sizeNotification && sizeNotification.size > 0 && (
-                        <span className={style.sizeNotification}>{sizeNotification.size}</span>
-                    )}
+                    {sizeNotification && <span className={style.sizeNotification}>{sizeNotification}</span>}
                 </div>
                 {avatar && <img src={avatar} alt="avatar" className={style.avatar} />}
                 <div className={style.users}>

@@ -40,13 +40,13 @@ function HeaderProFile() {
             router: config.routes.profilePersonalInfo,
             isAdmin: true,
         },
-        {
-            id: 2,
-            name: t('Profile.Headers.TabButton.managePosts'),
-            active: path === config.routes.profileEducationalInfo,
-            router: config.routes.profileEducationalInfo,
-            isAdmin: true,
-        },
+        // {
+        //     id: 2,
+        //     name: t('Profile.Headers.TabButton.managePosts'),
+        //     active: path === config.routes.managePosts,
+        //     router: config.routes.managePosts,
+        //     isAdmin: true,
+        // },
         {
             id: 3,
             name: t('Profile.Headers.TabButton.familyInfo'),
@@ -75,13 +75,13 @@ function HeaderProFile() {
             router: config.routes.blog,
             isAdmin: true,
         },
-        {
-            id: 7,
-            name: t('Profile.Headers.TabButton.approve'),
-            active: path === config.routes.approve,
-            router: config.routes.approve,
-            isAdmin: role === 'R5' || role === 'R4' || role === 'R3',
-        },
+        // {
+        //     id: 7,
+        //     name: t('Profile.Headers.TabButton.approve'),
+        //     active: path === config.routes.approve,
+        //     router: config.routes.approve,
+        //     isAdmin: role === 'R5' || role === 'R4' || role === 'R3',
+        // },
         {
             id: 8,
             name: 'Teacher',

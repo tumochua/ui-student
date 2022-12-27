@@ -94,7 +94,9 @@
     "Notification": {
         "notification": "Thông Báo",
         "createMes": "Vui Lòng Chờ Quản Trị Viên Duyệt Bài",
-        "resMes": "Bài Viết Của Bạn Đã Được Duyệt"
+        "resMes": "Bài Viết Của Bạn Đã Được Duyệt",
+        "seeAll": "Xem tất cả",
+        "mesRole": "Vừa Đăng Một Bài Viết"
     },
     "Confirm": {
         "title": "Bạn có chắc muốn xóa bài viết này không ??",

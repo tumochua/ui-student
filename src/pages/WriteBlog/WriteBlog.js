@@ -27,6 +27,7 @@ function WriteBlog() {
         textHtmlMarkDown: '',
         type: '',
         image: '',
+        roleId: '',
     });
     const [success, setSuccess] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -64,7 +65,23 @@ function WriteBlog() {
         },
     ]);
     const [sendNotification, setSendNotification] = useState(null);
+    const [role, setRoleId] = useState(null);
+    // const [roleData,setRoleData] = useState(['R3','R4','R5'])
 
+    useEffect(() => {
+        if (state.userInfor && state.userInfor.data) {
+            setRoleId(state.userInfor.data.roleId);
+            if (role) {
+                // console.log(role);
+                setPost((prevState) => {
+                    return {
+                        ...prevState,
+                        roleId: role,
+                    };
+                });
+            }
+        }
+    }, [role, state]);
     function handleEditorChange({ html, text }) {
         // console.log('html', html);
         // console.log('text', text);
@@ -76,6 +93,7 @@ function WriteBlog() {
             };
         });
     }
+    // console.log(role);
     const handleCreatePost = () => {
         setIsLoading(true);
         try {
@@ -85,17 +103,21 @@ function WriteBlog() {
                 // console.log(response.datapostsId);
                 if (response.data.statusCode === 2) {
                     setIsLoading(false);
-                    if (state.userInfor) {
+                    if (state.userInfor && state.userInfor.data) {
                         setSendNotification({
                             userId: state.userInfor.data.id,
                             userName: state.userInfor.data.fullName,
                             roleId: state.userInfor.data.roleId,
                             postsId: response.data.postsId,
                             statusId: 'T0',
-                            description: t('Notification.createMes'),
+                            description:
+                                role === 'R5' || role === 'R4' || role === 'R3'
+                                    ? `${state.userInfor.data.fullName} ${t('Notification.mesRole')}`
+                                    : t('Notification.createMes'),
                             title: posts.title,
                             image: posts.image,
                             readId: 'D0',
+                            // readId: role === 'R5' || role === 'R4' || role === 'R3' ? 'D1' : 'D0',
                         });
                     }
                 }
@@ -129,8 +151,9 @@ function WriteBlog() {
         const valuePosts = Object.values(posts);
         if (valuePosts) {
             const isEmpty = valuePosts.every((item) => {
-                return item.length > 2 ? true : false;
+                return item.length >= 2 ? true : false;
             });
+            // console.log(isEmpty);
             if (isEmpty) {
                 setSuccess(true);
             } else {

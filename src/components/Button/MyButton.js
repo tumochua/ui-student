@@ -16,6 +16,7 @@ function MyButton({
     opacity,
     hoverBorder,
     accent,
+    border,
 }) {
     // console.log(style);
     const btnClassses = classNames({
@@ -32,6 +33,7 @@ function MyButton({
         [style.opacity]: opacity,
         [style.hoverBorder]: hoverBorder,
         [style.accent]: accent,
+        [style.border]: border,
     });
 
     return (
