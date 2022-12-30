@@ -95,7 +95,8 @@
         "createMes": "Please wait for the Admin to review the post",
         "resMes": "Your Post Has Been Approved",
         "seeAll": "See all",
-        "mesRole": "Just Posted A Post"
+        "mesRole": "Just Posted A Post",
+        "deletePost": "Your Posts Have Been Deleted By Administrators For Reasons"
     },
     "Confirm": {
         "title": "Are you sure you want to delete this post??",

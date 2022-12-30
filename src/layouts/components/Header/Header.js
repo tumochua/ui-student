@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import io from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
 import style from './Header.module.scss';
+///  apiGetListNotification, apiCleanNotification
 import { apiGetProfileUser, apiGetListNotification, apiCleanNotification } from '@/services/apis';
 // import images from '@/assets/images';
 import Modal from '@/components/Modal';
@@ -18,35 +19,11 @@ function Header() {
     const [avatar, setAvatar] = useState(null);
     const [role, setRole] = useState(null);
     const [language, setLanguage] = useState(null);
-    // eslint-disable-next-line no-unused-vars
-    // const [notificationData, setNotificationData] = useState([
-    //     {
-    //         id: 1,
-    //         des: ' Chào mừng Tú Nguyễn Văn đã gia nhập F8. Hãy luôn đam mê, kiên trì và theo đuổi mục tiêu tới cùng bạn nhé ❤️',
-    //     },
-    //     {
-    //         id: 2,
-    //         des: ' Chào mừng Tú Nguyễn Văn đã gia nhập F8. Hãy luôn đam mê, kiên trì và theo đuổi mục tiêu tới cùng bạn nhé ❤️',
-    //     },
-    //     {
-    //         id: 3,
-    //         des: ' Chào mừng Tú Nguyễn Văn đã gia nhập F8. Hãy luôn đam mê, kiên trì và theo đuổi mục tiêu tới cùng bạn nhé ❤️',
-    //     },
-    //     {
-    //         id: 4,
-    //         des: ' Chào mừng Tú Nguyễn Văn đã gia nhập F8. Hãy luôn đam mê, kiên trì và theo đuổi mục tiêu tới cùng bạn nhé ❤️',
-    //     },
-    //     {
-    //         id: 5,
-    //         des: ' Chào mừng Tú Nguyễn Văn đã gia nhập F8. Hãy luôn đam mê, kiên trì và theo đuổi mục tiêu tới cùng bạn nhé ❤️',
-    //     },
-    // ]);
     const [notificationData, setNotificationData] = useState(null);
     const [isModalNotification, setIsModalNotification] = useState(false);
     const [sizeNotification, setSizeNotification] = useState(null);
     const [isReRender, setIsReRender] = useState(false);
-    // const [isRead, setIsRead] = useState(false);
-    const [roleNotificationData, setRoleNotificationData] = useState(null);
+    // const [userId, setUserId] = useState(null);
 
     useEffect(() => {
         if (userInfo) {
@@ -54,64 +31,33 @@ function Header() {
             setName(userInfo.fullName);
             setAvatar(userInfo.image);
             setLanguage(i18n.language);
+            // setUserId(userInfo.id);
         }
     }, [i18n.language, name, userInfo]);
 
     useEffect(() => {
         (async () => {
+            // console.log(isReRender);
             const response = await apiGetListNotification();
-            // console.log(response.data.data);
-            if (response.data.statusCode) {
+            // console.log(response.data);
+            if (response.data.statusCode === 2) {
                 setNotificationData(response.data.data);
+                setSizeNotification(response.data.sizeNotification);
             }
         })();
     }, [isReRender]);
-    useEffect(() => {
-        if (notificationData) {
-            const filterNotificationData = notificationData.filter((notification) => {
-                return notification.roleId === 'R5' || notification.roleId === 'R4' || notification.roleId === 'R3';
-            });
-            setRoleNotificationData(filterNotificationData);
-        }
-    }, [notificationData]);
-    useEffect(() => {
-        if (roleNotificationData) {
-            // console.log(roleNotificationData);
-        }
-    }, [roleNotificationData]);
-
-    useEffect(() => {
-        if (roleNotificationData) {
-            // console.log(roleNotificationData);
-            const newNotificationData = roleNotificationData.filter((element) => {
-                return element.readId === 'D0';
-            });
-            // console.log(newNotificationData);
-            // console.log(sizeNotification);
-            if (newNotificationData.length > 0) {
-                setSizeNotification(newNotificationData.length);
-                // return { ...prevState, size: newNotificationData.length };
-                // setSizeNotification((prevState) => {
-                // });
-            } else {
-                setSizeNotification(null);
-            }
-        }
-    }, [roleNotificationData]);
 
     useEffect(() => {
         socket.on('resCreateMesPosts', (arg) => {
-            // console.log('resCreateMesPosts');
-            // const newArg = [arg];
-            // console.log(newArg);
-            setIsReRender(true);
-            // console.log('re-render', arg);
+            setIsReRender(!isReRender);
         });
         socket.on('resApprovedPosts', (arg) => {
-            setIsReRender(false);
-            // console.log('re-render', arg);
-            // console.log('resApprovedPosts');
+            setIsReRender(!isReRender);
         });
+        socket.on('resDeleteNotificationPosts', () => {
+            setIsReRender(!isReRender);
+        });
+        // socket.on('resDeleteNotificationPosts',() )
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -143,6 +89,7 @@ function Header() {
         (async () => {
             const response = await apiCleanNotification();
             if (response.data.statusCode === 2) {
+                // socket.emit('readPostsNotifications');
                 setIsReRender(!isReRender);
             }
         })();
@@ -171,7 +118,6 @@ function Header() {
                     alt="abc"
                     className={style.logo}
                 />
-                {/* <img src={images.logo} alt="cao đẳng bách khoa" className={style.logo} /> */}
                 <h3>{t('Headers.studentPortal')}</h3>
             </div>
             <div className={style.userInfor}>
@@ -180,8 +126,12 @@ function Header() {
                     <Modal position="topCenter" showModal={isModalNotification}>
                         <h1>{t('Notification.notification')}</h1>
                         <ul className={style.moDalContent}>
-                            {roleNotificationData &&
-                                roleNotificationData.map((item) => {
+                            {notificationData &&
+                                notificationData.length > 0 &&
+                                notificationData.map((item, index) => {
+                                    if (index >= 4) {
+                                        return null;
+                                    }
                                     return (
                                         <li key={item.id} className={style.itemNotification}>
                                             <div
@@ -189,8 +139,14 @@ function Header() {
                                                 // onClick={handleNotificationDetaiPost(item.id, item.statusId)}
                                             >
                                                 <span>
-                                                    {avatar && (
+                                                    {avatar ? (
                                                         <img src={avatar} alt="avatar" className={style.avatar} />
+                                                    ) : (
+                                                        <img
+                                                            src="https://as2.ftcdn.net/v2/jpg/03/32/59/65/1000_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg"
+                                                            alt="avatar"
+                                                            className={style.avatar}
+                                                        />
                                                     )}
                                                 </span>
                                                 <div>

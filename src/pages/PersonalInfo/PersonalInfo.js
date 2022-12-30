@@ -119,7 +119,15 @@ function PersonalInfo() {
                 </table>
             </div>
             <div className={style.containerRight}>
-                {avatar && <img src={`${avatar}`} alt="avatar" className={style.avatar} />}
+                {avatar ? (
+                    <img src={`${avatar} `} alt="avatar" className={style.avatar} />
+                ) : (
+                    <img
+                        src="https://as2.ftcdn.net/v2/jpg/03/32/59/65/1000_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg"
+                        alt="avatar"
+                        className={style.avatar}
+                    />
+                )}
             </div>
         </div>
     );

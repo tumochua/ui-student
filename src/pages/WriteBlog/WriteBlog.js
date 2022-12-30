@@ -117,18 +117,19 @@ function WriteBlog() {
                             title: posts.title,
                             image: posts.image,
                             readId: 'D0',
+                            typeId: 'PN',
                             // readId: role === 'R5' || role === 'R4' || role === 'R3' ? 'D1' : 'D0',
                         });
                     }
                 }
             })();
-            // setPost({
-            //     title: '',
-            //     textMarkDown: '',
-            //     textHtmlMarkDown: '',
-            //     type: '',
-            //     image: '',
-            // });
+            setPost({
+                title: '',
+                textMarkDown: '',
+                textHtmlMarkDown: '',
+                type: '',
+                image: '',
+            });
         } catch (error) {
             console.log(error);
         } finally {

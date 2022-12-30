@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import style from './Approve.module.scss';
+// apiDeletePosts, apiConfirmPosts
 import { apiVerifyPosts, apiDeletePosts, apiConfirmPosts } from '@/services/apis';
 import MyButton from '@/components/Button/MyButton';
 import { handleConvertRimestampToDate } from '@/use/Date';
@@ -14,11 +15,25 @@ function Approve() {
 
     const { t } = useTranslation();
     const [posts, setPosts] = useState(null);
+    // eslint-disable-next-line no-unused-vars
     const [isCallApi, setIsCallApi] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [reason, setReason] = useState('');
     const [errorReason, setErrorReason] = useState(false);
     const [sendNotification, setSendNotification] = useState(null);
+    const [sendNotificationDeletePost, setSendNotificationDeletePost] = useState({
+        userIdApprove: '',
+        userName: '',
+        roleId: '',
+        userId: '',
+        postsId: '',
+        statusId: 'T2',
+        description: t('Notification.deletePost'),
+        reason: '',
+        readId: 'D0',
+        title: '',
+    });
+    // eslint-disable-next-line no-unused-vars
     const [sendNotificationReason, setSendNotificationReason] = useState({
         userId: '',
         userName: '',
@@ -28,6 +43,8 @@ function Approve() {
         title: '',
     });
     const [isOk, setIsOk] = useState(false);
+    const [isConfirm, setIsConfirm] = useState(false);
+    const [postsIdDelete, setPostsIdDelete] = useState(null);
     // console.log(state.userInfor.data.roleId);
     useEffect(() => {
         (async () => {
@@ -39,9 +56,26 @@ function Approve() {
         })();
     }, [isCallApi]);
 
-    const handleDeletePosts = async (postsId) => {
+    const handleDeletePosts = async (postsId, title, userId, fullName, roleId) => {
         setShowModal(true);
-        setIsOk(false);
+        setIsConfirm(false);
+        setSendNotificationDeletePost((prevState) => {
+            return {
+                ...prevState,
+                userIdApprove: state.userInfor.data.id,
+                userName: fullName,
+                roleId: roleId,
+                userId: userId,
+                postsId: postsId,
+                statusId: 'T2',
+                readId: 'D0',
+                title: title,
+            };
+        });
+
+        if (isOk) {
+            setIsOk(false);
+        }
 
         if (state.userInfor) {
             setSendNotificationReason((prevState) => {
@@ -51,13 +85,10 @@ function Approve() {
                 };
             });
         }
-        // const response = await apiDeletePosts({
-        //     type: 'delete',
-        //     postId,
-        // });
-        // if (response.data.statusCode === 2) {
-        //     setIsCallApi(!isCallApi);
-        // }
+        setPostsIdDelete({
+            type: 'delete',
+            postsId: postsId,
+        });
     };
 
     useEffect(() => {
@@ -75,11 +106,17 @@ function Approve() {
     }, [state.userInfor]);
 
     useEffect(() => {
-        if (isOk) {
-            console.log(sendNotificationReason);
-        }
+        if (isConfirm && postsIdDelete)
+            if (postsIdDelete) {
+                (async () => {
+                    const response = await apiDeletePosts(postsIdDelete);
+                    if (response.data.statusCode === 2) {
+                        setIsCallApi(!isCallApi);
+                    }
+                })();
+            }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isOk]);
+    }, [postsIdDelete, isConfirm]);
     useEffect(() => {
         if (sendNotification) {
             // console.log(sendNotification);
@@ -87,27 +124,37 @@ function Approve() {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sendNotification]);
+    useEffect(() => {
+        // setIsOk(false);
+        if (isOk) {
+            // console.log(sendNotificationDeletePost);
+            socket.emit('deleteNotificationPosts', sendNotificationDeletePost);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isOk]);
 
-    const handleverifVerifyPosts = async (postsId, title) => {
+    const handleverifVerifyPosts = async (postsId, title, userId, fullName, roleId) => {
         if (state.userInfor) {
             setSendNotification({
-                userId: state.userInfor.data.id,
-                userName: state.userInfor.data.fullName,
-                roleId: state.userInfor.data.roleId,
+                userIdApprove: state.userInfor.data.id,
+                userName: fullName,
+                roleId: roleId,
+                userId: userId,
                 postsId: postsId,
                 statusId: 'T1',
-                description: t('Notification.resMes'),
+                description: `${t('Notification.resMes')}`,
                 readId: 'D0',
                 title: title,
             });
         }
-
         const response = await apiConfirmPosts({
             postsId,
             status: 'S1',
         });
         if (response.data.statusCode === 2) {
             setIsCallApi(!isCallApi);
+            // socket.emit('deleteNotificationPosts', sendNotificationDeletePost);
+
             // socket.emit('approveNotificationPosts', sendNotification);
         }
     };
@@ -123,6 +170,7 @@ function Approve() {
             setShowModal(false);
             setErrorReason(false);
             setReason('');
+            setIsConfirm(true);
         }
     };
     const handleOnChangeReason = (data) => {
@@ -132,6 +180,12 @@ function Approve() {
             return {
                 ...prevState,
                 description: data.value,
+            };
+        });
+        setSendNotificationDeletePost((prevState) => {
+            return {
+                ...prevState,
+                reason: data.value,
             };
         });
     };
@@ -168,13 +222,33 @@ function Approve() {
                                         {/* <th>{post.date}</th> */}
                                         <th>{handleConvertRimestampToDate(post.date, new Date())}</th>
                                         <th className={style.actions}>
-                                            <MyButton danger medium hanldeClick={() => handleDeletePosts(post.id)}>
+                                            <MyButton
+                                                danger
+                                                medium
+                                                hanldeClick={() =>
+                                                    handleDeletePosts(
+                                                        post.id,
+                                                        post.title,
+                                                        post.userId,
+                                                        post.userData.fullName,
+                                                        post.userData.roleId,
+                                                    )
+                                                }
+                                            >
                                                 {t('Blog.Approve.delete')}
                                             </MyButton>
                                             <MyButton
                                                 success
                                                 medium
-                                                hanldeClick={() => handleverifVerifyPosts(post.id, post.title)}
+                                                hanldeClick={() =>
+                                                    handleverifVerifyPosts(
+                                                        post.id,
+                                                        post.title,
+                                                        post.userId,
+                                                        post.userData.fullName,
+                                                        post.userData.roleId,
+                                                    )
+                                                }
                                             >
                                                 {t('Blog.Approve.verify')}
                                             </MyButton>
