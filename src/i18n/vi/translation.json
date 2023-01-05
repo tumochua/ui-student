@@ -97,7 +97,8 @@
         "resMes": "Bài Viết Của Bạn Đã Được Duyệt",
         "seeAll": "Xem tất cả",
         "mesRole": "Vừa Đăng Một Bài Viết",
-        "deletePost": "Bài Viết Của Bạn Bị Quản Trị Viên Xóa Vì Lý Do"
+        "deletePost": "Bài Viết Của Bạn Bị Quản Trị Viên Xóa Vì Lý Do",
+        "likePost": " Đã Like Bài Viết Của Bạn"
     },
     "Confirm": {
         "title": "Bạn có chắc muốn xóa bài viết này không ??",

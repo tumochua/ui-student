@@ -39,4 +39,15 @@
     .bottom {
         margin-bottom: 12px;
     }
+    .isBorderBottom {
+        border-top: none;
+        border-right: none;
+        border-left: none;
+        border-bottom: 1px solid var(--input-boder);
+        &:focus {
+            border-top: none;
+            border-right: none;
+            border-left: none;
+        }
+    }
 }

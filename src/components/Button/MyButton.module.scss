@@ -74,3 +74,15 @@
 .border {
     border: none;
 }
+.radius {
+    color: var(--black);
+    border-radius: 38%;
+    font-size: 1.5rem;
+    &:hover {
+        background: #ebebeb;
+        cursor: pointer;
+    }
+}
+.isBackground {
+    background: transparent;
+}

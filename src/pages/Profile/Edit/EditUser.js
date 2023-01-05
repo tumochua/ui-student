@@ -68,7 +68,7 @@ function EditUser() {
     });
     const handleEditUser = async (e) => {
         e.preventDefault();
-        // console.log(valueInput);
+        console.log(valueInput);
         // console.log(family);
         const response = await handleApiEditUser(valueInput);
         console.log(response);
@@ -233,7 +233,7 @@ function EditUser() {
                         <FormInput
                             label="Mobile"
                             name="mobile"
-                            value={valueInput.mobile}
+                            value={valueInput.mobile | ''}
                             onChangeInput={handleOnChangeInput}
                             placeholder="mobile"
                             type="number"
@@ -244,12 +244,12 @@ function EditUser() {
                             onChangeInput={handleOnChangeInput}
                             placeholder="birthday"
                             type="date"
-                            value={valueInput.birthday}
+                            value={valueInput.birthday || ''}
                         ></FormInput>
                         <MySelect
                             options={optionGender}
                             label={t('Profile.gender')}
-                            value={valueInput.gender}
+                            value={valueInput.gender || ''}
                             onChanType={handleChangeGender}
                             height
                             width
@@ -257,7 +257,7 @@ function EditUser() {
                         <MySelect
                             options={optionClass}
                             label={t('Profile.class')}
-                            value={valueInput.className}
+                            value={valueInput.className || ''}
                             onChanType={handleOnchangeClass}
                             height
                             width
