@@ -6,7 +6,8 @@ import style from './PersonalInfo.module.scss';
 import { useContextStore } from '@/context';
 
 import { useChangeLanguageRole, useChangeLanguageGender } from '../../use/Languages';
-
+// import io from 'socket.io-client';
+// const socket = io(process.env.REACT_APP_BACKEND_URL);
 function PersonalInfo() {
     const [state] = useContextStore();
     // console.log('state', state);
@@ -28,6 +29,9 @@ function PersonalInfo() {
         }
     }, [state]);
     useEffect(() => {
+        // socket.on('connection', () => {
+        //     console.log('change');
+        // });
         if (state.userInfor && state.userInfor.data) {
             const stateAgeCopy = state.userInfor.data.dob;
             const result = new Date(stateAgeCopy).getFullYear();
@@ -115,7 +119,15 @@ function PersonalInfo() {
                 </table>
             </div>
             <div className={style.containerRight}>
-                {avatar && <img src={`${avatar}`} alt="avatar" className={style.avatar} />}
+                {avatar ? (
+                    <img src={`${avatar} `} alt="avatar" className={style.avatar} />
+                ) : (
+                    <img
+                        src="https://as2.ftcdn.net/v2/jpg/03/32/59/65/1000_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg"
+                        alt="avatar"
+                        className={style.avatar}
+                    />
+                )}
             </div>
         </div>
     );

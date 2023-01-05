@@ -8,13 +8,77 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // padding: 0 20px;
+
     .headerLeft {
         display: flex;
         align-items: center;
         gap: 20px;
         .logo {
             width: 50px;
+        }
+    }
+    .userInfor {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+        margin-right: 20px;
+        .containerBell {
+            cursor: pointer;
+            position: relative;
+            .iconBell {
+                font-size: 2.7rem;
+                border: 1px solid white;
+                opacity: 0.8;
+                &:hover {
+                    opacity: 1;
+                }
+            }
+            .sizeNotification {
+                display: inline-block;
+                position: absolute;
+                top: -8px;
+                right: 1px;
+                width: 20px;
+                height: 20px;
+                background: var(--danger);
+                border-radius: 50%;
+                text-align: center;
+                color: var(--white);
+            }
+            .moDalContent {
+                list-style: none;
+                cursor: default;
+                .itemNotification {
+                    padding: 10px;
+                    // &:hover {
+                    //     background-color: #f0f0f0;
+                    //     color: #292929;
+                    // }
+                    .notificationContent {
+                        display: flex;
+                        // border: 1px solid;
+                        align-items: center;
+                        gap: 10px;
+                        padding: 5px;
+                    }
+                }
+            }
+            .bottom {
+                padding-top: 10px;
+                text-align: center;
+                border-top: 1px solid var(--input-boder);
+                cursor: default;
+            }
+        }
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .users {
+            display: flex;
+            flex-direction: column;
         }
     }
 }

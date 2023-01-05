@@ -14,7 +14,11 @@ import MySelect from '@/components/Selects/MySelect';
 
 import { apiCreatePost } from '@/services/apis';
 
+import { useContextStore } from '@/context';
+import io from 'socket.io-client';
+const socket = io(process.env.REACT_APP_BACKEND_URL);
 function WriteBlog() {
+    const [state] = useContextStore();
     const { t } = useTranslation();
     const mdParser = new MarkdownIt(/* Markdown-it options */);
     const [posts, setPost] = useState({
@@ -23,6 +27,7 @@ function WriteBlog() {
         textHtmlMarkDown: '',
         type: '',
         image: '',
+        roleId: '',
     });
     const [success, setSuccess] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -59,7 +64,24 @@ function WriteBlog() {
             value: t('Blog.other'),
         },
     ]);
+    const [sendNotification, setSendNotification] = useState(null);
+    const [role, setRoleId] = useState(null);
+    // const [roleData,setRoleData] = useState(['R3','R4','R5'])
 
+    useEffect(() => {
+        if (state.userInfor && state.userInfor.data) {
+            setRoleId(state.userInfor.data.roleId);
+            if (role) {
+                // console.log(role);
+                setPost((prevState) => {
+                    return {
+                        ...prevState,
+                        roleId: role,
+                    };
+                });
+            }
+        }
+    }, [role, state]);
     function handleEditorChange({ html, text }) {
         // console.log('html', html);
         // console.log('text', text);
@@ -71,14 +93,34 @@ function WriteBlog() {
             };
         });
     }
+    // console.log(role);
     const handleCreatePost = () => {
         setIsLoading(true);
         try {
             // console.log(posts);
             (async () => {
                 const response = await apiCreatePost(posts);
+                // console.log(response.datapostsId);
                 if (response.data.statusCode === 2) {
                     setIsLoading(false);
+                    if (state.userInfor && state.userInfor.data) {
+                        setSendNotification({
+                            userId: state.userInfor.data.id,
+                            userName: state.userInfor.data.fullName,
+                            roleId: state.userInfor.data.roleId,
+                            postsId: response.data.postsId,
+                            statusId: 'T0',
+                            description:
+                                role === 'R5' || role === 'R4' || role === 'R3'
+                                    ? `${state.userInfor.data.fullName} ${t('Notification.mesRole')}`
+                                    : t('Notification.createMes'),
+                            title: posts.title,
+                            image: posts.image,
+                            readId: 'D0',
+                            typeId: 'PN',
+                            // readId: role === 'R5' || role === 'R4' || role === 'R3' ? 'D1' : 'D0',
+                        });
+                    }
                 }
             })();
             setPost({
@@ -95,6 +137,12 @@ function WriteBlog() {
         }
     };
     useEffect(() => {
+        if (sendNotification) {
+            // console.log(sendNotification);
+            socket.emit('createNotificationPosts', sendNotification);
+        }
+    }, [sendNotification, posts]);
+    useEffect(() => {
         document.title = t('Blog.post');
         if (posts.title) {
             document.title = posts.title;
@@ -104,8 +152,9 @@ function WriteBlog() {
         const valuePosts = Object.values(posts);
         if (valuePosts) {
             const isEmpty = valuePosts.every((item) => {
-                return item.length > 2 ? true : false;
+                return item.length >= 2 ? true : false;
             });
+            // console.log(isEmpty);
             if (isEmpty) {
                 setSuccess(true);
             } else {

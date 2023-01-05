@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -8,6 +8,10 @@ import { publicRoutes, privateRoutes } from '@/routes';
 import DefaultLayout from './layouts/DefaultLayout';
 import ProtectedRouter from './components/ProtectedRouter';
 function App() {
+    useEffect(() => {
+        // console.log('call api');
+    }, []);
+
     return (
         <Router>
             <Routes>

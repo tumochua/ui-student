@@ -1,108 +1,160 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import style from './DetailPost.module.scss';
 import { handleConvertRimestampToDate } from '@/use/Date';
-import { apiGetDetailPost, apiLikePost } from '@/services/apis';
+//apiLikePost
+import { useTranslation } from 'react-i18next';
+import { apiGetDetailPost, apiLikePost, apiGetProfileUser } from '@/services/apis';
+import io from 'socket.io-client';
+import Comments from './Comments';
 function DetailPost() {
+    const socket = io(process.env.REACT_APP_BACKEND_URL);
+    const { t } = useTranslation();
     const routerData = useLocation();
     const postId = routerData.state.id;
     const [postDetail, setDetaiPost] = useState(null);
-    const [sizeLike, setSizeLike] = useState(null);
-    const [sumLike, setSumLike] = useState(null);
+    // eslint-disable-next-line no-unused-vars
     const [isCallApi, setIsCallApi] = useState(false);
-    const [isUserLikePosts, setIsUserLikePosts] = useState(false);
-    const [idUserStore, setIsUserStore] = useState(null);
+    const [isLikePost, setIsLikePost] = useState(false);
+    const [userId, setUserId] = useState(null);
+    const [sizeLike, setSizeLike] = useState(null);
+    const [dataPostId, setDataPostId] = useState(null);
+    const [userData, setUserData] = useState(null);
+    const [userInfo, setUserInfor] = useState(null);
+    const [isComments, setIsComments] = useState(false);
+    useEffect(() => {
+        (async () => {
+            const response = await apiGetProfileUser();
+            if (response.data.statusCode === 2) {
+                setUserInfor(response.data.data);
+            }
+        })();
+    }, []);
     useEffect(() => {
         (async () => {
             const response = await apiGetDetailPost(postId);
             // console.log('response', response.data);
             if (response) {
                 setDetaiPost(response.data);
+                setDataPostId(response.data.post.id);
+                setUserData(response.data.post.userData);
                 setSizeLike(response.data.post.likeData);
             }
         })();
     }, [postId, isCallApi]);
+    useEffect(() => {
+        const userLocalStorage = JSON.parse(localStorage.getItem('user'));
+        // console.log(userLocalStorage.data.user);
+        if (userLocalStorage.data && userLocalStorage.data.user && userLocalStorage.data.user.id) {
+            const userId = userLocalStorage.data.user.id;
+            setUserId(userId);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (userId && sizeLike && dataPostId) {
+            // console.log(sizeLike, dataPostId);
+            // /every
+            const result = sizeLike.some((like) => {
+                return like.userId === userId && like.postId === dataPostId;
+            });
+            if (result) {
+                setIsLikePost(true);
+                // setIsCallApi(!isCallApi);
+            } else {
+                setIsLikePost(false);
+            }
+        }
+    }, [userId, sizeLike, dataPostId]);
 
     const handleLike = async (id) => {
-        await apiLikePost({
+        // console.log('change');
+
+        // console.log('id', id);
+        const response = await apiLikePost({
             postId: id,
             name: 'like',
         });
+        // console.log(response);
+        if (response.data.statusCode === 3) {
+            setIsLikePost(false);
+        } else {
+            setIsLikePost(true);
+            if (userData && userInfo) {
+                socket.emit('notificationLikePost', {
+                    userIdCreatePost: userData.id,
+                    userIdLikePost: userInfo.id,
+                    postId: id,
+                    description: `${t('Notification.likePost')}`,
+                    userName: userInfo.fullName || null,
+                    typeId: 'LN',
+                    readId: 'D0',
+                    statusId: 'T1',
+                });
+            }
+        }
         setIsCallApi(!isCallApi);
     };
-    useMemo(() => {
-        const userLocalStorage = JSON.parse(localStorage.getItem('user'));
-        if (userLocalStorage) {
-            setIsUserStore(userLocalStorage.data.user.id);
-            if (sizeLike && idUserStore) {
-                // console.log(sizeLike);
-                // console.log(idUserStore);
-                const result = sizeLike.some((element) => {
-                    return element.userId === idUserStore;
-                });
-                // console.log(result);
-                if (result) {
-                    setIsUserLikePosts(true);
-                } else {
-                    setIsUserLikePosts(false);
-                }
-            }
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [idUserStore, sizeLike, isUserLikePosts]);
 
-    useEffect(() => {
-        // console.log(sizeLike);
-        if (sizeLike) {
-            const coppyLike = [];
-            sizeLike.forEach((element) => {
-                coppyLike.push(element.size);
-            });
-            // console.log('coppyLike', coppyLike);
-
-            const sum = coppyLike.reduce(handleSumLike, 0);
-
-            function handleSumLike(accumulator, item) {
-                return accumulator + item;
-            }
-            setSumLike(sum);
-        }
-    }, [sizeLike, idUserStore]);
+    const handlCommentsPost = () => {
+        setIsComments(true);
+        // setIsAminationHide(true);
+    };
+    const handleCloseComment = () => {
+        setIsComments(false);
+        // setIsAminationHide(false);
+        // setIsAminationHide(true);
+        // console.log('change');
+    };
+    // console.log(isAminationHide);
 
     return (
-        <div className={style.container}>
-            {postDetail && (
-                <div className={style.header}>
-                    <div className={style.inforWapper}>
-                        <div className={style.inforLeft}>
-                            <img src={postDetail.post.userData.image} alt="avatart" className={style.avatar} />
-                            <div className={style.infor}>
-                                <span>{postDetail.post.userData.fullName} </span>
-                                <span>{handleConvertRimestampToDate(postDetail.post.date, new Date())}</span>
+        <>
+            {<Comments onClose={handleCloseComment} isComments={isComments}></Comments>}
+            <div className={style.container}>
+                {postDetail && (
+                    <div className={style.header}>
+                        <div className={style.inforWapper}>
+                            <div className={style.inforLeft}>
+                                {/* {console.log(postDetail.post.userData.image)} */}
+                                {postDetail.post.userData.image ? (
+                                    <img src={postDetail.post.userData.image} alt="avatart" className={style.avatar} />
+                                ) : (
+                                    <img
+                                        src="https://as2.ftcdn.net/v2/jpg/03/32/59/65/1000_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg"
+                                        alt="avatar"
+                                        className={style.avatar}
+                                    />
+                                )}
+                                <div className={style.infor}>
+                                    <span>{postDetail.post.userData.fullName} </span>
+                                    <span>{handleConvertRimestampToDate(postDetail.post.date, new Date())}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={style.inforRight}>
+                            {/* fa-solid fa-heart */}
+                            {/* fa-regular fa-heart */}
+                            <div onClick={() => handleLike(postDetail.post.id)} className={style.likes}>
+                                <i
+                                    className={`${style.iconHeart}  ${
+                                        isLikePost ? ` fa-solid fa-heart ${style.like}` : 'fa-regular fa-heart'
+                                        // isLikePost ? `fa-solid fa-heart ${style.like}` : 'fa-regular fa-heart'
+                                    }`}
+                                ></i>
+                                {/* <i className={`${style.iconHeart} fa-regular fa-heart`}></i> */}
+                                <span>{sizeLike && sizeLike.length}</span>
+                                {/* {JSON.stringify(isUserLikePosts)} */}
+                            </div>
+                            <div onClick={handlCommentsPost}>
+                                <i className={`${style.iconComment} fa-regular fa-comment`}></i>
                             </div>
                         </div>
                     </div>
-                    <div className={style.inforRight}>
-                        {/* fa-solid fa-heart */}
-                        {/* fa-regular fa-heart */}
-                        <div onClick={() => handleLike(postDetail.post.id)} className={style.likes}>
-                            <i
-                                className={`${style.iconHeart}  ${
-                                    isUserLikePosts ? ` fa-solid fa-heart ${style.like}` : 'fa-regular fa-heart'
-                                    // isUserLikePosts ? `fa-solid fa-heart ${style.like}` : 'fa-regular fa-heart'
-                                }`}
-                            ></i>
-                            <span>{sumLike && sumLike}</span>
-                            {/* {JSON.stringify(isUserLikePosts)} */}
-                        </div>
-                        <div>
-                            <i className={`${style.iconComment} fa-regular fa-comment`}></i>
-                        </div>
-                    </div>
-                </div>
-            )}
-            {postDetail && <div dangerouslySetInnerHTML={{ __html: `${postDetail.post.contentHTML}` }}></div>}
-        </div>
+                )}
+                {postDetail && <div dangerouslySetInnerHTML={{ __html: `${postDetail.post.contentHTML}` }}></div>}
+            </div>
+        </>
     );
 }
 

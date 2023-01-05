@@ -3,9 +3,11 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    border: 1px solid var(--input-boder);
 }
 
 .danger {
+    border: none;
     background-color: var(--danger);
     color: var(--white);
     &:hover {
@@ -14,12 +16,14 @@
 }
 
 .disabled {
+    border: none;
     pointer-events: none;
     opacity: 0.5;
     background: transparent;
 }
 
 .success {
+    border: none;
     background: var(--btn-success);
     color: var(--white);
     box-shadow: var(--btn-box-shadow);
@@ -66,4 +70,19 @@
 .accent {
     background: var(--color-accent-fg);
     color: var(--white);
+}
+.border {
+    border: none;
+}
+.radius {
+    color: var(--black);
+    border-radius: 38%;
+    font-size: 1.5rem;
+    &:hover {
+        background: #ebebeb;
+        cursor: pointer;
+    }
+}
+.isBackground {
+    background: transparent;
 }

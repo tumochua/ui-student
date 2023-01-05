@@ -135,6 +135,7 @@ function Post() {
     // const prevPage = useRef(currentPage);
 
     const debouncedValue = useDebounce(searchPosts, 500);
+
     useEffect(() => {
         if (debouncedValue) {
             (async () => {
@@ -151,6 +152,7 @@ function Post() {
                 // console.log('response', response.data);
                 // console.log('response', response.data.posts[0].userData);
                 if (response.data.statusCode === 2) {
+                    // console.log(response.data);
                     setPosts(response.data.posts);
                 }
                 if (response.data.pageSize === 12) {
@@ -319,6 +321,7 @@ function Post() {
             <div className={style.container}>
                 {posts &&
                     posts.map((post) => {
+                        // console.log(post.date);
                         return (
                             post.status === 'S1' && (
                                 <div
@@ -340,9 +343,18 @@ function Post() {
                                     </div>
                                     <div className={style.title}>{post.title}</div>
                                     <div className={style.cardInfor}>
-                                        <img src={post.userData.image} alt="avatar" className={style.avatar} />
+                                        <img
+                                            src={
+                                                post.userData.image
+                                                    ? post.userData.image
+                                                    : 'https://as2.ftcdn.net/v2/jpg/03/32/59/65/1000_F_332596535_lAdLhf6KzbW6PWXBWeIFTovTii1drkbT.jpg'
+                                            }
+                                            alt="avatar"
+                                            className={style.avatar}
+                                        />
                                         <div>{post.userData.fullName}</div>
                                         <span>{handleConvertRimestampToDate(post.date, new Date())}</span>
+                                        {/* {console.log(post.date)} */}
                                         {/* <span>{console.log(handleConvertRimestampToDate(post.date, new Date()))}</span> */}
                                     </div>
                                 </div>

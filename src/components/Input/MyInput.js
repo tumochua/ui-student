@@ -14,6 +14,8 @@ function MyInput({
     boder = true,
     opacity = true,
     bottom,
+    isBorderBottom,
+    onFocuInput,
 }) {
     const handleOnchangeInput = (e) => {
         if (name === 'inputFile') {
@@ -41,6 +43,7 @@ function MyInput({
         [style.boder]: !boder,
         [style.opacity]: !opacity,
         [style.bottom]: bottom,
+        [style.isBorderBottom]: isBorderBottom,
         // [style.formControll]: true,
     });
 
@@ -54,6 +57,7 @@ function MyInput({
                 onChange={handleOnchangeInput}
                 className={inputClasses}
                 autoComplete="on"
+                onFocus={onFocuInput}
             />
             <IconComponent></IconComponent>
             {/* <span className={style.inputWapperIcon}>

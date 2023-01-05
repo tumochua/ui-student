@@ -1,33 +1,28 @@
-// import style from './Modal.module.scss';
-
-// function Modal({ type, images, onPreviewImages }) {
-//     if (type === 'preview') {
-//         return (
-//             <>
-//                 <div className={style.modal}>
-//                     {images && <img src={images} alt="preview" width={100} onClick={onPreviewImages} />}
-//                 </div>
-//             </>
-//         );
-//     } else {
-//         return <h1>Modal</h1>;
-//     }
-// }
-
-// export default Modal;
-
 import classNames from 'classnames';
-import './Modal.module.scss';
+import style from './Modal.module.scss';
+import MyButton from '../Button/MyButton';
 
-function Modal({ children, isShowModal, onShowHideModal }) {
-    const classModal = classNames({
+function Modal({ children, isShowModal, onShowHideModal, position, isBottom, showModal, onCanCel, onOk, opacity }) {
+    const classModal = classNames(style.container, {
         modal: isShowModal,
+        [style.topCenter]: position === 'topCenter',
+        [style.center]: position === 'center',
     });
     return (
         <>
-            <div className={classModal} onClick={onShowHideModal}>
-                <div className="modalBody">{children}</div>
-            </div>
+            {showModal && (
+                <div className={classModal} onClick={onShowHideModal}>
+                    <div className={style.modalBody}>{children}</div>
+                    {isBottom && (
+                        <div className={style.bottom}>
+                            <MyButton hanldeClick={onCanCel}>Cancel</MyButton>
+                            <MyButton success hanldeClick={onOk} opacity={opacity}>
+                                Ok
+                            </MyButton>
+                        </div>
+                    )}
+                </div>
+            )}
         </>
     );
 }

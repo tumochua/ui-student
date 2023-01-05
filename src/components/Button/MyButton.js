@@ -16,6 +16,9 @@ function MyButton({
     opacity,
     hoverBorder,
     accent,
+    border,
+    radius,
+    isBackground,
 }) {
     // console.log(style);
     const btnClassses = classNames({
@@ -32,6 +35,9 @@ function MyButton({
         [style.opacity]: opacity,
         [style.hoverBorder]: hoverBorder,
         [style.accent]: accent,
+        [style.border]: border,
+        [style.radius]: radius,
+        [style.isBackground]: isBackground,
     });
 
     return (

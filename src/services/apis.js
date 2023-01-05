@@ -105,3 +105,14 @@ export const apiVerifyPosts = (status) => {
 export const apiConfirmPosts = (status) => {
     return api.put('/api-confirm-posts', { status });
 };
+export const apiGetListNotification = () => {
+    return api.get('/api-list-notification');
+};
+
+export const apiCleanNotification = () => {
+    return api.put('/api-clean-notification');
+};
+
+export const apiSeeAllNotification = () => {
+    return api.get('/api-list-see-all-notification');
+};

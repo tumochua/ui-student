@@ -69,7 +69,7 @@ const privateRoutes = [
     },
     { path: config.routes.editUser, component: EditUser, layout: DefaultHeaderProfile },
     { path: config.routes.profilePersonalInfo, component: PersonalInfo, layout: DefaultHeaderProfile },
-    { path: config.routes.profileEducationalInfo, component: ManagePosts, layout: DefaultHeaderProfile },
+    { path: config.routes.managePosts, component: ManagePosts, layout: DefaultHeaderProfile },
     { path: config.routes.profileFamilyInfo, component: FamilyInfo, layout: DefaultHeaderProfile },
     { path: config.routes.profileProctorDetails, component: ProctorDetails, layout: DefaultHeaderProfile },
     { path: config.routes.profileHostelDetails, component: HostelDetails, layout: DefaultHeaderProfile },
