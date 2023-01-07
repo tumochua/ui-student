@@ -22,11 +22,15 @@ function DetailPost() {
     const [userData, setUserData] = useState(null);
     const [userInfo, setUserInfor] = useState(null);
     const [isComments, setIsComments] = useState(false);
+    const [userName, setUserName] = useState(null);
+    // const [userIdCreatePost,setuserDataUserIdCreatePost] = useState(null)
     useEffect(() => {
         (async () => {
             const response = await apiGetProfileUser();
+            // console.log(response.data.data);
             if (response.data.statusCode === 2) {
                 setUserInfor(response.data.data);
+                setUserName(response.data.data.fullName);
             }
         })();
     }, []);
@@ -39,6 +43,7 @@ function DetailPost() {
                 setDataPostId(response.data.post.id);
                 setUserData(response.data.post.userData);
                 setSizeLike(response.data.post.likeData);
+                // setUserIdCreatePost(response.data.post.userData)
             }
         })();
     }, [postId, isCallApi]);
@@ -110,7 +115,16 @@ function DetailPost() {
 
     return (
         <>
-            {<Comments onClose={handleCloseComment} isComments={isComments}></Comments>}
+            {
+                <Comments
+                    onClose={handleCloseComment}
+                    isComments={isComments}
+                    postId={dataPostId}
+                    userId={userId}
+                    userIdCreatePost={userData && userData.id}
+                    userName={userName}
+                ></Comments>
+            }
             <div className={style.container}>
                 {postDetail && (
                     <div className={style.header}>

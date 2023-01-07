@@ -8,7 +8,7 @@ import { MENUS } from '@/Data';
 function ManagePosts() {
     const navigate = useNavigate();
     const [postsUser, setPostsUser] = useState(null);
-    const [isMenuPosts, setIsMenuPosts] = useState(null);
+    const [isMenu, setisMenu] = useState(null);
     const [postsData, setPostsData] = useState(null);
     const [isCallApi, setIsCallApi] = useState(false);
     const wrapperRef = useRef(null);
@@ -51,8 +51,8 @@ function ManagePosts() {
     }, [isCallApi, postsData]);
 
     const handleClickOutside = () => {
-        setIsMenuPosts(false);
-        // setIsMenuPosts(!isMenuPosts);
+        setisMenu(false);
+        // setisMenu(!isMenu);
     };
 
     const handleDetailPosts = (postsId) => {
@@ -61,9 +61,9 @@ function ManagePosts() {
 
     const handleChangeMenu = (id, event) => {
         event.stopPropagation();
-        setIsMenuPosts(id);
-        if (isMenuPosts) {
-            setIsMenuPosts(false);
+        setisMenu(id);
+        if (isMenu) {
+            setisMenu(false);
         }
     };
 
@@ -86,11 +86,11 @@ function ManagePosts() {
                                 ref={wrapperRef}
                             >
                                 <i className={`fa-solid fa-ellipsis ${style.iconOptions}`}></i>
-                                {/* {JSON.stringify(isMenuPosts)} */}
+                                {/* {JSON.stringify(isMenu)} */}
                                 <Menus
                                     position="top-right"
                                     menus={MENUS}
-                                    isMenuPosts={isMenuPosts === posts.id ? true : false}
+                                    isMenu={isMenu === posts.id ? true : false}
                                     postId={posts.id}
                                     onChangeItemMenu={handleChangeItemMenu}
                                 ></Menus>

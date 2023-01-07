@@ -59,6 +59,14 @@ function Header() {
         });
 
         socket.on('resNotificationLike', (arg) => {
+            // console.log('re-render');
+            setIsReRender(!isReRender);
+        });
+        socket.on('resNotificationComment', (arg) => {
+            setIsReRender(!isReRender);
+        });
+        socket.on('resNotificationLikeComment', (arg) => {
+            // console.log(arg);
             setIsReRender(!isReRender);
         });
         // socket.on('resDeleteNotificationPosts',() )
