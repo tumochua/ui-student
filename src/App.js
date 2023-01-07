@@ -7,9 +7,24 @@ import { publicRoutes, privateRoutes } from '@/routes';
 
 import DefaultLayout from './layouts/DefaultLayout';
 import ProtectedRouter from './components/ProtectedRouter';
+import { useContextStore, userAction } from '@/context';
+import { apiGetProfileUser } from '@/services/apis';
+
 function App() {
+    // eslint-disable-next-line no-unused-vars
+    const [state, dispatch] = useContextStore();
     useEffect(() => {
-        // console.log('call api');
+        (async () => {
+            try {
+                const response = await apiGetProfileUser();
+                if (response.data.statusCode === 2) {
+                    dispatch(userAction.getUserInfor(response.data));
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        })();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

@@ -17,6 +17,29 @@
             box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
             border-radius: 3px;
             padding: 16px;
+            overflow: hidden;
         }
     }
 }
+
+@media only screen and (max-width: 1023px) {
+    .layoutWapper {
+        .container {
+            display: grid;
+            grid-template-columns: none;
+            .sidebar {
+                display: none;
+            }
+        }
+    }
+}
+
+// // mobile
+// @media only screen and (max-width: 739px) {
+//     .layoutWapper {
+//         .container {
+//             display: flex;
+//             flex-direction: column;
+//         }
+//     }
+// }

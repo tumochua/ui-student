@@ -130,10 +130,8 @@
 //     }
 // }
 .fadeOut {
-    // animation: fade-in 0.5s ease;
     animation: fade-out 0.5s ease;
     .slideOut {
-        // animation: slide-in 0.5s ease;
         animation: slide-out 0.5s ease;
     }
 }

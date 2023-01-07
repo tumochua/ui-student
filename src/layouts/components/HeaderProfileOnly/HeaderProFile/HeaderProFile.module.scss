@@ -17,3 +17,65 @@
         }
     }
 }
+.iconBars {
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.wapper {
+    .container {
+        background-color: rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: flex-start;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 10;
+        display: none;
+        animation: var(--fadeIn);
+
+        .content {
+            width: 40%;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+            display: flex;
+            flex-direction: column;
+            animation: var(--slideIn);
+            .iconClose {
+                font-size: 3.3rem;
+            }
+        }
+    }
+}
+
+/// mobile and tablet
+@media only screen and (max-width: 1023px) {
+    .container {
+        display: none;
+        .content {
+            .languageWapper {
+                display: block;
+            }
+        }
+    }
+}
+
+//mobile
+@media only screen and (max-width: 739px) {
+    .content {
+        overflow: hidden;
+    }
+}
+// tablet
+@media only screen and (min-width: 740px) and (max-width: 1023px) {
+    // .container {
+    //     display: none;
+    //     .content {
+    //     }
+    // }
+}
+// pc
+@media only screen and (min-width: 1024px) {
+}

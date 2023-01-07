@@ -46,3 +46,18 @@
         }
     }
 }
+
+// mobile
+@media only screen and (max-width: 739px) {
+    .cardPosts {
+        width: 100%;
+        .cardBody {
+            .postsLeft {
+                width: 100%;
+            }
+        }
+        .postsRight {
+            display: none;
+        }
+    }
+}
