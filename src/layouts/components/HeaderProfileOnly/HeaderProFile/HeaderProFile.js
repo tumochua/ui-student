@@ -98,11 +98,40 @@ function HeaderProFile() {
         },
     ];
 
+    // eslint-disable-next-line no-unused-vars
+    const [isIconTalet, setIsIconTablet] = useState(false);
+    const [width, setWidth] = useState(window.innerWidth);
+    // const [isTablet, setIsTablet] = useState(false);
+
     useEffect(() => {
         if (state.userInfor && state.userInfor.data) {
             setRole(state.userInfor.data.roleId);
         }
     }, [role, state]);
+    // console.log(width);
+    useEffect(() => {
+        if (width < 1023) {
+            setIsIconTablet(true);
+        } else {
+            setIsIconTablet(false);
+        }
+
+        const handleResize = () => {
+            // console.log('change', window.innerWidth);
+            setWidth(window.innerWidth);
+            if (width < 1023) {
+                setIsIconTablet(true);
+            } else {
+                setIsIconTablet(false);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            return window.removeEventListener('resize', handleResize);
+        };
+    }, [width]);
 
     const handleChangeLanguage = useCallback(
         (language) => {
@@ -134,45 +163,50 @@ function HeaderProFile() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [tabButtom],
     );
+    // const handleShowTab = () => {
+    //     setIsTablet(!isTablet);
+    // };
 
     return (
-        <div className={style.container}>
-            <div className={style.content}>
-                <div
-                    className={style.languageWapper}
-                    onMouseEnter={() => handleMouseEnter()}
-                    onMouseLeave={() => handleMouseLeave()}
-                >
-                    {t('Profile.language')}
-                    {isModalLanguage && (
-                        <Language
-                            isModalLanguage={isModalLanguage}
-                            languages={languages}
-                            onChanLanguage={handleChangeLanguage}
-                        />
-                    )}
+        <>
+            <div className={style.container}>
+                <div className={style.content}>
+                    <div
+                        className={style.languageWapper}
+                        onMouseEnter={() => handleMouseEnter()}
+                        onMouseLeave={() => handleMouseLeave()}
+                    >
+                        {t('Profile.language')}
+                        {isModalLanguage && (
+                            <Language
+                                isModalLanguage={isModalLanguage}
+                                languages={languages}
+                                onChanLanguage={handleChangeLanguage}
+                            />
+                        )}
+                    </div>
+                    <ul className={style.tabBtn}>
+                        {tabButtom &&
+                            tabButtom.map((tab) => {
+                                return (
+                                    <li key={tab.id}>
+                                        {tab.isAdmin && (
+                                            <MyButton
+                                                // key={tab.id}
+                                                success={tab.active}
+                                                large
+                                                hanldeClick={() => handleChangeTab(tab.router, tab.id)}
+                                            >
+                                                {tab.name}
+                                            </MyButton>
+                                        )}
+                                    </li>
+                                );
+                            })}
+                    </ul>
                 </div>
-                <ul className={style.tabBtn}>
-                    {tabButtom &&
-                        tabButtom.map((tab) => {
-                            return (
-                                <li key={tab.id}>
-                                    {tab.isAdmin && (
-                                        <MyButton
-                                            // key={tab.id}
-                                            success={tab.active}
-                                            large
-                                            hanldeClick={() => handleChangeTab(tab.router, tab.id)}
-                                        >
-                                            {tab.name}
-                                        </MyButton>
-                                    )}
-                                </li>
-                            );
-                        })}
-                </ul>
             </div>
-        </div>
+        </>
     );
 }
 

@@ -14,3 +14,13 @@
         z-index: 0;
     }
 }
+
+// mobile
+@media only screen and (max-width: 739px) {
+    .container {
+        .headerWaper {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

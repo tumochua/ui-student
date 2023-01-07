@@ -184,7 +184,7 @@ function Comments({ onClose, isComments, postId, userId, userIdCreatePost, userN
             if (type === 'like') {
                 socket.emit('createLikeComment', {
                     postId: postId,
-                    description: `${userName} Vừa Like Bài Comment Của Bạn`,
+                    description: `${userName} Vừa Like Comment Của Bạn`,
                     userName: userName,
                     userId: userId,
                     commentId: commentId,
