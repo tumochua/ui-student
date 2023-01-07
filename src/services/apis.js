@@ -116,3 +116,26 @@ export const apiCleanNotification = () => {
 export const apiSeeAllNotification = () => {
     return api.get('/api-list-see-all-notification');
 };
+
+export const apiCreateComment = (data) => {
+    return api.post('/api-create-comment', data);
+};
+
+export const apiGetListCommentPost = (postId) => {
+    return api.get('/api-get-list-comments', { params: { postId } });
+};
+
+export const apiEditComment = (data) => {
+    // console.log(data);
+    return api.put('/api-eidt-comment', data);
+};
+
+export const apiDeleteComment = (data) => {
+    return api.delete('/api-delete-comment', {
+        data,
+    });
+};
+
+export const apiLikeComment = (data) => {
+    return api.put('/api-likes-comment', data);
+};

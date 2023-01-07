@@ -2,14 +2,15 @@ import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 import style from './Menus.module.scss';
-function Menus({ position, menus, isMenuPosts, postId, onChangeItemMenu }) {
+function Menus({ position, menus, isMenu, postId, onChangeItemMenu, commnetId, authorId, textComment }) {
     const { t } = useTranslation();
     const menusClassess = classNames(style.baseMenu, {
         [style.topRight]: position === 'top-right',
     });
+    // console.log(postId);
     return (
         <>
-            {isMenuPosts && (
+            {isMenu && (
                 <ul className={menusClassess}>
                     {menus &&
                         menus.map((itemMenu) => {
@@ -17,7 +18,16 @@ function Menus({ position, menus, isMenuPosts, postId, onChangeItemMenu }) {
                                 <li
                                     key={itemMenu.id}
                                     className={style.itemMenu}
-                                    onClick={(event) => onChangeItemMenu(itemMenu.value, postId, event)}
+                                    onClick={(event) =>
+                                        onChangeItemMenu(
+                                            itemMenu.value,
+                                            postId,
+                                            commnetId,
+                                            authorId,
+                                            textComment,
+                                            event,
+                                        )
+                                    }
                                 >
                                     <i className={itemMenu.icon && itemMenu.icon}></i>
                                     <span>{t(`${itemMenu.text}`)}</span>

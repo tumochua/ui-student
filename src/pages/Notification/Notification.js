@@ -22,7 +22,7 @@ function Notification() {
                     notification.map((item) => {
                         return (
                             <li key={item.id}>
-                                <span>{item.title}</span>
+                                <span>{item.description}</span>
                             </li>
                         );
                     })}
