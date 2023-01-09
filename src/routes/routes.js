@@ -22,11 +22,17 @@ import HostelDetails from '@/pages/HostelDetails';
 import EditPosts from '@/pages/ManagePosts/Edit/EditPosts';
 import Approve from '@/pages/Approve';
 import Teacher from '@/pages/Teacher';
+import Manages from '@/pages/Manages';
+import DefaulayOutManage from '@/pages/Manages/Layout/DefaulayOutManage';
 
 import NotFound from '@/pages/NotFound';
 
 // import LeanRedux from '@/pages/LeanRedux/index';
 import LeanReactContext from '@/pages/LeanReactContext/index';
+import ManageStudent from '@/pages/ManageStudent';
+import ManageAdminPost from '@/pages/ManageAdminPost';
+import ManageTeach from '@/pages/ManageTeach';
+import ManageSystem from '@/pages/ManageSystem';
 const publicRoutes = [
     { path: config.routes.home, component: Home, layout: null },
     { path: config.routes.login, component: Login, layout: null },
@@ -77,7 +83,12 @@ const privateRoutes = [
     { path: config.routes.detailPost, component: DetailPost },
     { path: config.routes.editPosts, component: EditPosts },
     { path: config.routes.approve, component: Approve, layout: DefaultHeaderProfile, isRole: true },
+    { path: config.routes.manages, component: Manages, layout: DefaulayOutManage, isRole: true },
     { path: config.routes.teacher, component: Teacher, layout: DefaultHeaderProfile, isTeacher: true },
+    { path: config.routes.manageStudent, component: ManageStudent, layout: DefaulayOutManage, isRole: true },
+    { path: config.routes.manageTeach, component: ManageTeach, layout: DefaulayOutManage, isRole: true },
+    { path: config.routes.managePost, component: ManageAdminPost, layout: DefaulayOutManage, isRole: true },
+    { path: config.routes.manageSystem, component: ManageSystem, layout: DefaulayOutManage, isRole: true },
 ];
 
 export { publicRoutes, privateRoutes };

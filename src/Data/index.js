@@ -1,3 +1,5 @@
+import config from '@/config';
+
 export const MENUS = [
     {
         id: 1,
@@ -47,5 +49,35 @@ export const optionClass = [
         id: 3,
         name: 'BK08-K14',
         value: 'BK08',
+    },
+];
+
+export const HEADERMANAGE = [
+    {
+        id: 1,
+        name: 'Student',
+        router: config.routes.manageStudent,
+    },
+    {
+        id: 2,
+        name: 'Posts',
+        router: config.routes.managePost,
+    },
+    {
+        id: 3,
+        name: 'Teach',
+        router: config.routes.manageTeach,
+    },
+    {
+        id: 4,
+        name: 'System',
+        router: config.routes.manageSystem,
+    },
+];
+
+export const COURSE = [
+    {
+        id: 1,
+        name: '',
     },
 ];

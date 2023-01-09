@@ -14,6 +14,13 @@ const routes = {
     detailPost: '/detail-post',
     approve: '/approve',
     teacher: '/teacher',
+    manages: '/manages',
+    manage: '/manage',
+    manageStudent: '/manage-student',
+    manageTeach: '/manage-teach',
+    managePost: '/manage-posts',
+    manageSystem: '/manage-system',
+
     // detailPost: '/detail-post/:id',
 
     // editUser: '/eidt-user/:id',
