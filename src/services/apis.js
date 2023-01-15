@@ -139,3 +139,32 @@ export const apiDeleteComment = (data) => {
 export const apiLikeComment = (data) => {
     return api.put('/api-likes-comment', data);
 };
+
+export const apiGetAllPosts = (valueSort) => {
+    return api.get('/api-get-all-posts', {
+        params: {
+            data: valueSort,
+        },
+    });
+};
+
+export const apiGetAllStudentManage = () => {
+    return api.get('/api-get-all-student-manage');
+};
+
+export const apiManageGetUserById = (userId) => {
+    return api.get('/api-get-user-by-id', {
+        params: {
+            userId,
+        },
+    });
+};
+
+export const apiManageEditUser = (data) => {
+    return api.put('/api-manage-eidt-user', data);
+};
+export const apiManageDeleteUser = (userId) => {
+    return api.delete('/api-manage-delete-user', {
+        data: { userId },
+    });
+};

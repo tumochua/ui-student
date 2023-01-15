@@ -30,6 +30,9 @@ const routes = {
     post: '/post/page:id',
     editPosts: '/edit-posts/:id',
 
+    /// manage
+    editUserManage: '/manage-edit-user',
+
     /// not found
     notFound: '*',
 };

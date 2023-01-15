@@ -13,6 +13,7 @@ function DefaulayOutManage({ children }) {
                 </div>
                 <div className={style.content}>
                     <HeaderManage />
+                    {/* <i className="fa-solid fa-bars"></i> */}
                     {children}
                 </div>
             </div>

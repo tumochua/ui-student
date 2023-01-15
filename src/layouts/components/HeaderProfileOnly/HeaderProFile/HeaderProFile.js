@@ -94,7 +94,7 @@ function HeaderProFile() {
             name: t('Profile.Headers.TabButton.edit'),
             active: path === config.routes.editUser,
             router: config.routes.editUser,
-            isAdmin: role === 'R5' || role === 'R4' || role === 'R3' || role === 'R2',
+            isAdmin: true,
         },
     ];
 

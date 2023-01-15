@@ -148,6 +148,7 @@ function Post() {
             })();
         } else {
             (async () => {
+                // console.log(currentPage);
                 const response = await apiGetListPosts(currentPage);
                 // console.log('response', response.data);
                 // console.log('response', response.data.posts[0].userData);

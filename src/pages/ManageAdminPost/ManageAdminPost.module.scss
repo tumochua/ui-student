@@ -1,3 +1,45 @@
-.notFound {
-    color: red;
+.container {
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+        font-weight: 300;
+        .stt {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+    }
+
+    .actions {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+    }
+    .iconSort {
+        font-size: 1.8rem;
+        cursor: pointer;
+    }
+    .header {
+        width: 40%;
+        float: right;
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        position: relative;
+        .iconSeach {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
 }

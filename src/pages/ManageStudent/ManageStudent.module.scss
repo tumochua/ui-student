@@ -1,3 +1,59 @@
-.notFound {
-    color: red;
+.container {
+    margin-top: 10px;
+    .content {
+        background-color: #fff;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        padding: 10px;
+        .body {
+            .headerWapper {
+                margin-top: 10px;
+                table {
+                    font-family: arial, sans-serif;
+                    border-collapse: collapse;
+                    width: 100%;
+                }
+
+                td,
+                th {
+                    border: 1px solid #dddddd;
+                    text-align: left;
+                    padding: 8px;
+                    font-weight: 300;
+                }
+                .headerItem {
+                    display: flex;
+                    gap: 10px;
+                    .iconSort {
+                        font-weight: 600 !important;
+                        cursor: pointer;
+                    }
+                }
+                .avatarWapper {
+                    text-align: center;
+                    .avatar {
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+                }
+                .actionsWapper {
+                    display: flex;
+                    align-items: center;
+                    gap: 7px;
+                    .eye {
+                        cursor: pointer;
+                    }
+                    .pen {
+                        color: var(--icon-success);
+                        cursor: pointer;
+                    }
+                    .trash {
+                        color: var(--icon-error);
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
+    }
 }

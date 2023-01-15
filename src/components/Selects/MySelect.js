@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import style from './MySelect.module.scss';
 
-function MySelect({ options, onChanType, value, label, height, width }) {
+function MySelect({ options, onChanType, value, label, height, width, top }) {
     const selected = value;
     const handleChange = (event) => {
         onChanType(event.target.value);
@@ -10,6 +10,7 @@ function MySelect({ options, onChanType, value, label, height, width }) {
         [style.height]: height,
         [style.baseSelects]: true,
         [style.width]: width,
+        [style.mtTop]: top,
     });
     // console.log(selected);
     // console.log(options);

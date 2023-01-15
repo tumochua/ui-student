@@ -33,6 +33,8 @@ import ManageStudent from '@/pages/ManageStudent';
 import ManageAdminPost from '@/pages/ManageAdminPost';
 import ManageTeach from '@/pages/ManageTeach';
 import ManageSystem from '@/pages/ManageSystem';
+import ManageEditUsers from '@/pages/ManageEditUsers';
+
 const publicRoutes = [
     { path: config.routes.home, component: Home, layout: null },
     { path: config.routes.login, component: Login, layout: null },
@@ -89,6 +91,7 @@ const privateRoutes = [
     { path: config.routes.manageTeach, component: ManageTeach, layout: DefaulayOutManage, isRole: true },
     { path: config.routes.managePost, component: ManageAdminPost, layout: DefaulayOutManage, isRole: true },
     { path: config.routes.manageSystem, component: ManageSystem, layout: DefaulayOutManage, isRole: true },
+    { path: config.routes.editUserManage, component: ManageEditUsers, isRole: true },
 ];
 
 export { publicRoutes, privateRoutes };
