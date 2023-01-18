@@ -32,6 +32,7 @@ const routes = {
 
     /// manage
     editUserManage: '/manage-edit-user',
+    detailUserManage: '/manage-detail-user',
 
     /// not found
     notFound: '*',

@@ -1,3 +1,22 @@
-.notFound {
-    color: red;
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    font-weight: 300;
+}
+.headerItem {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.container {
+    margin-top: 10px;
 }

@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import style from './ManageStudent.module.scss';
 import { apiGetAllStudentManage, apiManageDeleteUser } from '@/services/apis';
 import config from '@/config';
 import Modal from '@/components/Modal';
+import MyInput from '@/components/Input/MyInput';
 function ManageStudent() {
     const navigate = useNavigate();
-
+    const elementBody = useRef(null);
     // eslint-disable-next-line no-unused-vars
     const [headers, setHeaders] = useState([
         {
@@ -34,11 +35,11 @@ function ManageStudent() {
             name: 'Gender',
             icon: 'fa-solid fa-sort',
         },
-        {
-            id: 6,
-            name: 'Parents Name',
-            icon: 'fa-solid fa-sort',
-        },
+        // {
+        //     id: 6,
+        //     name: 'Parents Name',
+        //     icon: 'fa-solid fa-sort',
+        // },
         {
             id: 7,
             name: 'Class',
@@ -75,19 +76,43 @@ function ManageStudent() {
     // const [isOk, setIsOk] = useState(false);
     const [userId, setUserId] = useState(null);
     const [isRerender, setIsRerender] = useState(false);
+    const [sizeUser, setSizeUser] = useState(0);
+    const [currentHight, setCurrentHight] = useState(null);
+    const [currentUser, setCurrentUser] = useState(25);
+    // console.log(elementBody?.current?.scrollHeight);
     useEffect(() => {
         (async () => {
-            const response = await apiGetAllStudentManage();
+            const response = await apiGetAllStudentManage(currentUser);
+            setSizeUser(response.data?.sizeUser);
             if (response.data.statusCode === 2) {
                 setAllStudents(response.data.data);
             }
         })();
-    }, [isRerender]);
+    }, [isRerender, currentUser]);
     useEffect(() => {
         if (allStudents) {
             // console.log(allStudents);
         }
     }, [allStudents]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => {
+        setCurrentHight(document.documentElement.offsetHeight);
+    });
+    useEffect(() => {
+        const handleScrollLoadMore = () => {
+            const check = Math.floor(window.scrollY + 1000) > currentHight;
+            // console.log(check);
+            if (check) {
+                setCurrentUser(currentUser + 10);
+            }
+        };
+        window.addEventListener('scroll', handleScrollLoadMore);
+        return () => {
+            return window.removeEventListener('scroll', handleScrollLoadMore);
+        };
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentHight]);
 
     const handleEditUserManage = (userId) => {
         navigate(config.routes.editUserManage, { state: { id: userId } });
@@ -111,15 +136,31 @@ function ManageStudent() {
             setIsRerender(!isRerender);
         }
     };
-
+    const handleDetailStudent = (userId) => {
+        navigate(config.routes.detailUserManage, { state: { id: userId } });
+    };
+    // console.log(allStudents);
+    // console.log(currentUser);
     return (
         <>
+            {/* {JSON.stringify(currentHight)} */}
             <Modal showModal={isConfirm} isBottom position="center" onCanCel={handleCanCel} onOk={handleOk}>
                 <h3> Bạn Có Chắc Muốn Xóa User Này</h3>
             </Modal>
-            <div className={style.container}>
+            <div className={style.container} ref={elementBody}>
                 <div className={style.content}>
-                    <h3>All student</h3>
+                    <div className={style.headerContent}>
+                        <div className={style.left}>
+                            <h3>All student</h3>
+                            <div> Student sum: {sizeUser}</div>
+                        </div>
+                        <div className={style.right}>
+                            <span className={style.seachWapper}>
+                                <MyInput placeholder="seach name"></MyInput>
+                            </span>
+                            {/* <MyInput></MyInput> */}
+                        </div>
+                    </div>
                     <div className={style.body}>
                         <div className={style.headerWapper}>
                             <table>
@@ -164,7 +205,7 @@ function ManageStudent() {
                                                     </th>
                                                     <th>{student?.fullName}</th>
                                                     <th>{student?.genderData?.valueEn}</th>
-                                                    <th>{student?.parentData?.fullNameFather}</th>
+                                                    {/* <th>{student?.parentData?.fullNameFather}</th> */}
                                                     <th>{student?.classId}</th>
                                                     <th>{student?.address}</th>
                                                     {/* <th>{student?.dob}</th> */}
@@ -179,7 +220,10 @@ function ManageStudent() {
                                                     <th>{student?.email}</th>
                                                     <th>
                                                         <div className={style.actionsWapper}>
-                                                            <i className={`fa-solid fa-eye ${style.eye}`}></i>
+                                                            <i
+                                                                className={`fa-solid fa-eye ${style.eye}`}
+                                                                onClick={() => handleDetailStudent(student.id)}
+                                                            ></i>
                                                             <i
                                                                 className={`fa-solid fa-pen-to-square ${style.pen}`}
                                                                 onClick={() => handleEditUserManage(student.id)}

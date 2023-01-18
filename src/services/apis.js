@@ -148,8 +148,12 @@ export const apiGetAllPosts = (valueSort) => {
     });
 };
 
-export const apiGetAllStudentManage = () => {
-    return api.get('/api-get-all-student-manage');
+export const apiGetAllStudentManage = (currentUser) => {
+    return api.get('/api-get-all-student-manage', {
+        params: {
+            currentUser,
+        },
+    });
 };
 
 export const apiManageGetUserById = (userId) => {
@@ -167,4 +171,16 @@ export const apiManageDeleteUser = (userId) => {
     return api.delete('/api-manage-delete-user', {
         data: { userId },
     });
+};
+
+export const apiManageGetDetailUser = (userId) => {
+    return api.get('/api-manage-get-detail-user', {
+        params: {
+            userId,
+        },
+    });
+};
+
+export const apiManageGetALlTeacher = () => {
+    return api.get('/api-get-all-teachers');
 };
