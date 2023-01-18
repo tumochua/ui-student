@@ -15,7 +15,8 @@ function ManagePosts() {
     useEffect(() => {
         (async () => {
             const response = await apiGetAllPostsByUser();
-            if (response.data.statusCode) {
+            if (response.data.statusCode === 2) {
+                // console.log(response.data);
                 setPostsUser(response.data);
             }
         })();

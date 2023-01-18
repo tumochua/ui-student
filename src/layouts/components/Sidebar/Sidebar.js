@@ -66,6 +66,13 @@ function Sidebar() {
             path: config.routes.approve,
             isAdmin: role === 'R5' || role === 'R4' || role === 'R3',
         },
+        {
+            id: 8,
+            name: 'Quản Lý',
+            // active: path === config.routes.approve,
+            path: config.routes.manageStudent,
+            isAdmin: role === 'R5' || role === 'R4' || role === 'R3',
+        },
     ];
 
     useEffect(() => {

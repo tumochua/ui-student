@@ -1,0 +1,60 @@
+.container {
+    .iconBars {
+        cursor: pointer;
+        font-size: 2.2rem;
+    }
+    .body {
+        background-color: rgba(0, 0, 0, 0.2);
+        display: flex;
+        justify-content: flex-start;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 10;
+        animation: var(--fadeIn);
+        margin-top: var(--default-layout-header-height);
+        .bodyWapper {
+            width: 16%;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgb(0 0 0 / 15%);
+            display: flex;
+            flex-direction: column;
+            animation: var(--slideIn);
+            padding: 10px;
+            overflow: auto;
+            .iconCloseWapper {
+                text-align: right;
+                margin-right: 15px;
+                display: inline;
+                .iconClose {
+                    cursor: pointer;
+                    font-size: 3rem;
+                }
+            }
+
+            .content {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                .itemWapper {
+                    // margin-top: 10px;
+                    border-top: 1px solid var(--input-boder);
+                    .item {
+                        padding: 10px;
+                        display: flex;
+                        gap: 10px;
+                        margin-left: 10px;
+                        align-items: center;
+                        cursor: pointer;
+                    }
+                }
+                .active {
+                    background-color: #f0f0f0;
+                    color: #292929;
+                }
+            }
+        }
+    }
+}
